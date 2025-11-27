@@ -14,529 +14,94 @@
        Warm Mocha Brown Theme
        ============================================ */
 
-    :root {
-      /* Mocha Brown Palette - Deliberately darker to remain mocha on brightened screens */
-      --mocha-darkest: #2c1810;
-      --mocha-dark: #3d251a;
-      --mocha-medium: #4a2c1c;
-      --mocha-base: #5c3a2e;
-      --mocha-light: #7a5244;
-      --mocha-lighter: #9b7566;
-
-      /* Background Colors */
-      --bg-primary: #f8f4f1;
-      --bg-secondary: #f0e9e4;
-      --bg-tertiary: #e8dfd8;
-      --bg-card: #ffffff;
-
-      /* Accent Colors */
-      --accent-primary: #c4704a;
-      --accent-secondary: #d4a574;
-      --accent-tertiary: #8b5a3c;
-      --accent-danger: #b85450;
-
-      /* Shadows */
-      --shadow-sm: 0 2px 8px rgba(44, 24, 16, 0.08);
-      --shadow-card: 0 4px 20px rgba(44, 24, 16, 0.06);
-      --shadow-card-hover: 0 12px 40px rgba(44, 24, 16, 0.12);
-
-      /* Border */
-      --border-color: rgba(92, 58, 46, 0.12);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-      background: var(--bg-primary);
-      color: var(--mocha-darkest);
-      line-height: 1.6;
-      margin: 0;
-      min-height: 100vh;
-    }
-
-    /* Subtle background texture */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 50% at 20% 20%, rgba(196, 112, 74, 0.03) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(212, 165, 116, 0.04) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    /* ============================================
-       NAVBAR
-       ============================================ */
-
-    header.border-bottom {
-      background: var(--bg-card) !important;
-      border-bottom-color: var(--border-color) !important;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .navbar {
-      padding: 1rem 0;
-    }
-
-    .navbar-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-    }
-
-    .navbar-brand img {
-      height: 36px;
-      width: auto;
-    }
-
-    .navbar-brand span {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--mocha-dark);
-      letter-spacing: -0.01em;
-    }
-
-    .navbar-nav {
-      align-items: center;
-    }
-
-    .navbar-nav .nav-link {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--mocha-base);
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      transition: all 0.25s ease;
-      text-decoration: none;
-    }
-
-    .navbar-nav .nav-link:hover {
-      color: var(--mocha-dark);
-      background: var(--bg-secondary);
-    }
-
-    .navbar-nav .nav-link.active {
-      color: var(--accent-primary);
-      background: rgba(196, 112, 74, 0.08);
-    }
-
-    .user-avatar {
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--mocha-base), var(--mocha-light));
-      color: white;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .user-avatar:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(92, 58, 46, 0.25);
-    }
-
-    /* ============================================
-       ANIMATIONS
-       ============================================ */
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ============================================
-       MAIN CONTENT
-       ============================================ */
-
-    #main-content {
-      min-height: calc(100vh - 80px);
-      animation: fadeIn 0.6s ease-out;
-    }
-
-    /* ============================================
-       BUTTONS
-       ============================================ */
-
-    .btn {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      transition: all 0.25s ease;
-      border-radius: 50px;
-    }
-
-    .btn-outline-secondary {
-      color: var(--mocha-base);
-      border: 1.5px solid var(--border-color);
-      background: transparent;
-    }
-
-    .btn-outline-secondary:hover {
-      background: var(--bg-secondary);
-      border-color: var(--mocha-light);
-      color: var(--mocha-dark);
-    }
-
-    .btn-outline-danger {
-      color: var(--accent-danger);
-      border: 1.5px solid rgba(184, 84, 80, 0.4);
-      background: transparent;
-    }
-
-    .btn-outline-danger:hover {
-      background: var(--accent-danger);
-      border-color: var(--accent-danger);
-      color: white;
-    }
-
-    .btn-sm {
-      padding: 0.25rem 1rem;
-      font-size: 0.8rem;
-    }
-
-    /* ============================================
-       RECIPE DETAIL CARD
-       ============================================ */
-
-    .recipe-container {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .action-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp 0.4s ease-out;
-    }
-
-    .card {
-      background: var(--bg-card);
-      border-radius: 20px;
-      box-shadow: var(--shadow-card);
-      border: 1px solid var(--border-color);
-      animation: fadeInUp 0.5s ease-out 0.1s both;
-    }
-
-    .card-body {
-      padding: 2rem;
-    }
-
-    /* Recipe Title */
-    .recipe-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.75rem;
-      font-weight: 600;
-      color: var(--mocha-darkest);
-      line-height: 1.3;
-      margin-bottom: 0.5rem;
-    }
-
-    /* Recipe Description */
-    .recipe-description {
-      font-size: 1rem;
-      color: var(--mocha-light);
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Time Badges */
-    .time-badges {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .time-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      color: var(--mocha-lighter);
-    }
-
-    .time-badge .icon {
-      font-size: 1rem;
-    }
-
-    .time-badge .value {
-      font-weight: 600;
-      color: var(--mocha-base);
-    }
-
-    .time-badge .label {
-      color: var(--mocha-lighter);
-    }
-
-    /* Divider */
-    hr {
-      border: none;
-      border-top: 1px solid var(--border-color);
-      margin: 1.5rem 0;
-    }
-
-    /* Section Titles */
-    .section-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--mocha-dark);
-      margin-bottom: 0.75rem;
-    }
-
-    /* Placeholder Text */
-    .placeholder-text {
-      font-size: 0.9rem;
-      color: var(--mocha-lighter);
-      font-style: italic;
-    }
-
-    /* Ingredients List (for future use) */
-    .ingredients-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .ingredients-list li {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border-color);
-      color: var(--mocha-base);
-      font-size: 0.95rem;
-    }
-
-    .ingredients-list li:last-child {
-      border-bottom: none;
-    }
-
-    .ingredients-list li::before {
-      content: '•';
-      color: var(--accent-primary);
-      margin-right: 0.75rem;
-      font-weight: bold;
-    }
-
-    /* Steps List (for future use) */
-    .steps-list {
-      counter-reset: step-counter;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .steps-list li {
-      counter-increment: step-counter;
-      padding: 1rem 0;
-      padding-left: 3rem;
-      position: relative;
-      border-bottom: 1px solid var(--border-color);
-      color: var(--mocha-base);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    .steps-list li:last-child {
-      border-bottom: none;
-    }
-
-    .steps-list li::before {
-      content: counter(step-counter);
-      position: absolute;
-      left: 0;
-      top: 1rem;
-      width: 28px;
-      height: 28px;
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    /* ============================================
-       RESPONSIVE
-       ============================================ */
-
-    @media (max-width: 768px) {
-      .card-body {
-        padding: 1.5rem;
-      }
-
-      .recipe-title {
-        font-size: 1.5rem;
-      }
-
-      .action-row {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .action-row .btn {
-        width: 100%;
-        text-align: center;
-      }
-
-      .time-badges {
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .navbar-brand span {
-        font-size: 1.1rem;
-      }
-
-      .navbar-nav .nav-link {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.85rem;
-      }
-    }
-
-    /* ============================================
-       REDUCED MOTION
-       ============================================ */
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- NAVBAR -->
-  <header class="border-bottom bg-white">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="/">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="36" height="36" rx="8" fill="url(#mocha-gradient)"/>
-            <path d="M10 18C10 14 12 11 18 11C24 11 26 14 26 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="18" cy="22" r="4" fill="white"/>
-            <path d="M14 26H22" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            <defs>
-              <linearGradient id="mocha-gradient" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#5c3a2e"/>
-                <stop offset="1" stop-color="#7a5244"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <span>Kitchen Guru</span>
-        </a>
-
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="/">Home</a>
-          <a class="nav-link active" href="index.html">My Recipes</a>
-          <a class="nav-link" href="/meal-plans">Meal Plans</a>
-          <div class="dropdown-toggle user-avatar ms-3">JD</div>
-        </div>
-      </nav>
-    </div>
-  </header>
-
-  <!-- MAIN CONTENT: SHOW PAGE -->
-  <main id="main-content" class="py-4">
-    <div class="container py-5 recipe-container">
-
-      <!-- Back + delete actions -->
-      <div class="action-row">
-        <a href="index.html" class="btn btn-outline-secondary btn-sm rounded-pill">
-          ← Back to my recipes
-        </a>
-        <button class="btn btn-outline-danger btn-sm rounded-pill" onclick="confirm('Remove this recipe from your cookbook?')">
-          Delete this recipe
-        </button>
+  <div class="mb-4">
+    <%= link_to "← Back to my recipes",
+                recipes_path,
+                class: "btn btn-outline-secondary btn-sm rounded-pill" %>
+  </div>
+
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body p-5">
+
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <h2 class="h5 text-uppercase fw-light text-muted m-0"><%= @recipe.category.present? ? @recipe.category.humanize : "Recipe" %></h2>
+        <%= button_to "Delete",
+                      recipe_path(@recipe),
+                      method: :delete,
+                      data: { confirm: "Remove this recipe from your cookbook?" },
+                      class: "btn btn-outline-danger btn-sm rounded-pill" %>
       </div>
 
-      <!-- Recipe card -->
-      <div class="card shadow-sm border-0 rounded-4">
-        <div class="card-body p-4">
-          <h1 class="recipe-title">Morning Chia Seed Bowl with 5 Plants</h1>
-          <p class="recipe-description">A nutrient-dense breakfast bowl packed with fiber, omega-3s, and plant-based protein. Perfect for busy mornings when you need sustained energy without the crash.</p>
+      <h1 class="display-6 fw-bold mb-4"><%= @recipe.title %></h1>
 
-          <div class="time-badges">
-            <div class="time-badge">
-              <span class="icon">⏱</span>
-              <span class="value">5 min</span>
-              <span class="label">prep</span>
+      <div class="bg-light d-flex justify-content-center align-items-center rounded-3 mb-4" style="height: 250px; border: 2px dashed #ccc;">
+        <p class="text-muted">Image Placeholder</p>
+      </div>
+
+      <div class="mb-4">
+        <p class="mb-1"><strong>Serves:</strong> <%= @recipe.servings || 1 %> <%= (@recipe.servings || 1) > 1 ? "(with leftovers)" : "" %></p>
+        <p class="mb-1"><strong>Preparation Time:</strong> <%= @recipe.prep_time || 0 %> minutes</p>
+        <p class="mb-1"><strong>Cook Time:</strong> <%= @recipe.cook_time || 0 %> minutes</p>
+        <p class="mb-1"><strong>Diet:</strong> <%= @recipe.is_vegan? ? "Vegan" : (@recipe.is_vegetarian? ? "Vegetarian" : "None specified") %></p>
+      </div>
+
+      <hr class="mb-4">
+
+      <%
+        recipe_macros = @recipe.macros_summary
+        macro_labels = { calories: "ENERGY (kcal)", proteins: "PROTEIN (g)", fiber: "FIBER (g)", fats: "FAT (g)" }
+        dummy_targets = { calories: 500, proteins: 30, fiber: 15, fats: 25 }
+      %>
+      <h2 class="h5 fw-bold mb-3 text-secondary text-uppercase">Daily Nutrition Targets (per serving)</h2>
+      <div class="mb-4">
+        <% macro_labels.each do |key, label| %>
+          <% current_value = recipe_macros[key] || 0 %>
+          <% target_value = dummy_targets[key] %>
+          <% percentage = [(current_value.to_f / target_value.to_f) * 100, 100].min %>
+          <div class="mb-2">
+            <p class="small fw-semibold text-uppercase mb-1"><%= label %></p>
+            <div class="progress" style="height: 12px;">
+              <div class="progress-bar bg-info" role="progressbar" style="width: <%= percentage %>%;" aria-valuenow="<%= current_value %>" aria-valuemin="0" aria-valuemax="<%= target_value %>"></div>
             </div>
-            <div class="time-badge">
-              <span class="icon">🔥</span>
-              <span class="value">0 min</span>
-              <span class="label">cook</span>
-            </div>
+            <span class="small text-muted"><%= current_value.round(0) %> / <%= target_value.round(0) %></span>
           </div>
+        <% end %>
+      </div>
 
-          <hr>
+      <hr class="mb-4">
 
-          <!-- Ingredients Section -->
-          <div class="mb-4">
-            <h2 class="section-title">Ingredients</h2>
-            <p class="placeholder-text">
-              Coming soon – we'll display structured ingredients here.
-            </p>
-            <!-- Example of future ingredients list:
-            <ul class="ingredients-list">
-              <li>3 tbsp chia seeds</li>
-              <li>1 cup almond milk</li>
-              <li>1 tbsp maple syrup</li>
-              <li>1/2 cup mixed berries</li>
-              <li>1 tbsp hemp seeds</li>
-            </ul>
-            -->
-          </div>
+      <%
+        ingredients_text = @recipe.description.split("Ingredients:")[1].to_s.split("Steps:")[0].to_s.strip
+        ingredients_list = ingredients_text.split("\n").map(&:strip).reject(&:empty?)
+      %>
+      <div class="p-4 bg-light rounded-3 mb-4 border border-info border-3 border-opacity-25">
+        <h2 class="h5 fw-bold mb-3 text-secondary text-uppercase">Ingredients</h2>
+        <ul class="list-unstyled">
+          <% if ingredients_list.any? %>
+            <% ingredients_list.each do |ingredient| %>
+              <li>• <%= ingredient %></li>
+            <% end %>
+          <% else %>
+            <li>No ingredients listed.</li>
+          <% end %>
+        </ul>
+      </div>
 
-          <!-- Steps Section -->
-          <div>
-            <h2 class="section-title">Steps</h2>
-            <p class="placeholder-text">
-              Coming soon – we'll show step-by-step instructions here.
-            </p>
-            <!-- Example of future steps list:
-            <ol class="steps-list">
-              <li>Combine chia seeds and almond milk in a bowl or jar. Stir well to prevent clumping.</li>
-              <li>Add maple syrup and stir again. Cover and refrigerate overnight or for at least 2 hours.</li>
-              <li>When ready to serve, give it a good stir. The mixture should be thick and pudding-like.</li>
-              <li>Top with mixed berries and hemp seeds. Enjoy cold!</li>
-            </ol>
-            -->
-          </div>
-        </div>
+      <%
+        steps_text = @recipe.description.split("Steps:")[1].to_s.strip
+        steps_list = steps_text.split("\n").map(&:strip).reject(&:empty?)
+      %>
+      <div>
+        <h2 class="h5 fw-bold mb-3 text-secondary text-uppercase">Method</h2>
+        <ol class="list-unstyled">
+          <% if steps_list.any? %>
+            <% steps_list.each do |step| %>
+              <li class="mb-2"> <%= step %></li>
+            <% end %>
+          <% else %>
+            <li>No steps listed.</li>
+          <% end %>
+        </ol>
       </div>
 
     </div>
