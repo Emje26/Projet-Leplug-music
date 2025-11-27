@@ -1,25 +1,111 @@
-<h2>Sign up</h2>
+<%# app/views/devise/registrations/new.html.erb %>
+<%# Layout EXACT Citadium %>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+<div class="signup-page">
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+  <%# Breadcrumb %>
+  <div class="signup-breadcrumb">
+    [ <%= link_to "ACCUEIL", root_path %> <span>►</span> INSCRIPTION ]
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+  <%# GIANT TITLE %>
+  <div class="signup-giant-title">
+    <h1>Compte</h1>
   </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+  <%# TABS: Se connecter / Créer un compte %>
+  <div class="signup-tabs">
+    <%= link_to "Se connecter", new_session_path(resource_name), class: "signup-tab" %>
+    <div class="signup-tab signup-tab--active">
+      Créer un compte
+      <span class="tab-arrow">↓</span>
+    </div>
+  </div>
+
+  <%# Form Section %>
+  <div class="signup-form-section">
+
+    <%# Promo text %>
+    <div class="signup-promo">
+      <p>
+        <span>Rejoins KitchenGuru</span>
+        <span>Scanne ton frigo</span>
+        <span>Génère des recettes avec l'IA</span>
+      </p>
+    </div>
+
+    <%# Flash messages %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger"><%= flash[:alert] %></div>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class="alert alert-success"><%= flash[:notice] %></div>
+    <% end %>
+
+    <%# Form %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "signup-form" }) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :email,
+            required: true,
+            autofocus: true,
+            autocomplete: "email",
+            label: "E-mail",
+            placeholder: "" %>
+
+        <%= f.input :password,
+            required: true,
+            autocomplete: "new-password",
+            label: "Mot de passe",
+            placeholder: "",
+            hint: false %>
+
+        <%= f.input :password_confirmation,
+            required: true,
+            autocomplete: "new-password",
+            label: "Confirmer le mot de passe",
+            placeholder: "" %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Créer mon compte" %>
+      </div>
+    <% end %>
+
+    <%# Legal text %>
+    <div class="signup-legal">
+      <p>
+        KitchenGuru traite les données recueillies pour permettre la création et la gestion de votre compte,
+        la génération de recettes personnalisées et l'amélioration de nos services.
+        Pour en savoir plus sur la gestion de vos données personnelles et pour exercer vos droits,
+        veuillez consulter notre <%= link_to "politique de confidentialité", "#" %>.
+      </p>
+    </div>
+
+  </div>
+
+  <%# IMAGE GALLERY %>
+  <div class="signup-gallery">
+    <div class="gallery-tagline">Bon appétit!</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <%= image_tag "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=800&fit=crop", alt: "Salade fraîche" %>
+      </div>
+      <div class="gallery-item">
+        <%= image_tag "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=800&fit=crop", alt: "Pizza maison" %>
+      </div>
+      <div class="gallery-item">
+        <%= image_tag "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=800&fit=crop", alt: "Pancakes" %>
+      </div>
+      <div class="gallery-item">
+        <%= image_tag "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=800&fit=crop", alt: "Bowl healthy" %>
+      </div>
+      <div class="gallery-item">
+        <%= image_tag "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=800&fit=crop", alt: "Burger gourmet" %>
+      </div>
+    </div>
+  </div>
+
+</div>

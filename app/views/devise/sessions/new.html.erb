@@ -1,20 +1,79 @@
-<h2>Log in</h2>
+<div class="session-page">
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  <!-- Floating particles -->
+  <div class="particles-container">
+    <% 15.times do %>
+      <div class="particle"></div>
+    <% end %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
+  <div class="session-wrapper">
 
-<%= render "devise/shared/links" %>
+    <div class="session-card">
+
+      <!-- HEADER -->
+      <div class="session-header">
+        <div class="session-icon">
+          🔒
+        </div>
+        <h2 class="session-title">Log in</h2>
+        <p class="session-subtitle">
+          Accédez à <span class="highlight">KitchenGuru</span>
+        </p>
+      </div>
+
+      <!-- FORMULAIRE DEVlSE -->
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <div class="form-inputs">
+
+          <!-- Email -->
+          <div class="input email-input">
+            <%= f.input :email,
+              required: true,
+              label: "Email Address",
+              input_html: { autocomplete: "email" } %>
+          </div>
+
+          <!-- Password -->
+          <div class="input password-input">
+            <%= f.input :password,
+              required: true,
+              label: "Password",
+              input_html: { autocomplete: "current-password" } %>
+          </div>
+
+          <!-- Remember me -->
+          <% if devise_mapping.rememberable? %>
+            <div class="boolean remember-me">
+              <%= f.input :remember_me, as: :boolean, label: "Remember me" %>
+            </div>
+          <% end %>
+
+        </div>
+
+        <!-- Submit -->
+        <div class="form-actions">
+          <%= f.button :submit, "Log in", class: "btn-primary" %>
+        </div>
+
+      <% end %>
+
+      <!-- LINKS -->
+      <div class="session-links">
+        <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+        <br>
+        <span>Pas de compte ?</span>
+        <%= link_to "Sign up", new_registration_path(resource_name) %>
+      </div>
+
+      <!-- SECURITY BADGE -->
+      <div class="security-badge">
+        <span class="badge-icon">🛡️</span>
+        <span class="badge-text">Secured by Devise</span>
+      </div>
+
+    </div>
+
+  </div>
+</div>

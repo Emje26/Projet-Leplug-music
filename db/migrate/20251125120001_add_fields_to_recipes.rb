@@ -22,3 +22,4 @@ class AddFieldsToRecipes < ActiveRecord::Migration[7.1]
     add_index :recipes, :difficulty
   end
 end
+

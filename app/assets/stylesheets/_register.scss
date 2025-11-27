@@ -1,0 +1,645 @@
+// ============================================
+// KitchenGuru - Register Page
+// Apple-inspired Ultra Premium Design
+// ============================================
+
+// Variables
+$color-bg: #000000;
+$color-bg-card: rgba(28, 28, 30, 0.8);
+$color-bg-input: rgba(44, 44, 46, 0.6);
+$color-border: rgba(255, 255, 255, 0.1);
+$color-border-focus: rgba(255, 255, 255, 0.3);
+$color-text-primary: #ffffff;
+$color-text-secondary: rgba(255, 255, 255, 0.6);
+$color-text-tertiary: rgba(255, 255, 255, 0.4);
+$color-accent: #0A84FF;
+$color-accent-hover: #409CFF;
+$color-success: #30D158;
+$color-warning: #FFD60A;
+$color-danger: #FF453A;
+
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+
+$transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+$border-radius-sm: 8px;
+$border-radius-md: 12px;
+$border-radius-lg: 16px;
+$border-radius-xl: 24px;
+
+// Reset & Base
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $font-family;
+    background-color: $color-bg;
+    color: $color-text-primary;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// Ambient Background Effects
+.ambient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: float 20s ease-in-out infinite;
+
+    &.gradient-orb-1 {
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(10, 132, 255, 0.3) 0%, transparent 70%);
+        top: -200px;
+        right: -200px;
+        animation-delay: 0s;
+    }
+
+    &.gradient-orb-2 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(94, 92, 230, 0.25) 0%, transparent 70%);
+        bottom: -150px;
+        left: -150px;
+        animation-delay: -7s;
+    }
+
+    &.gradient-orb-3 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(48, 209, 88, 0.15) 0%, transparent 70%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation-delay: -14s;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(30px, -30px) scale(1.05);
+    }
+    50% {
+        transform: translate(-20px, 20px) scale(0.95);
+    }
+    75% {
+        transform: translate(-30px, -20px) scale(1.02);
+    }
+}
+
+// Navigation
+.navbar {
+    padding: 1rem 0;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid $color-border;
+    z-index: 1000;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.navbar-brand {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.brand-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, $color-accent, #5E5CE6);
+    border-radius: $border-radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.brand-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $color-text-primary;
+    letter-spacing: -0.02em;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+}
+
+.nav-text {
+    color: $color-text-secondary;
+    font-size: 0.9rem;
+}
+
+.btn-outline-light.btn-apple {
+    border: 1px solid $color-border;
+    border-radius: 980px;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all $transition-fast;
+    background: transparent;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: $color-border-focus;
+        transform: scale(1.02);
+    }
+}
+
+// Main Content
+.main-content {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 0 60px;
+}
+
+// Register Card
+.register-card {
+    background: $color-bg-card;
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-radius: $border-radius-xl;
+    border: 1px solid $color-border;
+    padding: 3rem;
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+
+    @media (max-width: 576px) {
+        padding: 2rem 1.5rem;
+        border-radius: $border-radius-lg;
+    }
+}
+
+.card-header {
+    margin-bottom: 2.5rem;
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.card-subtitle {
+    color: $color-text-secondary;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+// Form Styles
+.form-floating-apple {
+    position: relative;
+
+    label {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+        color: $color-text-tertiary;
+        font-size: 0.95rem;
+        font-weight: 400;
+        pointer-events: none;
+        transition: all $transition-fast;
+        display: flex;
+        align-items: center;
+    }
+
+    &.focused label,
+    .form-control-apple:not(:placeholder-shown) + label {
+        top: 0.5rem;
+        transform: translateY(0);
+        font-size: 0.7rem;
+        color: $color-accent;
+    }
+
+    &.focused .input-glow {
+        opacity: 1;
+    }
+}
+
+.form-control-apple {
+    width: 100%;
+    background: $color-bg-input;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    padding: 1.5rem 1rem 0.75rem;
+    font-size: 1rem;
+    color: $color-text-primary;
+    transition: all $transition-fast;
+    outline: none;
+
+    &::placeholder {
+        color: transparent;
+    }
+
+    &:focus {
+        border-color: $color-accent;
+        background: rgba(44, 44, 46, 0.8);
+        box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.15);
+    }
+
+    &:hover:not(:focus) {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+.input-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: $border-radius-md;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity $transition-medium;
+    box-shadow: 0 0 30px rgba(10, 132, 255, 0.2);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: $color-text-tertiary;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $color-text-primary;
+    }
+}
+
+// Password Strength
+.password-strength {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.strength-bars {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+}
+
+.strength-bar {
+    height: 3px;
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    transition: all $transition-fast;
+
+    &.weak {
+        background: $color-danger;
+    }
+    &.medium {
+        background: $color-warning;
+    }
+    &.strong {
+        background: $color-accent;
+    }
+    &.very-strong {
+        background: $color-success;
+    }
+}
+
+.strength-text {
+    font-size: 0.75rem;
+    color: $color-text-tertiary;
+    min-width: 120px;
+    text-align: right;
+}
+
+// Checkbox
+.form-check-apple {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.form-check-input-apple {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    flex-shrink: 0;
+    appearance: none;
+    background: $color-bg-input;
+    border: 1px solid $color-border;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all $transition-fast;
+    position: relative;
+
+    &:checked {
+        background: $color-accent;
+        border-color: $color-accent;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 7px;
+            width: 5px;
+            height: 9px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.15);
+    }
+}
+
+.form-check-label-apple {
+    font-size: 0.85rem;
+    color: $color-text-secondary;
+    line-height: 1.5;
+
+    a {
+        color: $color-accent;
+        text-decoration: none;
+        transition: color $transition-fast;
+
+        &:hover {
+            color: $color-accent-hover;
+            text-decoration: underline;
+        }
+    }
+}
+
+// Primary Button
+.btn-apple-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, $color-accent 0%, #5E5CE6 100%);
+    border: none;
+    border-radius: $border-radius-md;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all $transition-fast;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity $transition-fast;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(10, 132, 255, 0.4);
+
+        &::before {
+            opacity: 1;
+        }
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    .btn-loader {
+        display: none;
+    }
+
+    &.loading {
+        pointer-events: none;
+
+        .btn-text,
+        .bi-arrow-right {
+            opacity: 0;
+        }
+
+        .btn-loader {
+            display: block;
+            position: absolute;
+        }
+    }
+
+    &.success {
+        background: linear-gradient(135deg, $color-success 0%, #28A745 100%);
+    }
+}
+
+// Divider
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+
+    &::before,
+    &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: $color-border;
+    }
+
+    span {
+        padding: 0 1rem;
+        color: $color-text-tertiary;
+        font-size: 0.85rem;
+    }
+}
+
+// Social Login
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-social {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: $color-bg-input;
+    border: 1px solid $color-border;
+    color: $color-text-primary;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all $transition-fast;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: $color-border-focus;
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+// Footer Text
+.footer-text {
+    margin-top: 2rem;
+    color: $color-text-tertiary;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+// Animations
+.fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+.fade-in-down {
+    animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Animation delays
+@for $i from 1 through 10 {
+    .delay-#{$i} {
+        animation-delay: #{$i * 0.08}s;
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .nav-text {
+        display: none;
+    }
+
+    .card-title {
+        font-size: 1.75rem;
+    }
+
+    .gradient-orb {
+        opacity: 0.25;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        padding: 100px 0 40px;
+    }
+
+    .register-card {
+        margin: 0 1rem;
+    }
+
+    .btn-social {
+        width: 48px;
+        height: 48px;
+        font-size: 1.1rem;
+    }
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+}
+
+// Selection
+::selection {
+    background: rgba(10, 132, 255, 0.4);
+    color: white;
+}

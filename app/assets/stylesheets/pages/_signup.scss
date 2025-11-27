@@ -1,0 +1,414 @@
+// ============================================
+// KITCHENGURU - SIGNUP PAGE
+// Style Citadium - Compatible simple_form natif
+// Cible les classes générées par simple_form
+// ============================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ============================================
+// VARIABLES
+// ============================================
+
+$color-bg: #ffffff;
+$color-text: #000000;
+$color-text-light: #666666;
+$color-text-muted: #888888;
+$color-border: #000000;
+$color-border-light: #e0e0e0;
+$color-accent: #9333ea;
+$color-accent-light: #a855f7;
+
+$font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-5deg); }
+  50% { transform: translate(-50%, -60%) rotate(-3deg); }
+}
+
+// ============================================
+// PAGE BODY - Appliqué à toute la page signup
+// ============================================
+
+body.registrations,
+body.devise-registrations,
+body.registrations-new {
+  background: $color-bg;
+  font-family: $font-main;
+  color: $color-text;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+
+  // Override Bootstrap si présent
+  .container, .container-fluid {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+// ============================================
+// WRAPPER PRINCIPAL
+// Ajoute cette classe autour de ton formulaire
+// OU cible directement le form Devise
+// ============================================
+
+// Cible le formulaire Devise directement
+#new_user,
+form.new_user,
+form[action*="registration"],
+form[action*="sign_up"] {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+// ============================================
+// TITRE H2 - "Sign up" devient ÉNORME
+// ============================================
+
+// Le h2 généré par Devise
+h2 {
+  font-size: clamp(3rem, 12vw, 10rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 0.9 !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  color: $color-text !important;
+  margin: 40px 0 50px !important;
+  padding: 0 !important;
+  animation: fadeInUp 0.5s ease-out;
+
+  // Masquer le texte par défaut et le remplacer visuellement
+  // Ou si tu veux garder "Sign up", ça marchera aussi
+}
+
+// ============================================
+// FORM INPUTS CONTAINER
+// ============================================
+
+.form-inputs {
+  margin-bottom: 24px;
+
+  // Chaque groupe input généré par simple_form
+  > div,
+  .input,
+  .field,
+  .email,
+  .password,
+  .string {
+    margin-bottom: 20px;
+    animation: fadeInUp 0.5s ease-out both;
+
+    &:nth-child(1) { animation-delay: 0.1s; }
+    &:nth-child(2) { animation-delay: 0.15s; }
+    &:nth-child(3) { animation-delay: 0.2s; }
+  }
+}
+
+// ============================================
+// LABELS
+// ============================================
+
+label,
+.form-inputs label,
+.control-label {
+  display: block !important;
+  font-family: $font-main !important;
+  font-size: 0.65rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: $color-text !important;
+  margin-bottom: 8px !important;
+
+  // Cacher l'astérisque required
+  abbr, abbr[title] {
+    display: none !important;
+  }
+}
+
+// ============================================
+// INPUTS - Bordure complète style Citadium
+// ============================================
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input.form-control,
+input.string,
+input.email,
+input.password,
+.form-inputs input {
+  width: 100% !important;
+  padding: 14px 16px !important;
+  font-family: $font-main !important;
+  font-size: 0.9rem !important;
+  font-weight: 400 !important;
+  color: $color-text !important;
+  background: $color-bg !important;
+  border: 1px solid $color-border-light !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: border-color 0.25s ease !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+
+  &::placeholder {
+    color: $color-text-muted !important;
+  }
+
+  &:hover {
+    border-color: $color-text-light !important;
+  }
+
+  &:focus {
+    border-color: $color-text !important;
+    box-shadow: none !important;
+  }
+}
+
+// ============================================
+// HINTS (texte d'aide sous les inputs)
+// ============================================
+
+.hint,
+.help-block,
+small.form-text {
+  display: block;
+  font-size: 0.7rem;
+  color: $color-text-muted;
+  margin-top: 6px;
+}
+
+// ============================================
+// FORM ACTIONS - Bouton Submit
+// ============================================
+
+.form-actions {
+  margin-top: 32px;
+  animation: fadeInUp 0.5s ease-out 0.3s both;
+
+  input[type="submit"],
+  button[type="submit"],
+  button,
+  .btn,
+  .btn-primary {
+    width: 100% !important;
+    padding: 18px 32px !important;
+    font-family: $font-main !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase !important;
+    color: $color-accent !important;
+    background: transparent !important;
+    border: 1.5px solid $color-accent !important;
+    border-radius: 0 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: $color-accent;
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    &:hover {
+      color: $color-bg !important;
+
+      &::before {
+        width: 100%;
+      }
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &:focus {
+      outline: none !important;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.15) !important;
+    }
+  }
+}
+
+// ============================================
+// DEVISE SHARED LINKS
+// ============================================
+
+// Les liens générés par le partial _links
+a[href*="sign_in"],
+a[href*="login"],
+a[href*="password"],
+a[href*="confirmation"],
+a[href*="unlock"] {
+  display: inline-block;
+  font-family: $font-main;
+  font-size: 0.8rem;
+  color: $color-accent;
+  text-decoration: none;
+  margin: 8px 0;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-accent-light;
+    text-decoration: underline;
+  }
+}
+
+// Container des liens (après le form)
+form + a,
+form + br,
+form ~ a,
+.devise-links,
+.links {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+}
+
+// Masquer les <br> moches de Devise
+form ~ br {
+  display: none;
+}
+
+// ============================================
+// ERRORS
+// ============================================
+
+#error_explanation,
+.error-notification,
+.alert-danger {
+  max-width: 700px;
+  margin: 0 auto 24px;
+  padding: 16px 20px;
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 3px solid #dc2626;
+  color: #dc2626;
+  font-size: 0.85rem;
+
+  h2 {
+    font-size: 0.9rem !important;
+    margin: 0 0 8px !important;
+    text-transform: none !important;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+}
+
+.field_with_errors {
+  input {
+    border-color: #dc2626 !important;
+  }
+}
+
+span.error,
+.inline-errors {
+  display: block;
+  font-size: 0.7rem;
+  color: #dc2626;
+  margin-top: 4px;
+}
+
+// ============================================
+// FLASH MESSAGES
+// ============================================
+
+.alert,
+.flash,
+.notice {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 14px 20px;
+  font-size: 0.85rem;
+  text-align: center;
+
+  &.alert-success,
+  &.notice {
+    background: rgba(147, 51, 234, 0.08);
+    color: $color-accent;
+    border-left: 3px solid $color-accent;
+  }
+
+  &.alert-danger,
+  &.alert-error {
+    background: rgba(239, 68, 68, 0.08);
+    color: #dc2626;
+    border-left: 3px solid #dc2626;
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 3.5rem !important;
+    margin: 30px 0 40px !important;
+  }
+
+  #new_user,
+  form.new_user,
+  form[action*="registration"] {
+    padding: 0 16px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 2.5rem !important;
+    margin: 20px 0 30px !important;
+  }
+
+  .form-actions input[type="submit"],
+  .form-actions button[type="submit"] {
+    padding: 14px 24px !important;
+    font-size: 0.7rem !important;
+  }
+}
+
+// ============================================
+// REDUCED MOTION
+// ============================================
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

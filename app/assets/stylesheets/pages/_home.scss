@@ -1,1 +1,498 @@
-// Specific CSS for your home-page
+// ===========================================
+// 🍳 KITCHEN GURU - MOCHA BROWN EDITION
+// ===========================================
+//
+// 🎨 PALETTE - MOCHA BROWN (same as recipes)
+// ----------------------------------------
+// Couleurs volontairement foncées pour rester
+// mocha même sur écrans qui éclaircissent
+//
+// ===========================================
+
+// ===========================================
+// 🎨 COLOR PALETTE - MOCHA BROWN
+// ===========================================
+
+// Primary - Mocha Brown (chaleureux, gourmand)
+$mocha-darkest: #2c1810;
+$mocha-dark: #3d251a;
+$mocha-medium: #4a2c1c;
+$mocha-base: #5c3a2e;
+$mocha-light: #7a5244;
+$mocha-lighter: #9b7566;
+
+// Accent Colors - Warm Terracotta & Caramel
+$accent-primary: #c4704a;
+$accent-primary-dark: #a85f3d;
+$accent-secondary: #d4a574;
+$accent-tertiary: #8b5a3c;
+
+// Secondary - Sage Green (naturel, frais)
+$secondary: #8FA57E;
+$secondary-dark: #6B8560;
+$secondary-light: #B5C9A8;
+
+// Background Colors
+$bg-primary: #f8f4f1;
+$bg-secondary: #f0e9e4;
+$bg-tertiary: #e8dfd8;
+$bg-card: #ffffff;
+
+// Neutrals
+$sand: #E8DDD0;
+$mushroom: #C9B8A8;
+
+// Text colors
+$text-primary: $mocha-darkest;
+$text-secondary: $mocha-base;
+$text-muted: $mocha-light;
+$text-light: $mocha-lighter;
+
+// Border
+$border-color: rgba(92, 58, 46, 0.12);
+
+// Shadows
+$shadow-soft: 0 2px 8px rgba(44, 24, 16, 0.06);
+$shadow-medium: 0 8px 24px rgba(44, 24, 16, 0.08);
+$shadow-large: 0 16px 48px rgba(44, 24, 16, 0.12);
+$shadow-card: 0 4px 20px rgba(44, 24, 16, 0.06);
+
+// ===========================================
+// 🔧 RESET & BASE
+// ===========================================
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: $bg-primary;
+  color: $text-primary;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ===========================================
+// 🌿 BACKGROUND - Natural & Luminous
+// ===========================================
+.bg-natural {
+  background:
+    radial-gradient(ellipse 120% 80% at 20% 10%, rgba($secondary, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 60% at 85% 90%, rgba($accent-primary, 0.08) 0%, transparent 40%),
+    linear-gradient(180deg, $bg-primary 0%, $bg-secondary 100%);
+  position: relative;
+  overflow: hidden;
+
+  // Organic blob shapes
+  &::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+    background: linear-gradient(135deg, rgba($secondary, 0.06) 0%, transparent 60%);
+    top: -100px;
+    right: -80px;
+    animation: organic-float 20s ease-in-out infinite;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
+    background: linear-gradient(225deg, rgba($accent-secondary, 0.05) 0%, transparent 60%);
+    bottom: -50px;
+    left: -60px;
+    animation: organic-float 25s ease-in-out infinite reverse;
+  }
+}
+
+// ===========================================
+// ✨ ANIMATIONS
+// ===========================================
+@keyframes organic-float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(20px, -15px) rotate(5deg) scale(1.02);
+  }
+  66% {
+    transform: translate(-10px, 10px) rotate(-3deg) scale(0.98);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.85);
+  }
+}
+
+// Animation classes
+.animate-in {
+  opacity: 0;
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@for $i from 1 through 6 {
+  .delay-#{$i} {
+    animation-delay: #{$i * 0.1}s;
+  }
+}
+
+// ===========================================
+// 🏠 HOMEPAGE LAYOUT
+// ===========================================
+.homepage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+  z-index: 1;
+
+  &__container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+// ===========================================
+// 🎪 LOGO
+// ===========================================
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1.25rem;
+  background: $bg-card;
+  border-radius: 100px;
+  box-shadow: $shadow-soft;
+  border: 1px solid $border-color;
+
+  &__icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, $mocha-base 0%, $mocha-light 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  &__text {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $mocha-dark;
+    letter-spacing: -0.02em;
+  }
+}
+
+// ===========================================
+// 📦 MAIN CARD
+// ===========================================
+.card {
+  width: 100%;
+  background: $bg-card;
+  border-radius: 28px;
+  padding: 2.5rem 2rem;
+  box-shadow: $shadow-card;
+  border: 1px solid $border-color;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  // Top accent bar - mocha gradient
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, $mocha-base 0%, $accent-primary 100%);
+    border-radius: 0 0 4px 4px;
+  }
+}
+
+// ===========================================
+// 📝 CONTENT
+// ===========================================
+.content {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: $mocha-darkest;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+
+  &__highlight {
+    color: $accent-primary;
+    font-style: italic;
+  }
+}
+
+.subtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: $text-muted;
+  font-weight: 400;
+}
+
+// ===========================================
+// 🎈 DECORATIVE ITEMS
+// ===========================================
+.decorations {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.deco-item {
+  width: 52px;
+  height: 52px;
+  background: $bg-secondary;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: 1px solid $border-color;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px) rotate(5deg);
+    box-shadow: $shadow-soft;
+    border-color: rgba($accent-primary, 0.3);
+  }
+
+  @for $i from 2 through 4 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{($i - 1) * 0.1}s;
+    }
+  }
+}
+
+// ===========================================
+// 🔘 BUTTONS
+// ===========================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+
+  &--primary {
+    background: linear-gradient(135deg, $accent-primary 0%, $accent-primary-dark 100%);
+    color: $bg-card;
+    box-shadow:
+      0 4px 12px rgba($accent-primary, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 8px 20px rgba($accent-primary, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &--secondary {
+    background: $bg-secondary;
+    color: $text-primary;
+    border: 1px solid $border-color;
+
+    &:hover {
+      background: $bg-tertiary;
+      border-color: $mocha-lighter;
+    }
+  }
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
+  }
+}
+
+// ===========================================
+// 🔗 SECONDARY LINK
+// ===========================================
+.link-secondary {
+  display: block;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: $text-light;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  span {
+    color: $accent-primary;
+    font-weight: 500;
+  }
+
+  &:hover {
+    color: $text-secondary;
+
+    span {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ===========================================
+// 💡 FEATURE HINTS
+// ===========================================
+.hints {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8rem;
+  color: $text-light;
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 14px;
+      height: 14px;
+      stroke: $mocha-base;
+    }
+  }
+}
+
+// ===========================================
+// 🌿 BADGE
+// ===========================================
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: $bg-card;
+  border-radius: 100px;
+  box-shadow: $shadow-soft;
+  font-size: 0.8rem;
+  color: $text-secondary;
+  border: 1px solid $border-color;
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    background: $mocha-base;
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+}
+
+// ===========================================
+// 📱 RESPONSIVE
+// ===========================================
+@media (max-width: 380px) {
+  .homepage {
+    padding: 1.5rem 1rem;
+  }
+
+  .card {
+    padding: 2rem 1.5rem;
+    border-radius: 24px;
+  }
+
+  .title {
+    font-size: 1.625rem;
+  }
+
+  .decorations {
+    gap: 0.5rem;
+  }
+
+  .deco-item {
+    width: 46px;
+    height: 46px;
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .homepage__container {
+    max-width: 440px;
+  }
+
+  .card {
+    padding: 3rem 2.5rem;
+  }
+
+  .title {
+    font-size: 2.125rem;
+  }
+}
