@@ -1,0 +1,112 @@
+.mahe-navbar {
+
+  // ===========================================
+  // 🎨 COLOR PALETTE - MOCHA BROWN
+  // ===========================================
+  $mocha-darkest: #2c1810;
+  $mocha-dark: #3d251a;
+  $mocha-medium: #4a2c1c;
+  $mocha-base: #5c3a2e;
+  $mocha-light: #7a5244;
+  $mocha-lighter: #9b7566;
+
+  $accent-primary: #c4704a;
+  $accent-primary-dark: #a85f3d;
+  $accent-secondary: #d4a574;
+  $accent-tertiary: #8b5a3c;
+
+  $secondary: #8FA57E;
+  $secondary-dark: #6B8560;
+  $secondary-light: #B5C9A8;
+
+  $bg-primary: #f8f4f1;
+  $bg-secondary: #f0e9e4;
+  $bg-tertiary: #e8dfd8;
+  $bg-card: #ffffff;
+
+  $text-primary: $mocha-darkest;
+  $text-secondary: $mocha-base;
+  $text-muted: $mocha-light;
+  $text-light: $mocha-lighter;
+
+  $border-color: rgba(92, 58, 46, 0.25);
+
+  $shadow-soft: 0 4px 10px rgba(44, 24, 16, 0.1);
+  $shadow-strong: 0 6px 20px rgba(44, 24, 16, 0.2);
+
+
+  // ===========================================
+  // 🧹 SUPPRIMER "My Recipes" + AVATAR
+  // ===========================================
+  .navbar-nav .nav-item:first-child {
+    display: none !important;     // My Recipes
+  }
+
+  .navbar-nav .nav-item.dropdown {
+    display: none !important;     // Avatar + dropdown
+  }
+
+
+  // ===========================================
+  // 🧭 NAVBAR STYLE GLOBAL
+  // ===========================================
+  background: $bg-primary !important;
+  border-bottom: 3px solid $accent-primary !important;
+  box-shadow: $shadow-strong !important;
+  padding: 8px 0 !important;
+
+
+  // ===========================================
+  // 🎪 LOGO
+  // ===========================================
+  .navbar-brand span {
+    color: $mocha-darkest !important;
+    font-weight: 700 !important;
+    font-size: 1.4rem;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-brand img {
+    border-radius: 12px !important;
+    box-shadow: $shadow-soft;
+    border: 2px solid $accent-primary !important;
+  }
+
+
+  // ===========================================
+  // 🔗 LINKS (nav-link)
+  // ===========================================
+  .nav-link {
+    color: $mocha-light !important;
+    font-weight: 600 !important;
+    padding: 10px 14px !important;
+    border-radius: 12px !important;
+    transition: 0.3s ease;
+
+    &:hover {
+      color: $mocha-darkest !important;
+      background: $bg-secondary;
+      border: 1px solid $accent-primary;
+      transform: translateY(-2px);
+    }
+  }
+
+
+  // ===========================================
+  // 🟧 SIGN UP BUTTON (Bootstrap .btn-primary)
+  // ===========================================
+  .btn-primary {
+    background: $accent-primary !important;
+    border: none !important;
+    border-radius: 999px !important;
+    padding: 8px 20px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(196, 112, 74, 0.4);
+
+    &:hover {
+      background: $accent-primary-dark !important;
+      transform: translateY(-2px);
+    }
+  }
+
+}
