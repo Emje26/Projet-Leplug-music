@@ -496,3 +496,64 @@ body {
     font-size: 2.125rem;
   }
 }
+
+
+// ===========================================
+// 🅵🅾🅽🆃 — EXACT SAME FONT AS NAVBAR
+// ===========================================
+
+.homepage-root,
+.homepage-root * {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+// TITRE PRINCIPAL EXACT navbar-brand span
+.homepage-root h1.fw-bold text-dark {
+  font-weight: 700 !important;
+  font-size: 1.4rem !important;
+  color: $mocha-darkest !important;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.3px;
+}
+
+// Sous-texte du header
+.homepage-root p.text-muted.mb-0 {
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  color: $mocha-light !important;
+}
+
+// Texte principal (lead)
+.homepage-root p.lead.text-dark.mb-5 {
+  font-weight: 500 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.7 !important;
+  color: $mocha-dark !important;
+}
+
+// Textes sous icônes
+.homepage-root .small.fw-semibold.text-muted {
+  font-weight: 600 !important;
+  color: $mocha-light !important;
+}
+
+// Bouton
+.homepage-root .btn.btn-outline-dark.btn-lg.py-3.rounded-pill.fw-bold.border-2 {
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+}
+
+
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+html {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
