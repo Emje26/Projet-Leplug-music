@@ -1,0 +1,104 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <h2 class="mb-4">🗓️ Weekly Meal Planner</h2>
+
+      <!-- Preferences Form -->
+      <div class="card bg-dark text-white mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">Your Preferences</h5>
+        </div>
+        <div class="card-body">
+          <%= form_with url: meal_plans_generate_path, method: :post, local: true do |f| %>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <%= f.label :age, "Age", class: "form-label" %>
+                <%= f.number_field :age, value: @user_preference.age, class: "form-control bg-secondary text-white", min: 1 %>
+              </div>
+
+              <div class="col-md-4">
+                <%= f.label :gender, "Gender", class: "form-label" %>
+                <%= f.select :gender,
+                    [["Male", "male"], ["Female", "female"], ["Other", "other"]],
+                    { selected: @user_preference.gender },
+                    class: "form-select bg-secondary text-white" %>
+              </div>
+
+              <div class="col-md-4">
+                <%= f.label :activity_level, "Activity Level", class: "form-label" %>
+                <%= f.select :activity_level,
+                    [
+                      ["Sedentary", "sedentary"],
+                      ["Light", "light"],
+                      ["Moderate", "moderate"],
+                      ["Active", "active"],
+                      ["Very Active", "very_active"]
+                    ],
+                    { selected: @user_preference.activity_level },
+                    class: "form-select bg-secondary text-white" %>
+              </div>
+
+              <div class="col-md-4">
+                <%= f.label :weekly_budget_max, "Weekly Budget (€)", class: "form-label" %>
+                <%= f.number_field :weekly_budget_max, value: @user_preference.weekly_budget_max, class: "form-control bg-secondary text-white", min: 0, step: 5 %>
+              </div>
+
+              <div class="col-md-4">
+                <%= f.label :max_prep_time_minutes, "Max Prep Time (min)", class: "form-label" %>
+                <%= f.number_field :max_prep_time_minutes, value: @user_preference.max_prep_time_minutes, class: "form-control bg-secondary text-white", min: 5 %>
+              </div>
+
+              <div class="col-md-4">
+                <%= f.label :allergies, "Allergies (comma-separated)", class: "form-label" %>
+                <%= f.text_field :allergies, value: @user_preference.allergies.join(", "), class: "form-control bg-secondary text-white", placeholder: "e.g., peanuts, gluten" %>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <%= f.submit "Generate Weekly Menu", class: "btn btn-success btn-lg" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Current Meal Plan -->
+      <% if @meal_plan.present? && @meal_plan.plan_data.present? %>
+        <div class="card bg-dark text-white">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Your Weekly Menu</h5>
+            <span class="badge bg-success">Week of <%= @meal_plan.week_start_date.strftime("%B %d, %Y") %></span>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-dark table-bordered">
+                <thead>
+                  <tr>
+                    <th>Day</th>
+                    <th>Breakfast</th>
+                    <th>Lunch</th>
+                    <th>Dinner</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @meal_plan.plan_data["menus"]&.each do |day, meals| %>
+                    <tr>
+                      <td><strong><%= day %></strong></td>
+                      <td><%= meals["Petit-déjeuner"]&.dig("title") || "-" %></td>
+                      <td><%= meals["Déjeuner"]&.dig("title") || "-" %></td>
+                      <td><%= meals["Dîner"]&.dig("title") || "-" %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="alert alert-info">
+          <i class="fas fa-info-circle me-2"></i>
+          No meal plan generated yet. Fill in your preferences above and click "Generate Weekly Menu".
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

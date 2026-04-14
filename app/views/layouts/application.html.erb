@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>KitchenGuru</title>
+    <title>Le Plug</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,14 +10,17 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-white">
+  <body class="bg-dark">
     <%= link_to "Skip to main content", "#main-content", class: "visually-hidden-focusable" %>
 
-    <header class="border-bottom bg-white">
-      <%= render "shared/navbar" %>
-    </header>
+    <% # Hide navbar when logged in user is on home page (feed page has its own bottom nav) %>
+    <% unless user_signed_in? && controller_name == 'home' && action_name == 'index' %>
+      <header class="cyber-header">
+        <%= render "shared/navbar" %>
+      </header>
+    <% end %>
 
-    <main id="main-content" class="py-4">
+    <main id="main-content" class="">
       <div class="">
 
         <% if notice %>

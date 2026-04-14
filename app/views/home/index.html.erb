@@ -1,42 +1,183 @@
-<div class="homepage-root bg-natural">
-  <div class=" d-flex justify-content-center align-items-center min-vh-100 py-5">
-    <div class="card shadow-lg border-0 rounded-4 p-5 text-center" style="max-width: 480px; width: 100%;">
+<% if user_signed_in? %>
+  <!-- ========== LOGGED IN USER - FEED PAGE ========== -->
+  <div class="feed-page">
 
-      <div class="d-flex align-items-center justify-content-center mb-4">
-        <%= image_tag "logo.png", alt: "Kitchen Guru Logo", width: 60, class: "rounded-circle shadow me-3" %>
-        <div>
-          <h1 class="h1 fw-bold mb-0" style="font-family: 'Nunito', 'Helvetica', sans-serif; color: #333;">
-            Kitchen Guru
-          </h1>
-          <p class="text-muted mb-0" style="font-size: 1.1rem;">
-            Your gut's new bestie
-          </p>
+    <!-- Hero Section -->
+    <section class="feed-hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Welcome back</h1>
+        <p class="hero-subtitle">Discover what's new in the music scene</p>
+      </div>
+      <div class="hero-visual">
+        <div class="vinyl-record">
+          <div class="vinyl-label">♪</div>
         </div>
       </div>
+    </section>
 
-      <p class="lead text-dark mb-5" style="font-size: 1.1rem; line-height: 1.6;">
-        Stop googling 'healthy recipes' at 7pm. Kitchen Guru creates custom meal plans tailored to your nutritional goals—just tell us what you're craving.
-      </p>
-
-
-      <div class="d-flex justify-content-around mb-5">
-        <div class="text-center">
-          <i class="fas fa-fire fa-2x text-danger mb-2"></i>
-          <p class="small fw-semibold text-muted">Easy & sexy recipes</p>
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+      <h2 class="section-title">Quick Actions</h2>
+      <div class="actions-grid">
+        <%= link_to assistant_path, class: "action-card" do %>
+          <div class="action-icon">🎵</div>
+          <span class="action-label">Create</span>
+        <% end %>
+        <%= link_to recipes_path, class: "action-card" do %>
+          <div class="action-icon">📂</div>
+          <span class="action-label">My Posts</span>
+        <% end %>
+        <div class="action-card">
+          <div class="action-icon">🔍</div>
+          <span class="action-label">Discover</span>
         </div>
-
-        <div class="text-center">
-          <i class="fas fa-clipboard-list fa-2x text-info mb-2"></i>
-          <p class="small fw-semibold text-muted">Custom recos</p>
-        </div>
-        <div class="text-center">
-          <i class="fas fa-microscope fa-2x text-success mb-2"></i>
-          <p class="small fw-semibold text-muted">Science-backed</p>
+        <div class="action-card">
+          <div class="action-icon">💬</div>
+          <span class="action-label">Messages</span>
         </div>
       </div>
+    </section>
 
-      <%= link_to "Let's cook!", recipes_path, class: "btn btn-outline-dark btn-lg py-3 rounded-pill fw-bold border-2" %>
+    <!-- Trending Section -->
+    <section class="trending-section">
+      <h2 class="section-title">Trending Now 🔥</h2>
+      <div class="trending-scroll">
+        <% 6.times do |i| %>
+          <div class="trending-card">
+            <div class="trending-cover">
+              <div class="cover-placeholder"><%= ['🎤', '🎸', '🎹', '🥁', '🎧', '🎼'][i] %></div>
+              <div class="play-overlay">▶</div>
+            </div>
+            <div class="trending-info">
+              <p class="trending-title">Track <%= i + 1 %></p>
+              <p class="trending-artist">Artist Name</p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Featured Artists -->
+    <section class="artists-section">
+      <h2 class="section-title">Featured Artists</h2>
+      <div class="artists-grid">
+        <% 8.times do |i| %>
+          <div class="artist-card">
+            <div class="artist-avatar">
+              <%= ['👨‍🎤', '👩‍🎤', '🧑‍🎤', '👨‍🎤', '👩‍🎤', '🧑‍🎤', '👨‍🎤', '👩‍🎤'][i] %>
+            </div>
+            <p class="artist-name">Artist <%= i + 1 %></p>
+            <span class="artist-genre"><%= ['Hip-Hop', 'R&B', 'Pop', 'Jazz', 'Rock', 'Electronic', 'Soul', 'Indie'][i] %></span>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Recent Activity -->
+    <section class="activity-section">
+      <h2 class="section-title">Recent Activity</h2>
+      <div class="activity-feed">
+        <% 5.times do |i| %>
+          <div class="activity-item">
+            <div class="activity-avatar"><%= ['🎵', '🎤', '🎧', '🎹', '🔥'][i] %></div>
+            <div class="activity-content">
+              <p class="activity-text"><strong>Someone</strong> <%= ['released a new track', 'started following you', 'liked your post', 'commented on your track', 'shared your music'][i] %></p>
+              <span class="activity-time"><%= i + 1 %>h ago</span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories-section">
+      <h2 class="section-title">Explore by Genre</h2>
+      <div class="categories-grid">
+        <% [['Hip-Hop', '🎤', '#bf00ff'], ['R&B', '💜', '#00bfff'], ['Pop', '⭐', '#ff69b4'], ['Jazz', '🎷', '#ffd700'], ['Rock', '🎸', '#ff4500'], ['Electronic', '🎧', '#00ff88']].each do |genre, emoji, color| %>
+          <div class="category-card" style="--cat-color: <%= color %>">
+            <span class="category-emoji"><%= emoji %></span>
+            <span class="category-name"><%= genre %></span>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Spacer for bottom nav -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+
+  <!-- Bottom Navigation Bar -->
+  <nav class="bottom-nav">
+    <%= link_to root_path, class: "nav-item active" do %>
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Home</span>
+    <% end %>
+    <%= link_to recipes_path, class: "nav-item" do %>
+      <span class="nav-icon">📂</span>
+      <span class="nav-label">Posts</span>
+    <% end %>
+    <%= link_to assistant_path, class: "nav-item nav-item-create" do %>
+      <span class="nav-icon-create">+</span>
+    <% end %>
+    <div class="nav-item">
+      <span class="nav-icon">💬</span>
+      <span class="nav-label">Chat</span>
+    </div>
+    <div class="nav-item">
+      <span class="nav-icon">👤</span>
+      <span class="nav-label">Profile</span>
+    </div>
+  </nav>
+
+<% else %>
+  <!-- ========== LANDING PAGE - NOT LOGGED IN ========== -->
+  <div class="homepage-root bg-natural">
+    <div class="d-flex flex-column justify-content-center align-items-center min-vh-100 py-5">
+
+      <!-- Phrase qui apparaît -->
+      <div class="piano-phrase-container">
+        <p class="piano-phrase" data-phrase="1">Découvre des nouveaux artistes</p>
+        <p class="piano-phrase" data-phrase="2">Fais-toi connaître</p>
+        <p class="piano-phrase" data-phrase="3">Contacte des ingénieurs son</p>
+        <p class="piano-phrase" data-phrase="4">Partage ta musique</p>
+        <p class="piano-phrase" data-phrase="5">Collabore avec des producteurs</p>
+        <p class="piano-phrase" data-phrase="6">Trouve ton prochain feat</p>
+        <p class="piano-phrase" data-phrase="7">Booste ta carrière</p>
+      </div>
+
+      <!-- Piano -->
+      <div class="piano">
+        <div class="piano-keys">
+          <div class="key white" data-note="1"></div>
+          <div class="key white" data-note="2"></div>
+          <div class="key white" data-note="3"></div>
+          <div class="key white" data-note="4"></div>
+          <div class="key white" data-note="5"></div>
+          <div class="key white" data-note="6"></div>
+          <div class="key white" data-note="7"></div>
+          <div class="key black" data-note="1" style="left: 45px;"></div>
+          <div class="key black" data-note="2" style="left: 105px;"></div>
+          <div class="key black" data-note="4" style="left: 225px;"></div>
+          <div class="key black" data-note="5" style="left: 285px;"></div>
+          <div class="key black" data-note="6" style="left: 345px;"></div>
+        </div>
+        <div class="piano-body"></div>
+      </div>
+
+      <!-- Logo et contenu -->
+      <div class="piano-content mt-5">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+          <%= image_tag "logo.png", alt: "Le Plug Logo", width: 60, class: "rounded-circle shadow me-3" %>
+          <div>
+            <h1 class="h1 fw-bold mb-0 text-glow">Le plug</h1>
+            <p class="text-muted-cyber mb-0">Your music network</p>
+          </div>
+        </div>
+
+        <%= link_to "Let's plug in!", new_user_session_path, class: "btn-cyber mt-4" %>
+      </div>
 
     </div>
   </div>
-</div>
+<% end %>

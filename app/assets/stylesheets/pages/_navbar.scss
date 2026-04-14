@@ -1,38 +1,52 @@
+// ===========================================
+// 🎯 CYBER HEADER - No gap fix
+// ===========================================
+.cyber-header {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: #0a0a0f !important;
+}
+
+body.bg-dark {
+  background: #0d0d14 !important;
+}
+
 .mahe-navbar {
 
   // ===========================================
-  // 🎨 COLOR PALETTE - MOCHA BROWN
+  // 🎨 COLOR PALETTE - CYBERPUNK PURPLE
   // ===========================================
-  $mocha-darkest: #2c1810;
-  $mocha-dark: #3d251a;
-  $mocha-medium: #4a2c1c;
-  $mocha-base: #5c3a2e;
-  $mocha-light: #7a5244;
-  $mocha-lighter: #9b7566;
+  $cyber-darkest: #0a0a0f;
+  $cyber-dark: #12121a;
+  $cyber-medium: #1a1a2e;
+  $cyber-base: #252542;
+  $cyber-light: #3d3d6b;
+  $cyber-lighter: #5c5c8a;
 
-  $accent-primary: #c4704a;
-  $accent-primary-dark: #a85f3d;
-  $accent-secondary: #d4a574;
-  $accent-tertiary: #8b5a3c;
+  $accent-primary: #bf00ff;
+  $accent-primary-dark: #9900cc;
+  $accent-secondary: #e040fb;
+  $accent-tertiary: #7c4dff;
 
-  $secondary: #8FA57E;
-  $secondary-dark: #6B8560;
-  $secondary-light: #B5C9A8;
+  $secondary: #00f5ff;
+  $secondary-dark: #00c4cc;
+  $secondary-light: #80faff;
 
-  $bg-primary: #f8f4f1;
-  $bg-secondary: #f0e9e4;
-  $bg-tertiary: #e8dfd8;
-  $bg-card: #ffffff;
+  $bg-primary: #0d0d14;
+  $bg-secondary: #13131f;
+  $bg-tertiary: #1a1a2e;
+  $bg-card: #16162a;
 
-  $text-primary: $mocha-darkest;
-  $text-secondary: $mocha-base;
-  $text-muted: $mocha-light;
-  $text-light: $mocha-lighter;
+  $text-primary: #f0f0ff;
+  $text-secondary: #c0c0e0;
+  $text-muted: #8080a0;
+  $text-light: #6060a0;
 
-  $border-color: rgba(92, 58, 46, 0.25);
+  $border-color: rgba(191, 0, 255, 0.3);
 
-  $shadow-soft: 0 4px 10px rgba(44, 24, 16, 0.1);
-  $shadow-strong: 0 6px 20px rgba(44, 24, 16, 0.2);
+  $shadow-soft: 0 4px 10px rgba(191, 0, 255, 0.15);
+  $shadow-strong: 0 6px 20px rgba(191, 0, 255, 0.25);
 
 
   // ===========================================
@@ -50,26 +64,126 @@
   // ===========================================
   // 🧭 NAVBAR STYLE GLOBAL
   // ===========================================
-  background: $bg-primary !important;
-  border-bottom: 3px solid $accent-primary !important;
-  box-shadow: $shadow-strong !important;
+  background: linear-gradient(90deg, $cyber-darkest 0%, $cyber-dark 50%, $cyber-darkest 100%) !important;
+  border-bottom: 2px solid $accent-primary !important;
+  box-shadow:
+    $shadow-strong,
+    0 0 30px rgba($accent-primary, 0.2),
+    inset 0 -1px 0 rgba($accent-primary, 0.3) !important;
   padding: 8px 0 !important;
+  position: relative;
+  overflow: hidden;
+
+
+  // ===========================================
+  // 🎵 MUSIC NOTES ANIMATION
+  // ===========================================
+  .music-notes-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .music-note {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: float-note 8s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px currentColor);
+
+    &:nth-child(1) { left: 5%; animation-delay: 0s; color: $accent-primary; }
+    &:nth-child(2) { left: 15%; animation-delay: 1s; color: $secondary; }
+    &:nth-child(3) { left: 25%; animation-delay: 2s; color: $accent-secondary; }
+    &:nth-child(4) { left: 35%; animation-delay: 0.5s; color: $accent-tertiary; }
+    &:nth-child(5) { left: 45%; animation-delay: 1.5s; color: $accent-primary; }
+    &:nth-child(6) { left: 55%; animation-delay: 2.5s; color: $secondary; }
+    &:nth-child(7) { left: 65%; animation-delay: 0.8s; color: $accent-secondary; }
+    &:nth-child(8) { left: 75%; animation-delay: 1.8s; color: $accent-tertiary; }
+    &:nth-child(9) { left: 85%; animation-delay: 2.8s; color: $accent-primary; }
+    &:nth-child(10) { left: 95%; animation-delay: 3.5s; color: $secondary; }
+    &:nth-child(11) { left: 10%; animation-delay: 4s; color: $accent-secondary; }
+    &:nth-child(12) { left: 30%; animation-delay: 4.5s; color: $accent-tertiary; }
+    &:nth-child(13) { left: 50%; animation-delay: 5s; color: $accent-primary; }
+    &:nth-child(14) { left: 70%; animation-delay: 5.5s; color: $secondary; }
+    &:nth-child(15) { left: 90%; animation-delay: 6s; color: $accent-secondary; }
+  }
+
+  @keyframes float-note {
+    0% {
+      transform: translateY(60px) rotate(0deg) scale(0.5);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.9;
+    }
+    50% {
+      transform: translateY(-10px) rotate(15deg) scale(1);
+      opacity: 0.7;
+    }
+    90% {
+      opacity: 0.9;
+    }
+    100% {
+      transform: translateY(60px) rotate(-15deg) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  // Notes qui dansent
+  .note-bounce {
+    animation: note-dance 0.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes note-dance {
+    0% { transform: translateY(0) rotate(-5deg); }
+    100% { transform: translateY(-5px) rotate(5deg); }
+  }
 
 
   // ===========================================
   // 🎪 LOGO
   // ===========================================
-  .navbar-brand span {
-    color: $mocha-darkest !important;
-    font-weight: 700 !important;
-    font-size: 1.4rem;
-    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-  }
+  .navbar-brand {
+    position: relative;
+    z-index: 10;
 
-  .navbar-brand img {
-    border-radius: 12px !important;
-    box-shadow: $shadow-soft;
-    border: 2px solid $accent-primary !important;
+    span {
+      color: $text-primary !important;
+      font-weight: 700 !important;
+      font-size: 1.4rem;
+      text-shadow:
+        0 0 10px rgba($accent-primary, 0.5),
+        0 0 20px rgba($accent-primary, 0.3);
+      transition: all 0.3s ease;
+
+      &:hover {
+        text-shadow:
+          0 0 15px rgba($accent-primary, 0.8),
+          0 0 30px rgba($accent-primary, 0.5),
+          0 0 45px rgba($secondary, 0.3);
+      }
+    }
+
+    img {
+      border-radius: 12px !important;
+      box-shadow:
+        $shadow-soft,
+        0 0 15px rgba($accent-primary, 0.3);
+      border: 2px solid $accent-primary !important;
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow:
+          0 0 20px rgba($accent-primary, 0.5),
+          0 0 40px rgba($accent-primary, 0.3);
+        border-color: $secondary !important;
+      }
+    }
   }
 
 
@@ -77,17 +191,22 @@
   // 🔗 LINKS (nav-link)
   // ===========================================
   .nav-link {
-    color: $mocha-light !important;
+    position: relative;
+    z-index: 10;
+    color: $text-muted !important;
     font-weight: 600 !important;
     padding: 10px 14px !important;
     border-radius: 12px !important;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
 
     &:hover {
-      color: $mocha-darkest !important;
-      background: $bg-secondary;
+      color: $text-primary !important;
+      background: rgba($accent-primary, 0.15);
       border: 1px solid $accent-primary;
       transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba($accent-primary, 0.3);
+      text-shadow: 0 0 10px rgba($accent-primary, 0.5);
     }
   }
 
@@ -96,17 +215,31 @@
   // 🟧 SIGN UP BUTTON (Bootstrap .btn-primary)
   // ===========================================
   .btn-primary {
-    background: $accent-primary !important;
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(135deg, $accent-primary 0%, $accent-primary-dark 100%) !important;
     border: none !important;
     border-radius: 999px !important;
     padding: 8px 20px !important;
     font-weight: 700 !important;
-    box-shadow: 0 4px 12px rgba(196, 112, 74, 0.4);
+    box-shadow:
+      0 4px 15px rgba($accent-primary, 0.4),
+      0 0 30px rgba($accent-primary, 0.2);
+    transition: all 0.3s ease;
 
     &:hover {
-      background: $accent-primary-dark !important;
+      background: linear-gradient(135deg, $accent-secondary 0%, $accent-primary 100%) !important;
       transform: translateY(-2px);
+      box-shadow:
+        0 6px 20px rgba($accent-primary, 0.5),
+        0 0 40px rgba($accent-primary, 0.3);
     }
+  }
+
+  // Container fluid pour le z-index
+  .container-fluid {
+    position: relative;
+    z-index: 5;
   }
 
 }

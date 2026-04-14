@@ -1,49 +1,43 @@
-<%# app/views/devise/registrations/new.html.erb %>
-<%# Layout EXACT Citadium %>
+<div class="cyber-auth-page">
 
-<div class="signup-page">
-
-  <%# Breadcrumb %>
-  <div class="signup-breadcrumb">
-    [ <%= link_to "ACCUEIL", root_path %> <span>►</span> INSCRIPTION ]
+  <!-- Floating music notes background -->
+  <div class="cyber-notes-bg">
+    <span class="note">♪</span>
+    <span class="note">♫</span>
+    <span class="note">🎵</span>
+    <span class="note">♬</span>
+    <span class="note">🎶</span>
+    <span class="note">♩</span>
+    <span class="note">♪</span>
+    <span class="note">♫</span>
+    <span class="note">🎵</span>
+    <span class="note">♬</span>
   </div>
 
-  <%# GIANT TITLE %>
-  <div class="signup-giant-title">
-    <h1>Compte</h1>
-  </div>
+  <div class="cyber-card">
 
-  <%# TABS: Se connecter / Créer un compte %>
-  <div class="signup-tabs">
-    <%= link_to "Se connecter", new_session_path(resource_name), class: "signup-tab" %>
-    <div class="signup-tab signup-tab--active">
-      Créer un compte
-      <span class="tab-arrow">↓</span>
-    </div>
-  </div>
-
-  <%# Form Section %>
-  <div class="signup-form-section">
-
-    <%# Promo text %>
-    <div class="signup-promo">
-      <p>
-        <span>Rejoins KitchenGuru</span>
-        <span>Scanne ton frigo</span>
-        <span>Génère des recettes avec l'IA</span>
-      </p>
+    <!-- Header -->
+    <div class="cyber-header-section">
+      <div class="cyber-icon">🎧</div>
+      <h1 class="cyber-title">Rejoins Le Plug</h1>
+      <p class="cyber-subtitle">Connecte-toi à la <span class="highlight">scène musicale</span></p>
     </div>
 
-    <%# Flash messages %>
+    <!-- Tabs -->
+    <div class="cyber-tabs">
+      <%= link_to "Se connecter", new_session_path(resource_name), class: "cyber-tab" %>
+      <div class="cyber-tab active">Créer un compte</div>
+    </div>
+
+    <!-- Flash messages -->
     <% if flash[:alert] %>
-      <div class="alert alert-danger"><%= flash[:alert] %></div>
-    <% end %>
-    <% if flash[:notice] %>
-      <div class="alert alert-success"><%= flash[:notice] %></div>
+      <div class="alert alert-danger" style="background: rgba(255,71,87,0.1); border: 1px solid #ff4757; border-radius: 10px; padding: 1rem; margin-bottom: 1rem; color: #ff6b7a;">
+        <%= flash[:alert] %>
+      </div>
     <% end %>
 
-    <%# Form %>
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "signup-form" }) do |f| %>
+    <!-- Form -->
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "cyber-form" }) do |f| %>
       <%= f.error_notification %>
 
       <div class="form-inputs">
@@ -51,61 +45,38 @@
             required: true,
             autofocus: true,
             autocomplete: "email",
-            label: "E-mail",
-            placeholder: "" %>
+            label: "Adresse e-mail",
+            placeholder: "ton@email.com" %>
 
         <%= f.input :password,
             required: true,
             autocomplete: "new-password",
             label: "Mot de passe",
-            placeholder: "",
-            hint: false %>
+            placeholder: "••••••••",
+            hint: "6 caractères minimum" %>
 
         <%= f.input :password_confirmation,
             required: true,
             autocomplete: "new-password",
             label: "Confirmer le mot de passe",
-            placeholder: "" %>
+            placeholder: "••••••••" %>
       </div>
 
-      <div class="form-actions">
-        <%= f.button :submit, "Créer mon compte" %>
-      </div>
+      <%= f.button :submit, "Créer mon compte", class: "cyber-btn" %>
     <% end %>
 
-    <%# Legal text %>
-    <div class="signup-legal">
-      <p>
-        KitchenGuru traite les données recueillies pour permettre la création et la gestion de votre compte,
-        la génération de recettes personnalisées et l'amélioration de nos services.
-        Pour en savoir plus sur la gestion de vos données personnelles et pour exercer vos droits,
-        veuillez consulter notre <%= link_to "politique de confidentialité", "#" %>.
-      </p>
+    <!-- Links -->
+    <div class="cyber-links">
+      <span>Déjà inscrit ?</span>
+      <%= link_to "Connecte-toi", new_session_path(resource_name) %>
     </div>
 
-  </div>
-
-  <%# IMAGE GALLERY %>
-  <div class="signup-gallery">
-    <div class="gallery-tagline">Bon appétit!</div>
-
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <%= image_tag "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=800&fit=crop", alt: "Salade fraîche" %>
-      </div>
-      <div class="gallery-item">
-        <%= image_tag "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=800&fit=crop", alt: "Pizza maison" %>
-      </div>
-      <div class="gallery-item">
-        <%= image_tag "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=800&fit=crop", alt: "Pancakes" %>
-      </div>
-      <div class="gallery-item">
-        <%= image_tag "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=800&fit=crop", alt: "Bowl healthy" %>
-      </div>
-      <div class="gallery-item">
-        <%= image_tag "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=800&fit=crop", alt: "Burger gourmet" %>
-      </div>
+    <!-- Security badge -->
+    <div class="cyber-badge">
+      <span class="badge-icon">🔒</span>
+      <span class="badge-text">Connexion sécurisée</span>
     </div>
+
   </div>
 
 </div>

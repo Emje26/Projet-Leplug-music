@@ -1,12 +1,12 @@
 <div class="container py-5">
 
   <div class="text-center mb-4">
-    <h1 class="fw-bold">Your Recipes</h1>
-    <p class="text-muted">Manage all your saved and generated recipes.</p>
+    <h1 class="la-title">Your Posts</h1>
+    <p class="text-muted">Manage all your saved and generated content.</p>
   </div>
 
   <div class="d-flex justify-content-center gap-3 mb-5">
-    <%= link_to "➕ New Recipe", assistant_path, class: "btn btn-primary px-4 py-2 rounded-pill" %>
+    <%= link_to "➕ New Post", assistant_path, class: "btn btn-primary px-4 py-2 rounded-pill" %>
   </div>
 
   <% if @recipes.any? %>

@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_27_220307) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_12_161107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "meal_plans", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "week_start_date"
+    t.text "plan_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_meal_plans_on_user_id"
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -60,6 +69,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_220307) do
     t.text "allergies"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_user_preferences_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,6 +88,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_220307) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "meal_plans", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "recipes", "users"
+  add_foreign_key "user_preferences", "users"
 end

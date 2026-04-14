@@ -1,79 +1,82 @@
-<div class="session-page">
+<div class="cyber-auth-page">
 
-  <!-- Floating particles -->
-  <div class="particles-container">
-    <% 15.times do %>
-      <div class="particle"></div>
-    <% end %>
+  <!-- Floating music notes background -->
+  <div class="cyber-notes-bg">
+    <span class="note">♪</span>
+    <span class="note">♫</span>
+    <span class="note">🎵</span>
+    <span class="note">♬</span>
+    <span class="note">🎶</span>
+    <span class="note">♩</span>
+    <span class="note">♪</span>
+    <span class="note">♫</span>
+    <span class="note">🎵</span>
+    <span class="note">♬</span>
   </div>
 
-  <div class="session-wrapper">
+  <div class="cyber-card">
 
-    <div class="session-card">
+    <!-- Header -->
+    <div class="cyber-header-section">
+      <div class="cyber-icon">🔐</div>
+      <h1 class="cyber-title">Connexion</h1>
+      <p class="cyber-subtitle">Accède à <span class="highlight">Le Plug</span></p>
+    </div>
 
-      <!-- HEADER -->
-      <div class="session-header">
-        <div class="session-icon">
-          🔒
-        </div>
-        <h2 class="session-title">Log in</h2>
-        <p class="session-subtitle">
-          Accédez à <span class="highlight">KitchenGuru</span>
-        </p>
+    <!-- Tabs -->
+    <div class="cyber-tabs">
+      <div class="cyber-tab active">Se connecter</div>
+      <%= link_to "Créer un compte", new_registration_path(resource_name), class: "cyber-tab" %>
+    </div>
+
+    <!-- Flash messages -->
+    <% if flash[:alert] %>
+      <div class="alert alert-danger" style="background: rgba(255,71,87,0.1); border: 1px solid #ff4757; border-radius: 10px; padding: 1rem; margin-bottom: 1rem; color: #ff6b7a;">
+        <%= flash[:alert] %>
       </div>
+    <% end %>
 
-      <!-- FORMULAIRE DEVlSE -->
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <!-- Form -->
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "cyber-form" }) do |f| %>
 
-        <div class="form-inputs">
+      <div class="form-inputs">
+        <%= f.input :email,
+            required: true,
+            autofocus: true,
+            label: "Adresse e-mail",
+            placeholder: "ton@email.com",
+            input_html: { autocomplete: "email" } %>
 
-          <!-- Email -->
-          <div class="input email-input">
-            <%= f.input :email,
-              required: true,
-              label: "Email Address",
-              input_html: { autocomplete: "email" } %>
+        <%= f.input :password,
+            required: true,
+            label: "Mot de passe",
+            placeholder: "••••••••",
+            input_html: { autocomplete: "current-password" } %>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="boolean">
+            <%= f.input :remember_me, as: :boolean, label: "Se souvenir de moi" %>
           </div>
-
-          <!-- Password -->
-          <div class="input password-input">
-            <%= f.input :password,
-              required: true,
-              label: "Password",
-              input_html: { autocomplete: "current-password" } %>
-          </div>
-
-          <!-- Remember me -->
-          <% if devise_mapping.rememberable? %>
-            <div class="boolean remember-me">
-              <%= f.input :remember_me, as: :boolean, label: "Remember me" %>
-            </div>
-          <% end %>
-
-        </div>
-
-        <!-- Submit -->
-        <div class="form-actions">
-          <%= f.button :submit, "Log in", class: "btn-primary" %>
-        </div>
-
-      <% end %>
-
-      <!-- LINKS -->
-      <div class="session-links">
-        <%= link_to "Forgot your password?", new_password_path(resource_name) %>
-        <br>
-        <span>Pas de compte ?</span>
-        <%= link_to "Sign up", new_registration_path(resource_name) %>
+        <% end %>
       </div>
 
-      <!-- SECURITY BADGE -->
-      <div class="security-badge">
-        <span class="badge-icon">🛡️</span>
-        <span class="badge-text">Secured by Devise</span>
-      </div>
+      <%= f.button :submit, "Se connecter", class: "cyber-btn" %>
+    <% end %>
 
+    <!-- Links -->
+    <div class="cyber-links">
+      <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
+      <br><br>
+      <span>Pas encore inscrit ?</span>
+      <%= link_to "Créer un compte", new_registration_path(resource_name) %>
+    </div>
+
+    <!-- Security badge -->
+    <div class="cyber-badge">
+      <span class="badge-icon">🛡️</span>
+      <span class="badge-text">Connexion sécurisée</span>
     </div>
 
   </div>
+
 </div>

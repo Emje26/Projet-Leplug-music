@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # Après connexion → Home page
+  def after_sign_in_path_for(resource)
+    root_path
+  end
+
+  # Après inscription → Compléter le profil
   def after_sign_up_path_for(resource)
     who_you_are_path
   end
@@ -14,6 +20,3 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:username])
   end
 end
-
-
-
