@@ -1,0 +1,57 @@
+<div class="settings-page">
+
+  <!-- Header -->
+  <header class="settings-header">
+    <%= link_to profile_path, class: "back-btn" do %>
+      <span>‹</span>
+    <% end %>
+    <h1 class="settings-title">Paramètres et activité</h1>
+    <div class="header-spacer"></div>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="settings-search">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" placeholder="Rechercher">
+  </div>
+
+  <!-- Settings Content -->
+  <div class="settings-content">
+
+    <!-- Section: Votre compte -->
+    <section class="settings-section">
+      <h2 class="section-label">Votre compte</h2>
+
+      <!-- Settings Item (Flexbox clonable) -->
+      <div class="settings-item">
+        <span class="item-icon">⚙️</span>
+        <div class="item-content">
+          <span class="item-title">Espace Comptes</span>
+          <span class="item-subtitle">Mot de passe, sécurité, informations personnelles</span>
+        </div>
+        <span class="item-arrow">›</span>
+      </div>
+
+    </section>
+
+  </div>
+
+</div>
+
+<!-- Bottom Navigation Bar -->
+<nav class="bottom-nav">
+  <%= link_to root_path, class: "nav-item" do %>
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">Home</span>
+  <% end %>
+
+  <%= link_to chats_path, class: "nav-item" do %>
+    <span class="nav-icon">💬</span>
+    <span class="nav-label">Chat</span>
+  <% end %>
+
+  <%= link_to profile_path, class: "nav-item active" do %>
+    <span class="nav-icon">👤</span>
+    <span class="nav-label">Profile</span>
+  <% end %>
+</nav>

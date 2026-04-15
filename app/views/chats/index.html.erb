@@ -1,0 +1,96 @@
+<div class="chats-page">
+
+  <!-- Header -->
+  <header class="chat-header">
+    <h1 class="chat-title"><%= current_user.email.split('@').first %></h1>
+    <button class="new-chat-btn">
+      <span>✏️</span>
+    </button>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="chat-search-box">
+    <div class="search-input-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Rechercher" class="search-input">
+    </div>
+  </div>
+
+  <!-- Following / Stories Section -->
+  <div class="following-section">
+    <div class="following-scroll">
+      <!-- Your Note -->
+      <div class="following-item your-note">
+        <div class="following-avatar">
+          <div class="avatar-placeholder">👤</div>
+          <span class="add-note">+</span>
+        </div>
+        <span class="following-name">Votre note</span>
+      </div>
+
+      <!-- Sample following users -->
+      <% ['Luna', 'Marcus', 'Jade', 'Alex', 'Maya', 'Kai', 'Zoe'].each_with_index do |name, i| %>
+        <div class="following-item">
+          <div class="following-avatar <%= ['has-story', ''].sample %>">
+            <div class="avatar-placeholder"><%= ['🎤', '🎸', '🎹', '🎧', '🎵', '🎷', '🥁'][i] %></div>
+          </div>
+          <span class="following-name"><%= name %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Section Separator -->
+  <div class="chat-section-header">
+    <span class="section-label">Messages</span>
+    <span class="section-action">Demandes</span>
+  </div>
+
+  <!-- Active Chats List -->
+  <div class="chats-list">
+    <% [
+      { name: 'KØNG', message: 'A aimé un message', time: '5 h', emoji: '🎤', unread: false },
+      { name: 'DJ Storm', message: 'Vu par DJ Storm', time: '8 h', emoji: '🎧', unread: false },
+      { name: 'PIELO', message: 'A envoyé un reel de legend...', time: '3 j', emoji: '🎹', unread: true },
+      { name: 'Ulysse Naudin', message: 'A aimé un message', time: '3 j', emoji: '🎸', unread: false },
+      { name: 'Dodo', message: 'Regarde sur Shotgun', time: '4 j', emoji: '🥁', unread: false },
+      { name: 'J2', message: 'Tu connais le morceau?', time: '5 j', emoji: '🎵', unread: false },
+      { name: 'Maya B', message: 'On fait la collab?', time: '1 sem', emoji: '🎷', unread: true }
+    ].each do |chat| %>
+      <div class="chat-item <%= 'unread' if chat[:unread] %>">
+        <div class="chat-avatar">
+          <div class="avatar-placeholder"><%= chat[:emoji] %></div>
+        </div>
+        <div class="chat-content">
+          <div class="chat-name"><%= chat[:name] %></div>
+          <div class="chat-preview">
+            <span class="chat-message"><%= chat[:message] %></span>
+            <span class="chat-time"> · <%= chat[:time] %></span>
+          </div>
+        </div>
+        <div class="chat-actions">
+          <span class="camera-icon">📷</span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+<!-- Bottom Navigation Bar -->
+<nav class="bottom-nav">
+  <%= link_to root_path, class: "nav-item" do %>
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">Home</span>
+  <% end %>
+
+  <%= link_to chats_path, class: "nav-item active" do %>
+    <span class="nav-icon">💬</span>
+    <span class="nav-label">Chat</span>
+  <% end %>
+
+  <%= link_to profile_path, class: "nav-item" do %>
+    <span class="nav-icon">👤</span>
+    <span class="nav-label">Profile</span>
+  <% end %>
+</nav>

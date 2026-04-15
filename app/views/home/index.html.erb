@@ -1,110 +1,118 @@
 <% if user_signed_in? %>
-  <!-- ========== LOGGED IN USER - FEED PAGE ========== -->
   <div class="feed-page">
 
-    <!-- Hero Section -->
-    <section class="feed-hero">
-      <div class="hero-content">
-        <h1 class="hero-title">Welcome back</h1>
-        <p class="hero-subtitle">Discover what's new in the music scene</p>
-      </div>
-      <div class="hero-visual">
-        <div class="vinyl-record">
-          <div class="vinyl-label">♪</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quick Actions -->
-    <section class="quick-actions">
-      <h2 class="section-title">Quick Actions</h2>
-      <div class="actions-grid">
-        <%= link_to assistant_path, class: "action-card" do %>
-          <div class="action-icon">🎵</div>
-          <span class="action-label">Create</span>
-        <% end %>
-        <%= link_to recipes_path, class: "action-card" do %>
-          <div class="action-icon">📂</div>
-          <span class="action-label">My Posts</span>
-        <% end %>
-        <div class="action-card">
-          <div class="action-icon">🔍</div>
-          <span class="action-label">Discover</span>
-        </div>
-        <div class="action-card">
-          <div class="action-icon">💬</div>
-          <span class="action-label">Messages</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Trending Section -->
-    <section class="trending-section">
-      <h2 class="section-title">Trending Now 🔥</h2>
-      <div class="trending-scroll">
-        <% 6.times do |i| %>
-          <div class="trending-card">
-            <div class="trending-cover">
-              <div class="cover-placeholder"><%= ['🎤', '🎸', '🎹', '🥁', '🎧', '🎼'][i] %></div>
-              <div class="play-overlay">▶</div>
-            </div>
-            <div class="trending-info">
-              <p class="trending-title">Track <%= i + 1 %></p>
-              <p class="trending-artist">Artist Name</p>
-            </div>
+    <!-- Stories Section -->
+    <section class="stories-section">
+      <div class="stories-scroll">
+        <!-- Your Story -->
+        <div class="story-item your-story">
+          <div class="story-avatar">
+            <span>+</span>
           </div>
-        <% end %>
-      </div>
-    </section>
+          <span class="story-name">Votre story</span>
+        </div>
 
-    <!-- Featured Artists -->
-    <section class="artists-section">
-      <h2 class="section-title">Featured Artists</h2>
-      <div class="artists-grid">
+        <!-- Other Stories -->
         <% 8.times do |i| %>
-          <div class="artist-card">
+          <div class="story-item">
+            <div class="story-avatar <%= ['gradient-1', 'gradient-2', 'gradient-3', 'gradient-1', 'gradient-2', 'gradient-3', 'gradient-1', 'gradient-2'][i] %>">
+              <div class="story-avatar-inner">
+                <%= ['🎤', '🎸', '🎹', '🥁', '🎧', '🎵', '🎷', '🎻'][i] %>
+              </div>
+            </div>
+            <span class="story-name"><%= ['artist_1', 'prod_jay', 'melodie', 'drum_king', 'dj_max', 'wave_', 'jazzy', 'cello'][i] %></span>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Pour vous Section (Spotify-style cards) -->
+    <section class="spotify-section">
+      <h2 class="section-title">Pour vous</h2>
+      <div class="spotify-scroll">
+        <% 6.times do |i| %>
+          <div class="spotify-card">
+            <div class="spotify-cover">
+              <div class="cover-gradient gradient-<%= (i % 3) + 1 %>">
+                <%= ['🎤', '🔥', '💜', '⚡', '🌙', '✨'][i] %>
+              </div>
+              <div class="play-btn">▶</div>
+            </div>
+            <p class="spotify-title"><%= ['Nouveaux sons', 'Tendances', 'Découvertes', 'Fresh Beats', 'Night Vibes', 'Énergie'][i] %></p>
+            <p class="spotify-subtitle"><%= ['Mix personnalisé', 'Ce qui buzz', 'Pour toi', 'Producteurs locaux', 'Chill & Relax', 'Motivation'][i] %></p>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Shorts/Reels Feed (Vertical scroll cards) -->
+    <section class="shorts-section">
+      <h2 class="section-title">En ce moment 🔥</h2>
+      <div class="shorts-grid">
+        <% 6.times do |i| %>
+          <div class="short-card">
+            <div class="short-preview">
+              <div class="short-gradient gradient-<%= (i % 6) + 1 %>">
+                <span class="short-icon"><%= ['🎤', '🎹', '🎸', '🥁', '🎧', '🔊'][i] %></span>
+              </div>
+              <div class="short-overlay">
+                <div class="short-info">
+                  <span class="short-artist">@artist_<%= i + 1 %></span>
+                  <span class="short-song">Track Title #<%= i + 1 %></span>
+                </div>
+                <div class="short-stats">
+                  <span>▶ <%= (i + 1) * 12 %>K</span>
+                </div>
+              </div>
+              <div class="short-play">▶</div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Artistes récents -->
+    <section class="spotify-section">
+      <h2 class="section-title">Artistes récents</h2>
+      <div class="artists-scroll">
+        <% 8.times do |i| %>
+          <div class="artist-circle">
             <div class="artist-avatar">
-              <%= ['👨‍🎤', '👩‍🎤', '🧑‍🎤', '👨‍🎤', '👩‍🎤', '🧑‍🎤', '👨‍🎤', '👩‍🎤'][i] %>
+              <%= ['👨‍🎤', '👩‍🎤', '🧑‍🎤', '🎙️', '🎵', '🎶', '🎼', '🎹'][i] %>
             </div>
-            <p class="artist-name">Artist <%= i + 1 %></p>
-            <span class="artist-genre"><%= ['Hip-Hop', 'R&B', 'Pop', 'Jazz', 'Rock', 'Electronic', 'Soul', 'Indie'][i] %></span>
+            <span class="artist-name"><%= ['MC Flow', 'Luna', 'Prod X', 'Jay B', 'Melodie', 'Wave', 'Tempo', 'Keys'][i] %></span>
           </div>
         <% end %>
       </div>
     </section>
 
-    <!-- Recent Activity -->
-    <section class="activity-section">
-      <h2 class="section-title">Recent Activity</h2>
-      <div class="activity-feed">
-        <% 5.times do |i| %>
-          <div class="activity-item">
-            <div class="activity-avatar"><%= ['🎵', '🎤', '🎧', '🎹', '🔥'][i] %></div>
-            <div class="activity-content">
-              <p class="activity-text"><strong>Someone</strong> <%= ['released a new track', 'started following you', 'liked your post', 'commented on your track', 'shared your music'][i] %></p>
-              <span class="activity-time"><%= i + 1 %>h ago</span>
+    <!-- More Shorts -->
+    <section class="shorts-section">
+      <h2 class="section-title">Découvrir</h2>
+      <div class="shorts-grid">
+        <% 4.times do |i| %>
+          <div class="short-card">
+            <div class="short-preview">
+              <div class="short-gradient gradient-<%= (i % 6) + 4 %>">
+                <span class="short-icon"><%= ['🌟', '💫', '🔥', '⚡'][i] %></span>
+              </div>
+              <div class="short-overlay">
+                <div class="short-info">
+                  <span class="short-artist">@new_talent_<%= i + 1 %></span>
+                  <span class="short-song">Nouveau son</span>
+                </div>
+                <div class="short-stats">
+                  <span>▶ <%= (i + 1) * 5 %>K</span>
+                </div>
+              </div>
+              <div class="short-play">▶</div>
             </div>
           </div>
         <% end %>
       </div>
     </section>
 
-    <!-- Categories -->
-    <section class="categories-section">
-      <h2 class="section-title">Explore by Genre</h2>
-      <div class="categories-grid">
-        <% [['Hip-Hop', '🎤', '#bf00ff'], ['R&B', '💜', '#00bfff'], ['Pop', '⭐', '#ff69b4'], ['Jazz', '🎷', '#ffd700'], ['Rock', '🎸', '#ff4500'], ['Electronic', '🎧', '#00ff88']].each do |genre, emoji, color| %>
-          <div class="category-card" style="--cat-color: <%= color %>">
-            <span class="category-emoji"><%= emoji %></span>
-            <span class="category-name"><%= genre %></span>
-          </div>
-        <% end %>
-      </div>
-    </section>
-
-    <!-- Spacer for bottom nav -->
     <div class="bottom-spacer"></div>
-
   </div>
 
   <!-- Bottom Navigation Bar -->
@@ -113,21 +121,16 @@
       <span class="nav-icon">🏠</span>
       <span class="nav-label">Home</span>
     <% end %>
-    <%= link_to recipes_path, class: "nav-item" do %>
-      <span class="nav-icon">📂</span>
-      <span class="nav-label">Posts</span>
-    <% end %>
-    <%= link_to assistant_path, class: "nav-item nav-item-create" do %>
-      <span class="nav-icon-create">+</span>
-    <% end %>
-    <div class="nav-item">
+
+    <%= link_to chats_path, class: "nav-item" do %>
       <span class="nav-icon">💬</span>
       <span class="nav-label">Chat</span>
-    </div>
-    <div class="nav-item">
+    <% end %>
+
+    <%= link_to profile_path, class: "nav-item" do %>
       <span class="nav-icon">👤</span>
       <span class="nav-label">Profile</span>
-    </div>
+    <% end %>
   </nav>
 
 <% else %>
@@ -136,7 +139,7 @@
     <div class="d-flex flex-column justify-content-center align-items-center min-vh-100 py-5">
 
       <!-- Phrase qui apparaît -->
-      <div class="piano-phrase-container">
+      <div clas="piano-phrase-container">
         <p class="piano-phrase" data-phrase="1">Découvre des nouveaux artistes</p>
         <p class="piano-phrase" data-phrase="2">Fais-toi connaître</p>
         <p class="piano-phrase" data-phrase="3">Contacte des ingénieurs son</p>
