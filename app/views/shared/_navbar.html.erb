@@ -1,85 +1,25 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom py-2 mahe-navbar">
+<nav class="plug-navbar">
+  <%= link_to root_path, class: "nav-brand" do %>
+    <span class="brand-dot"></span>
+    <span class="brand-name">LE&nbsp;PLUG</span>
+    <span class="brand-catalog">C/O&nbsp;MUSIC</span>
+  <% end %>
 
-  <!-- MUSIC NOTES FLOATING -->
-  <div class="music-notes-container">
-    <span class="music-note">♪</span>
-    <span class="music-note">♫</span>
-    <span class="music-note">♩</span>
-    <span class="music-note">♬</span>
-    <span class="music-note">🎵</span>
-    <span class="music-note">♪</span>
-    <span class="music-note">♫</span>
-    <span class="music-note">🎶</span>
-    <span class="music-note">♩</span>
-    <span class="music-note">♬</span>
-    <span class="music-note">🎵</span>
-    <span class="music-note">♪</span>
-    <span class="music-note">♫</span>
-    <span class="music-note">🎶</span>
-    <span class="music-note">♩</span>
-  </div>
-
-  <div class="container-fluid">
-
-    <!-- LOGO + APP NAME -->
-    <%= link_to root_path, class: "navbar-brand d-flex align-items-center gap-2" do %>
-      <%= image_tag "logo.png", alt: "Le Plug Logo", width: 40, class: "rounded-circle shadow-sm" %>
-      <span class="fw-bold text-dark">Le Plug</span>
-    <% end %>
-
-    <!-- MOBILE TOGGLER -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- NAVIGATION ITEMS -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto">
-
-        <% if user_signed_in? %>
-
-          <!-- MY RECIPES -->
-          <li class="nav-item">
-            <%= link_to "My Recipes", recipes_path, class: "nav-link fw-semibold text-dark" %>
-          </li>
-
-          <!-- DROPDOWN MENU -->
-          <li class="nav-item dropdown ms-2">
-            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier",
-                            class: "avatar", alt: "Profile" %>
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Profile", "#", class: "dropdown-item disabled" %>
-              <%= link_to "Settings", "#", class: "dropdown-item disabled" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Log out",
-                          destroy_user_session_path,
-                          data: { turbo_method: :delete },
-                          class: "dropdown-item text-danger" %>
-            </div>
-          </li>
-
-        <% else %>
-
-          <!-- LOGIN FOR NON LOGGED USER -->
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link fw-semibold text-dark" %>
-          </li>
-
-          <!-- SIGNUP BUTTON -->
-          <li class="nav-item ms-2">
-            <%= link_to "Sign Up", new_user_registration_path,
-                        class: "btn btn-primary btn-sm px-3 py-1" %>
-          </li>
-
+  <ul class="nav-links">
+    <% if user_signed_in? %>
+      <li><%= link_to "\"FEED\"", root_path, class: "nav-link" %></li>
+      <li><%= link_to "\"MESSAGES\"", chats_path, class: "nav-link" %></li>
+      <li><%= link_to "\"PROFILE\"", profile_path, class: "nav-link" %></li>
+      <li>
+        <%= link_to destroy_user_session_path,
+                    data: { turbo_method: :delete },
+                    class: "nav-link" do %>
+          "LOGOUT"
         <% end %>
-
-      </ul>
-    </div>
-  </div>
+      </li>
+    <% else %>
+      <li><%= link_to "\"LOGIN\"", new_user_session_path, class: "nav-link" %></li>
+      <li><%= link_to "PLUG IN", new_user_registration_path, class: "nav-cta" %></li>
+    <% end %>
+  </ul>
 </nav>

@@ -1,96 +1,99 @@
+<%
+  username = current_user.email.split('@').first
+
+  plugged = [
+    { name: "LUNA",    online: true  },
+    { name: "MARCUS",  online: false },
+    { name: "JADE",    online: true  },
+    { name: "ALEX",    online: false },
+    { name: "MAYA",    online: true  },
+    { name: "KAI",     online: false },
+    { name: "ZOE",     online: false }
+  ]
+
+  messages = [
+    { name: "KØNG",        preview: "A aimé un message",           time: "5H",  unread: false },
+    { name: "DJ STORM",    preview: "Vu par DJ Storm",             time: "8H",  unread: false },
+    { name: "PIELO",       preview: "A envoyé un reel de legend…", time: "3J",  unread: true  },
+    { name: "ULYSSE N.",   preview: "A aimé un message",           time: "3J",  unread: false },
+    { name: "DODO",        preview: "Regarde sur Shotgun",         time: "4J",  unread: false },
+    { name: "J2",          preview: "Tu connais le morceau ?",     time: "5J",  unread: false },
+    { name: "MAYA B.",     preview: "On fait la collab ?",         time: "1S",  unread: true  }
+  ]
+%>
+
 <div class="chats-page">
 
-  <!-- Header -->
   <header class="chat-header">
-    <h1 class="chat-title"><%= current_user.email.split('@').first %></h1>
-    <button class="new-chat-btn">
-      <span>✏️</span>
+    <h1 class="chat-title"><%= username.upcase %></h1>
+    <button class="new-chat-btn" aria-label="New message">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
     </button>
   </header>
 
-  <!-- Search Bar -->
-  <div class="chat-search-box">
-    <div class="search-input-wrapper">
-      <span class="search-icon">🔍</span>
-      <input type="text" placeholder="Rechercher" class="search-input">
+  <div class="chat-search">
+    <div class="search-box">
+      <span class="search-label">Q</span>
+      <input type="text" placeholder="RECHERCHER UN PLUG">
     </div>
   </div>
 
-  <!-- Following / Stories Section -->
-  <div class="following-section">
-    <div class="following-scroll">
-      <!-- Your Note -->
-      <div class="following-item your-note">
-        <div class="following-avatar">
-          <div class="avatar-placeholder">👤</div>
-          <span class="add-note">+</span>
-        </div>
-        <span class="following-name">Votre note</span>
-      </div>
-
-      <!-- Sample following users -->
-      <% ['Luna', 'Marcus', 'Jade', 'Alex', 'Maya', 'Kai', 'Zoe'].each_with_index do |name, i| %>
-        <div class="following-item">
-          <div class="following-avatar <%= ['has-story', ''].sample %>">
-            <div class="avatar-placeholder"><%= ['🎤', '🎸', '🎹', '🎧', '🎵', '🎷', '🥁'][i] %></div>
-          </div>
-          <span class="following-name"><%= name %></span>
+  <div class="plugged-row">
+    <span class="plugged-label">PLUGGED</span>
+    <div class="plugged-scroll">
+      <% plugged.each do |p| %>
+        <div class="plugged-item">
+          <div class="p-av <%= 'online' if p[:online] %>"></div>
+          <span class="p-name"><%= p[:name] %></span>
         </div>
       <% end %>
     </div>
   </div>
 
-  <!-- Section Separator -->
-  <div class="chat-section-header">
-    <span class="section-label">Messages</span>
-    <span class="section-action">Demandes</span>
+  <div class="chat-section-head">
+    <span class="sh-label">"MESSAGES"</span>
+    <span class="sh-action">DEMANDES</span>
   </div>
 
-  <!-- Active Chats List -->
-  <div class="chats-list">
-    <% [
-      { name: 'KØNG', message: 'A aimé un message', time: '5 h', emoji: '🎤', unread: false },
-      { name: 'DJ Storm', message: 'Vu par DJ Storm', time: '8 h', emoji: '🎧', unread: false },
-      { name: 'PIELO', message: 'A envoyé un reel de legend...', time: '3 j', emoji: '🎹', unread: true },
-      { name: 'Ulysse Naudin', message: 'A aimé un message', time: '3 j', emoji: '🎸', unread: false },
-      { name: 'Dodo', message: 'Regarde sur Shotgun', time: '4 j', emoji: '🥁', unread: false },
-      { name: 'J2', message: 'Tu connais le morceau?', time: '5 j', emoji: '🎵', unread: false },
-      { name: 'Maya B', message: 'On fait la collab?', time: '1 sem', emoji: '🎷', unread: true }
-    ].each do |chat| %>
-      <div class="chat-item <%= 'unread' if chat[:unread] %>">
-        <div class="chat-avatar">
-          <div class="avatar-placeholder"><%= chat[:emoji] %></div>
+  <div class="chat-list">
+    <% messages.each do |m| %>
+      <div class="chat-row <%= 'unread' if m[:unread] %>">
+        <div class="cr-av"></div>
+        <div>
+          <h3 class="cr-name"><%= m[:name] %></h3>
+          <div class="cr-preview"><%= m[:preview] %></div>
         </div>
-        <div class="chat-content">
-          <div class="chat-name"><%= chat[:name] %></div>
-          <div class="chat-preview">
-            <span class="chat-message"><%= chat[:message] %></span>
-            <span class="chat-time"> · <%= chat[:time] %></span>
-          </div>
-        </div>
-        <div class="chat-actions">
-          <span class="camera-icon">📷</span>
-        </div>
+        <span class="cr-time"><%= m[:time] %></span>
       </div>
     <% end %>
   </div>
 
 </div>
 
-<!-- Bottom Navigation Bar -->
 <nav class="bottom-nav">
   <%= link_to root_path, class: "nav-item" do %>
-    <span class="nav-icon">🏠</span>
-    <span class="nav-label">Home</span>
+    <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/></svg>
+    <span>FEED</span>
   <% end %>
 
+  <a class="nav-item" href="#">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+    <span>SEARCH</span>
+  </a>
+
+  <div class="nav-item nav-drop">
+    <button class="drop-btn" aria-label="Drop">+</button>
+  </div>
+
   <%= link_to chats_path, class: "nav-item active" do %>
-    <span class="nav-icon">💬</span>
-    <span class="nav-label">Chat</span>
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>DMS</span>
   <% end %>
 
   <%= link_to profile_path, class: "nav-item" do %>
-    <span class="nav-icon">👤</span>
-    <span class="nav-label">Profile</span>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    <span>ME</span>
   <% end %>
 </nav>

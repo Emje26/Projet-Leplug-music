@@ -1,137 +1,146 @@
+<%
+  username  = current_user.email.split('@').first
+  name      = @profile&.name.presence || username
+  bio       = @profile&.bio.presence   || "Producteur / MC · basé à Paris 18e. En studio sur le prochain projet. \"Minuit à Barbès\" EP dispo."
+  handle    = "@#{username}"
+  tracks = [
+    { title: "MINUIT À BARBÈS",  time: "03:24", plays: "2.1K" },
+    { title: "BÉTON FT. MARWA",  time: "02:58", plays: "1.8K" },
+    { title: "FANTÔME",          time: "04:12", plays: "956"  },
+    { title: "18E ARRONDISSEMENT", time: "03:47", plays: "742" }
+  ]
+%>
 
 <div class="profile-page">
 
-  <!-- Header -->
+  <!-- HEADER -->
   <header class="profile-header">
-    <span class="header-icon">🔒</span>
-    <h1 class="profile-username"><%= current_user.email.split('@').first %></h1>
-    <div class="header-actions">
-      <span class="header-icon">🔔</span>
-      <%= link_to profile_settings_path do %>
-        <span class="header-icon">☰</span>
+    <%= link_to root_path, class: "hdr-back" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg>
+    <% end %>
+
+    <div class="hdr-handle"><%= handle %></div>
+
+    <div class="hdr-actions">
+      <button class="hdr-action" aria-label="Share">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M4 12v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8"/>
+          <path d="M16 6l-4-4-4 4"/>
+          <line x1="12" y1="2" x2="12" y2="15"/>
+        </svg>
+      </button>
+      <%= link_to profile_settings_path, class: "hdr-action", "aria-label": "Settings" do %>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="12" cy="12" r="1.5"/>
+          <circle cx="5"  cy="12" r="1.5"/>
+          <circle cx="19" cy="12" r="1.5"/>
+        </svg>
       <% end %>
     </div>
   </header>
 
-  <!-- Profile Info Section -->
-  <section class="profile-info">
-    <!-- Avatar -->
-    <div class="profile-avatar-container">
-      <div class="profile-avatar">
-        <div class="avatar-image">👤</div>
-        <span class="add-story-btn">+</span>
-      </div>
+  <!-- IDENTITY -->
+  <section class="profile-identity">
+    <div class="pi-avatar">
+      <span class="av-badge"></span>
     </div>
-
-
-
-    <!-- Stats -->
-    <div class="profile-stats">
-      <div class="stat-item">
-        <span class="stat-number">0</span>
-        <span class="stat-label">publications</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">302</span>
-        <span class="stat-label">followers</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">371</span>
-        <span class="stat-label">suivi(e)s</span>
-      </div>
+    <div class="pi-meta">
+      <h1 class="pi-name"><%= name.upcase %></h1>
+      <span class="pi-handle"><%= handle %>.music</span>
+      <div class="pi-tags">RAP<span class="dot">·</span>TRAP<span class="dot">·</span>PARIS 18E</div>
     </div>
   </section>
 
-  <!-- Bio Section -->
+  <!-- STATS -->
+  <section class="profile-stats">
+    <div class="stat-cell">
+      <span class="stat-label">PLUGS</span>
+      <div class="stat-number">847</div>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-label">ÉCOUTES</span>
+      <div class="stat-number">12.4K</div>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-label">TRACKS</span>
+      <div class="stat-number"><%= tracks.size %></div>
+    </div>
+  </section>
+
+  <!-- BIO -->
   <section class="profile-bio">
-    <h2 class="bio-name"><%= @profile&.name || current_user.email.split('@').first %></h2>
-    <% if @profile&.bio.present? %>
-      <p class="bio-text"><%= @profile.bio %></p>
-    <% end %>
+    <p class="bio-text"><%= bio %></p>
+    <div class="bio-location">PARIS 18E · FR</div>
   </section>
 
-  <!-- Action Buttons -->
+  <!-- ACTIONS -->
   <section class="profile-actions">
-    <%= link_to edit_profile_path, class: "profile-btn" do %>
-      Modifier
+    <%= link_to "PLUG", "#", class: "btn-signal" %>
+    <%= link_to "MESSAGE", chats_path, class: "btn-ghost" %>
+    <%= link_to edit_profile_path, class: "btn-ghost", style: "min-width:0;width:46px;padding:0;" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="16" height="16">
+        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
     <% end %>
-    <button class="profile-btn">Partager le profil</button>
-    <button class="profile-btn profile-btn-icon">👤+</button>
   </section>
 
-  <!-- Story Highlights -->
-  <section class="profile-highlights">
-    <div class="highlights-scroll">
-      <div class="highlight-item">
-        <div class="highlight-circle highlight-add">
-          <span>+</span>
+  <!-- TABS -->
+  <nav class="profile-tabs">
+    <button class="tab active">SONS</button>
+    <button class="tab">CLIPS</button>
+    <button class="tab">BIO</button>
+  </nav>
+
+  <!-- TRACKS -->
+  <section class="profile-tracks">
+    <% tracks.each_with_index do |t, i| %>
+      <div class="track-row <%= 'playing' if i == 0 %>">
+        <button class="tr-play">▶</button>
+        <div>
+          <h3 class="tr-name"><%= t[:title] %></h3>
+          <div class="tr-sub"><%= t[:plays] %> plays</div>
         </div>
-        <span class="highlight-label">Nouveau</span>
+        <span class="tr-duration"><%= t[:time] %></span>
+        <div class="tr-eq"><span></span><span></span><span></span></div>
       </div>
-      <div class="highlight-item">
-        <div class="highlight-circle">
-          <img src="https://picsum.photos/70/70?random=1" alt="Highlight">
-        </div>
-        <span class="highlight-label">À la une</span>
-      </div>
-      <div class="highlight-item">
-        <div class="highlight-circle">
-          <img src="https://picsum.photos/70/70?random=2" alt="Highlight">
-        </div>
-        <span class="highlight-label">À la une</span>
-      </div>
+    <% end %>
+  </section>
+
+  <!-- NOW PLAYING -->
+  <div class="now-playing">
+    <div class="np-thumb"></div>
+    <div class="np-info">
+      <span class="np-t">MINUIT À BARBÈS</span>
+      <span class="np-a"><%= name.upcase %></span>
     </div>
-  </section>
-
-  <!-- Content Tabs -->
-  <section class="profile-tabs">
-    <button class="tab-item active">
-      <span>📷</span>
-    </button>
-    <button class="tab-item">
-      <span>🎬</span>
-    </button>
-    <button class="tab-item">
-      <span>🏷️</span>
-    </button>
-  </section>
-
-  <!-- Posts Grid / Empty State -->
-  <section class="profile-content">
-    <% if true %> <!-- Replace with actual posts check -->
-      <div class="empty-state">
-        <div class="empty-illustration">
-          <span>📸</span>
-        </div>
-        <h3 class="empty-title">Créez votre première publication</h3>
-        <p class="empty-text">Partagez votre musique avec le monde</p>
-        <%= link_to assistant_path, class: "empty-btn" do %>
-          Créer
-        <% end %>
-      </div>
-    <% else %>
-      <div class="posts-grid">
-        <!-- Posts would go here -->
-      </div>
-    <% end %>
-  </section>
+    <button class="np-btn">❚❚</button>
+  </div>
 
 </div>
 
-<!-- Bottom Navigation Bar -->
+<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <%= link_to root_path, class: "nav-item" do %>
-    <span class="nav-icon">🏠</span>
-    <span class="nav-label">Home</span>
+    <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/></svg>
+    <span>FEED</span>
   <% end %>
 
+  <a class="nav-item" href="#">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+    <span>SEARCH</span>
+  </a>
+
+  <div class="nav-item nav-drop">
+    <button class="drop-btn" aria-label="Drop">+</button>
+  </div>
+
   <%= link_to chats_path, class: "nav-item" do %>
-    <span class="nav-icon">💬</span>
-    <span class="nav-label">Chat</span>
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>DMS</span>
   <% end %>
 
   <%= link_to profile_path, class: "nav-item active" do %>
-    <span class="nav-icon">👤</span>
-    <span class="nav-label">Profile</span>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    <span>ME</span>
   <% end %>
 </nav>

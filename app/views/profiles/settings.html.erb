@@ -1,57 +1,114 @@
 <div class="settings-page">
 
-  <!-- Header -->
   <header class="settings-header">
     <%= link_to profile_path, class: "back-btn" do %>
-      <span>‹</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+        <path d="M15 6l-6 6 6 6"/>
+      </svg>
     <% end %>
-    <h1 class="settings-title">Paramètres et activité</h1>
-    <div class="header-spacer"></div>
+    <h1 class="settings-title">PARAMÈTRES</h1>
+    <span class="header-spacer"></span>
   </header>
 
-  <!-- Search Bar -->
   <div class="settings-search">
-    <span class="search-icon">🔍</span>
-    <input type="text" class="search-input" placeholder="Rechercher">
+    <div class="search-box">
+      <span class="lbl">Q</span>
+      <input type="text" placeholder="RECHERCHER">
+    </div>
   </div>
 
-  <!-- Settings Content -->
-  <div class="settings-content">
+  <section class="settings-section">
+    <h2 class="section-label">COMPTE</h2>
 
-    <!-- Section: Votre compte -->
-    <section class="settings-section">
-      <h2 class="section-label">Votre compte</h2>
-
-      <!-- Settings Item (Flexbox clonable) -->
-      <div class="settings-item">
-        <span class="item-icon">⚙️</span>
-        <div class="item-content">
-          <span class="item-title">Espace Comptes</span>
-          <span class="item-subtitle">Mot de passe, sécurité, informations personnelles</span>
-        </div>
-        <span class="item-arrow">›</span>
+    <a class="settings-item" href="#">
+      <span class="item-icon">◈</span>
+      <div class="item-content">
+        <span class="item-title">Espace compte</span>
+        <span class="item-subtitle">Mot de passe · sécurité · email</span>
       </div>
+      <span class="item-arrow">›</span>
+    </a>
 
-    </section>
+    <a class="settings-item" href="#">
+      <span class="item-icon">◉</span>
+      <div class="item-content">
+        <span class="item-title">Profil artiste</span>
+        <span class="item-subtitle">Nom · bio · ville · genres</span>
+      </div>
+      <span class="item-arrow">›</span>
+    </a>
 
-  </div>
+    <a class="settings-item" href="#">
+      <span class="item-icon">◐</span>
+      <div class="item-content">
+        <span class="item-title">Confidentialité</span>
+        <span class="item-subtitle">Qui peut te "plug" · messages</span>
+      </div>
+      <span class="item-arrow">›</span>
+    </a>
+  </section>
+
+  <section class="settings-section">
+    <h2 class="section-label">CRÉATION</h2>
+
+    <a class="settings-item" href="#">
+      <span class="item-icon">▲</span>
+      <div class="item-content">
+        <span class="item-title">Upload un son</span>
+        <span class="item-subtitle">MP3 · WAV · max 20 MB</span>
+      </div>
+      <span class="item-arrow">›</span>
+    </a>
+
+    <a class="settings-item" href="#">
+      <span class="item-icon">◆</span>
+      <div class="item-content">
+        <span class="item-title">Statistiques</span>
+        <span class="item-subtitle">Écoutes · plugs · provenance</span>
+      </div>
+      <span class="item-arrow">›</span>
+    </a>
+  </section>
+
+  <section class="settings-section">
+    <h2 class="section-label">SESSION</h2>
+
+    <%= link_to destroy_user_session_path,
+                data: { turbo_method: :delete },
+                class: "settings-item danger" do %>
+      <span class="item-icon">✕</span>
+      <div class="item-content">
+        <span class="item-title">Déconnexion</span>
+        <span class="item-subtitle">Fermer la session en cours</span>
+      </div>
+      <span class="item-arrow">›</span>
+    <% end %>
+  </section>
 
 </div>
 
-<!-- Bottom Navigation Bar -->
 <nav class="bottom-nav">
   <%= link_to root_path, class: "nav-item" do %>
-    <span class="nav-icon">🏠</span>
-    <span class="nav-label">Home</span>
+    <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/></svg>
+    <span>FEED</span>
   <% end %>
 
+  <a class="nav-item" href="#">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+    <span>SEARCH</span>
+  </a>
+
+  <div class="nav-item nav-drop">
+    <button class="drop-btn" aria-label="Drop">+</button>
+  </div>
+
   <%= link_to chats_path, class: "nav-item" do %>
-    <span class="nav-icon">💬</span>
-    <span class="nav-label">Chat</span>
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>DMS</span>
   <% end %>
 
   <%= link_to profile_path, class: "nav-item active" do %>
-    <span class="nav-icon">👤</span>
-    <span class="nav-label">Profile</span>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    <span>ME</span>
   <% end %>
 </nav>

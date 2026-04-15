@@ -1,16 +1,16 @@
-// Import Google fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
+// ===================================================================
+// LE PLUG — Typography
+// Industrial / brutalist stack inspired by Virgil Abloh's approach:
+// condensed display sans (Bebas) for headlines as architecture,
+// a neutral grotesque (Inter) for body, mono (JetBrains) for data.
+// ===================================================================
 
-// Define fonts for body and headers
-$body-font: "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Nunito", "Helvetica", "sans-serif";
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap');
 
-// To use a font file (.woff) uncomment following lines
-// @font-face {
-//   font-family: "Font Name";
-//   src: font-url('FontFile.eot');
-//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
-//        font-url('FontFile.woff') format('woff'),
-//        font-url('FontFile.ttf') format('truetype')
-// }
-// $my-font: "Font Name";
+$display-font: "Bebas Neue", "Oswald", "Impact", sans-serif;
+$body-font:    "Inter", "Helvetica Neue", "Arial", sans-serif;
+$mono-font:    "JetBrains Mono", "Menlo", "Courier New", monospace;
+$alt-font:     "Space Grotesk", "Inter", sans-serif;
+
+// legacy aliases (kept so old partials don't blow up)
+$headers-font: $display-font;

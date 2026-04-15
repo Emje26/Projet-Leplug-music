@@ -1,82 +1,84 @@
-<div class="cyber-auth-page">
+<div class="auth-page">
 
-  <!-- Floating music notes background -->
-  <div class="cyber-notes-bg">
-    <span class="note">♪</span>
-    <span class="note">♫</span>
-    <span class="note">🎵</span>
-    <span class="note">♬</span>
-    <span class="note">🎶</span>
-    <span class="note">♩</span>
-    <span class="note">♪</span>
-    <span class="note">♫</span>
-    <span class="note">🎵</span>
-    <span class="note">♬</span>
-  </div>
-
-  <div class="cyber-card">
-
-    <!-- Header -->
-    <div class="cyber-header-section">
-      <div class="cyber-icon">🔐</div>
-      <h1 class="cyber-title">Connexion</h1>
-      <p class="cyber-subtitle">Accède à <span class="highlight">Le Plug</span></p>
+  <aside class="auth-poster">
+    <div class="poster-top">
+      <span class="brand-dot"></span>
+      <span class="brand-name">LE PLUG</span>
+      <span class="catalog">C/O "MUSIC" — V.1.0</span>
     </div>
 
-    <!-- Tabs -->
-    <div class="cyber-tabs">
-      <div class="cyber-tab active">Se connecter</div>
-      <%= link_to "Créer un compte", new_registration_path(resource_name), class: "cyber-tab" %>
+    <div class="poster-mid">
+      <span class="poster-catalog">№ 001 / LOGIN</span>
+      <h2 class="poster-title">
+        RE&nbsp;<span class="slash">/</span><br>
+        PLUG<span class="slash">.</span>
+      </h2>
+      <p class="poster-sub">
+        Tu reprends là où t'avais laissé. Ton feed, tes plugs, tes messages
+        — tout t'attend. Aucune DM ne se perd sur Le Plug.
+      </p>
     </div>
 
-    <!-- Flash messages -->
+    <div class="poster-bottom">
+      <span>"MADE IN PARIS"</span>
+      <span>— <%= Date.today.year %> —</span>
+    </div>
+  </aside>
+
+  <div class="auth-panel">
+    <div class="auth-mobile-brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">LE PLUG</span>
+    </div>
+
+    <div class="auth-heading">
+      <span class="h-kicker">LOGIN</span>
+      <h1>RE/<br>CONNECT.</h1>
+      <p>Entre tes identifiants pour accéder à ton feed.</p>
+    </div>
+
+    <div class="auth-tabs">
+      <span class="auth-tab active">SE CONNECTER</span>
+      <%= link_to "CRÉER UN COMPTE", new_registration_path(resource_name), class: "auth-tab" %>
+    </div>
+
     <% if flash[:alert] %>
-      <div class="alert alert-danger" style="background: rgba(255,71,87,0.1); border: 1px solid #ff4757; border-radius: 10px; padding: 1rem; margin-bottom: 1rem; color: #ff6b7a;">
-        <%= flash[:alert] %>
-      </div>
+      <div class="alert alert-danger"><%= flash[:alert] %></div>
     <% end %>
 
-    <!-- Form -->
-    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "cyber-form" }) do |f| %>
-
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f| %>
       <div class="form-inputs">
         <%= f.input :email,
             required: true,
             autofocus: true,
-            label: "Adresse e-mail",
+            label: "EMAIL",
             placeholder: "ton@email.com",
             input_html: { autocomplete: "email" } %>
 
         <%= f.input :password,
             required: true,
-            label: "Mot de passe",
+            label: "MOT DE PASSE",
             placeholder: "••••••••",
             input_html: { autocomplete: "current-password" } %>
 
         <% if devise_mapping.rememberable? %>
           <div class="boolean">
-            <%= f.input :remember_me, as: :boolean, label: "Se souvenir de moi" %>
+            <%= f.input :remember_me, as: :boolean, label: "SE SOUVENIR" %>
           </div>
         <% end %>
       </div>
 
-      <%= f.button :submit, "Se connecter", class: "cyber-btn" %>
+      <%= f.button :submit, "SE CONNECTER →", class: "auth-submit" %>
     <% end %>
 
-    <!-- Links -->
-    <div class="cyber-links">
+    <div class="auth-links">
       <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
-      <br><br>
-      <span>Pas encore inscrit ?</span>
-      <%= link_to "Créer un compte", new_registration_path(resource_name) %>
+      <span>Pas encore inscrit ? <%= link_to "PLUG IN →", new_registration_path(resource_name) %></span>
     </div>
 
-    <!-- Security badge -->
-    <div class="cyber-badge">
-      <span class="badge-icon">🛡️</span>
-      <span class="badge-text">Connexion sécurisée</span>
+    <div class="auth-badge">
+      <span class="dot"></span>
+      CONNEXION "SÉCURISÉE"
     </div>
-
   </div>
-
 </div>
