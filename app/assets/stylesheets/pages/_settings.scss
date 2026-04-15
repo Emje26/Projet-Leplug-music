@@ -180,6 +180,14 @@
     flex-shrink: 0;
 
     svg { width: 20px; height: 20px; }
+
+    // Signal variant — reserved for attention-grabbing rows (Revenus).
+    // Per spec: rgba(255,77,0,0.1) fill + #FF4D00 stroke.
+    &.signal {
+      background: rgba(255, 77, 0, 0.1);
+      border-color: var(--signal);
+      color: var(--signal);
+    }
   }
 
   .card-body {
