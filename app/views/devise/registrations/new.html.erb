@@ -1,43 +1,52 @@
-<div class="cyber-auth-page">
+<div class="auth-page">
 
-  <!-- Floating music notes background -->
-  <div class="cyber-notes-bg">
-    <span class="note">♪</span>
-    <span class="note">♫</span>
-    <span class="note">🎵</span>
-    <span class="note">♬</span>
-    <span class="note">🎶</span>
-    <span class="note">♩</span>
-    <span class="note">♪</span>
-    <span class="note">♫</span>
-    <span class="note">🎵</span>
-    <span class="note">♬</span>
-  </div>
-
-  <div class="cyber-card">
-
-    <!-- Header -->
-    <div class="cyber-header-section">
-      <div class="cyber-icon">🎧</div>
-      <h1 class="cyber-title">Rejoins Le Plug</h1>
-      <p class="cyber-subtitle">Connecte-toi à la <span class="highlight">scène musicale</span></p>
+  <aside class="auth-poster">
+    <div class="poster-top">
+      <span class="brand-dot"></span>
+      <span class="brand-name">LE PLUG</span>
+      <span class="catalog">C/O "MUSIC" — V.1.0</span>
     </div>
 
-    <!-- Tabs -->
-    <div class="cyber-tabs">
-      <%= link_to "Se connecter", new_session_path(resource_name), class: "cyber-tab" %>
-      <div class="cyber-tab active">Créer un compte</div>
+    <div class="poster-mid">
+      <span class="poster-catalog">№ 002 / NEW ARTIST</span>
+      <h2 class="poster-title">
+        PLUG<span class="slash">.</span><br>
+        IN<span class="slash">/</span>
+      </h2>
+      <p class="poster-sub">
+        Rejoins 2.1K artistes déjà connectés. Upload un son, ajoute ta bio,
+        et commence à te "plug" avec la scène. Gratuit, pour toujours.
+      </p>
     </div>
 
-    <!-- Flash messages -->
+    <div class="poster-bottom">
+      <span>"FOR ARTISTS, BY ARTISTS"</span>
+      <span>— <%= Date.today.year %> —</span>
+    </div>
+  </aside>
+
+  <div class="auth-panel">
+    <div class="auth-mobile-brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">LE PLUG</span>
+    </div>
+
+    <div class="auth-heading">
+      <span class="h-kicker">NEW</span>
+      <h1>NEW<br>PLUG.</h1>
+      <p>Crée ton compte en 30 secondes. On ne demande rien de plus que l'essentiel.</p>
+    </div>
+
+    <div class="auth-tabs">
+      <%= link_to "SE CONNECTER", new_session_path(resource_name), class: "auth-tab" %>
+      <span class="auth-tab active">CRÉER UN COMPTE</span>
+    </div>
+
     <% if flash[:alert] %>
-      <div class="alert alert-danger" style="background: rgba(255,71,87,0.1); border: 1px solid #ff4757; border-radius: 10px; padding: 1rem; margin-bottom: 1rem; color: #ff6b7a;">
-        <%= flash[:alert] %>
-      </div>
+      <div class="alert alert-danger"><%= flash[:alert] %></div>
     <% end %>
 
-    <!-- Form -->
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "cyber-form" }) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f| %>
       <%= f.error_notification %>
 
       <div class="form-inputs">
@@ -45,38 +54,33 @@
             required: true,
             autofocus: true,
             autocomplete: "email",
-            label: "Adresse e-mail",
+            label: "EMAIL",
             placeholder: "ton@email.com" %>
 
         <%= f.input :password,
             required: true,
             autocomplete: "new-password",
-            label: "Mot de passe",
+            label: "MOT DE PASSE",
             placeholder: "••••••••",
             hint: "6 caractères minimum" %>
 
         <%= f.input :password_confirmation,
             required: true,
             autocomplete: "new-password",
-            label: "Confirmer le mot de passe",
+            label: "CONFIRMATION",
             placeholder: "••••••••" %>
       </div>
 
-      <%= f.button :submit, "Créer mon compte", class: "cyber-btn" %>
+      <%= f.button :submit, "CRÉER MON COMPTE →", class: "auth-submit" %>
     <% end %>
 
-    <!-- Links -->
-    <div class="cyber-links">
-      <span>Déjà inscrit ?</span>
-      <%= link_to "Connecte-toi", new_session_path(resource_name) %>
+    <div class="auth-links">
+      <span>Déjà inscrit ? <%= link_to "\"LOGIN\" →", new_session_path(resource_name) %></span>
     </div>
 
-    <!-- Security badge -->
-    <div class="cyber-badge">
-      <span class="badge-icon">🔒</span>
-      <span class="badge-text">Connexion sécurisée</span>
+    <div class="auth-badge">
+      <span class="dot"></span>
+      INSCRIPTION "SÉCURISÉE"
     </div>
-
   </div>
-
 </div>

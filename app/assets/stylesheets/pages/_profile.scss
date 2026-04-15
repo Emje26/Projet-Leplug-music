@@ -1,406 +1,416 @@
-// ===========================================
-// 👤 PROFILE PAGE - INSTAGRAM STYLE
-// ===========================================
-
-// Variables
-$profile-bg: #0d0d14;
-$profile-card: #16162a;
-$profile-border: rgba(191, 0, 255, 0.15);
-$profile-text: #f0f0ff;
-$profile-muted: #8080a0;
-$profile-accent: #bf00ff;
-$profile-secondary: #00f5ff;
+// ===================================================================
+// LE PLUG — PROFILE
+// Artist profile as a "product page" — industrial spec sheet.
+// ===================================================================
 
 .profile-page {
+  background: var(--ink);
+  color: var(--paper);
   min-height: 100vh;
-  background: $profile-bg;
-  padding-bottom: 100px;
+  padding-bottom: 120px;
 }
 
-// ===========================================
-// Header
-// ===========================================
+// ---- Header --------------------------------------------------------
 .profile-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.25rem;
-  background: $profile-bg;
+  justify-content: space-between;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--ink-line);
   position: sticky;
   top: 0;
-  z-index: 100;
-}
+  background: var(--ink);
+  z-index: 10;
 
-.profile-username {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: $profile-text;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.header-actions {
-  display: flex;
-  gap: 1rem;
-}
-
-.header-icon {
-  font-size: 1.25rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
-// ===========================================
-// Profile Info Section
-// ===========================================
-.profile-info {
-  display: flex;
-  align-items: center;
-  padding: 1rem 1.25rem;
-  gap: 1.5rem;
-}
-
-.profile-avatar-container {
-  flex-shrink: 0;
-}
-
-.profile-avatar {
-  width: 86px;
-  height: 86px;
-  border-radius: 50%;
-  background: linear-gradient(45deg, $profile-accent, $profile-secondary, $profile-accent);
-  padding: 3px;
-  position: relative;
-
-  .avatar-image {
-    width: 100%;
-    height: 100%;
-    background: $profile-bg;
-    border-radius: 50%;
+  .hdr-back, .hdr-action {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--ink-line);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
-  }
-
-  .add-story-btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 24px;
-    height: 24px;
-    background: $profile-accent;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    border: 3px solid $profile-bg;
+    background: transparent;
+    color: var(--paper);
     cursor: pointer;
+
+    &:hover { border-color: var(--paper); }
+
+    svg { width: 16px; height: 16px; }
+  }
+
+  .hdr-handle {
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+
+  .hdr-actions {
+    display: flex;
+    gap: 8px;
   }
 }
 
-.profile-stats {
-  display: flex;
-  flex: 1;
-  justify-content: space-around;
-}
+// ---- Identity block ------------------------------------------------
+.profile-identity {
+  padding: 24px 20px 16px;
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 20px;
+  align-items: flex-start;
 
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  cursor: pointer;
+  .pi-avatar {
+    width: 96px;
+    height: 96px;
+    background: var(--ink-2);
+    border: 1px solid var(--ink-line);
+    position: relative;
+    overflow: hidden;
 
-  &:hover .stat-number {
-    color: $profile-accent;
-  }
-}
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(45deg, transparent 48%, var(--ink-line) 48% 52%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, var(--ink-line) 48% 52%, transparent 52%);
+    }
 
-.stat-number {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: $profile-text;
-  transition: color 0.2s ease;
-}
-
-.stat-label {
-  font-size: 0.8rem;
-  color: $profile-muted;
-}
-
-// ===========================================
-// Bio Section
-// ===========================================
-.profile-bio {
-  padding: 0 1.25rem 1rem;
-}
-
-.bio-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: $profile-text;
-  margin: 0 0 0.25rem;
-}
-
-.bio-text {
-  font-size: 0.9rem;
-  color: $profile-muted;
-  margin: 0;
-  line-height: 1.4;
-}
-
-// ===========================================
-// Action Buttons
-// ===========================================
-.profile-actions {
-  display: flex;
-  gap: 0.5rem;
-  padding: 0 1.25rem 1rem;
-}
-
-.profile-btn {
-  flex: 1;
-  padding: 0.6rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 10px;
-  color: $profile-text;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: $profile-text;
+    .av-badge {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 18px;
+      height: 18px;
+      background: var(--signal);
+    }
   }
 
-  &.profile-btn-icon {
-    flex: 0;
-    padding: 0.6rem 0.8rem;
-  }
-}
+  .pi-meta {
+    padding-top: 4px;
 
-// ===========================================
-// Story Highlights
-// ===========================================
-.profile-highlights {
-  padding: 1rem 0;
-  border-bottom: 1px solid $profile-border;
-}
+    .pi-name {
+      font-family: var(--font-display);
+      font-size: 44px;
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      margin: 0 0 4px;
+      text-transform: uppercase;
+      color: var(--paper);
+    }
 
-.highlights-scroll {
-  display: flex;
-  gap: 1rem;
-  padding: 0 1.25rem;
-  overflow-x: auto;
-  scrollbar-width: none;
+    .pi-handle {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--paper-mute);
+      display: block;
+      margin-bottom: 6px;
+    }
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
+    .pi-tags {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--paper-dim);
+      text-transform: uppercase;
 
-.highlight-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  min-width: 70px;
-  cursor: pointer;
-}
-
-.highlight-circle {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: $profile-card;
-  border: 1px solid $profile-border;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  &.highlight-add {
-    border: 1px dashed $profile-muted;
-
-    span {
-      font-size: 1.5rem;
-      color: $profile-muted;
+      .dot { color: var(--signal); padding: 0 4px; }
     }
   }
 }
 
-.highlight-label {
-  font-size: 0.7rem;
-  color: $profile-text;
-  text-align: center;
-  max-width: 70px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-// ===========================================
-// Content Tabs
-// ===========================================
-.profile-tabs {
-  display: flex;
-  border-bottom: 1px solid $profile-border;
-}
-
-.tab-item {
-  flex: 1;
-  padding: 1rem;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: $profile-muted;
-  font-size: 1.25rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    color: $profile-text;
-  }
-
-  &.active {
-    color: $profile-text;
-    border-bottom-color: $profile-text;
-  }
-}
-
-// ===========================================
-// Posts Grid
-// ===========================================
-.profile-content {
-  padding: 1rem;
-}
-
-.posts-grid {
+// ---- Stats spec sheet ----------------------------------------------
+.profile-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
+  border-top: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--ink-line);
+  margin: 8px 0 0;
+
+  .stat-cell {
+    padding: 20px 16px;
+    text-align: left;
+    position: relative;
+
+    & + .stat-cell { border-left: 1px solid var(--ink-line); }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--paper-mute);
+      display: block;
+      margin-bottom: 6px;
+
+      &::before { content: "\201C"; }
+      &::after  { content: "\201D"; }
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 32px;
+      line-height: 1;
+      color: var(--paper);
+      letter-spacing: 0.02em;
+    }
+  }
 }
 
-.post-item {
-  aspect-ratio: 1;
-  background: $profile-card;
+// ---- Bio -----------------------------------------------------------
+.profile-bio {
+  padding: 20px;
+  border-bottom: 1px solid var(--ink-line);
+
+  .bio-text {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--paper-dim);
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .bio-location {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+    margin-top: 10px;
+
+    &::before {
+      content: "\2197";
+      margin-right: 6px;
+      color: var(--signal);
+    }
+  }
+}
+
+// ---- Action row ----------------------------------------------------
+.profile-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+// ---- Tab switch ----------------------------------------------------
+.profile-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--ink-line);
+
+  .tab {
+    padding: 14px 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+
+    &::before { content: "\201C"; }
+    &::after  { content: "\201D"; }
+
+    & + .tab { border-left: 1px solid var(--ink-line); }
+
+    &:hover { color: var(--paper); }
+
+    &.active {
+      color: var(--paper);
+      border-bottom-color: var(--signal);
+    }
+  }
+}
+
+// ---- Tracks list (Sons) --------------------------------------------
+.profile-tracks {
+  padding: 8px 20px 20px;
+}
+
+.track-row {
+  display: grid;
+  grid-template-columns: 42px 1fr auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--ink-line);
   cursor: pointer;
-  overflow: hidden;
-  transition: opacity 0.2s ease;
 
-  &:hover {
-    opacity: 0.8;
+  .tr-play {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--ink-2);
+    border: 1px solid var(--ink-line);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    transition: all .15s ease;
   }
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  &:hover .tr-play {
+    background: var(--signal);
+    color: #000;
+    border-color: var(--signal);
+  }
+
+  .tr-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    letter-spacing: 0.03em;
+    color: var(--paper);
+    line-height: 1;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+  }
+
+  .tr-sub {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--paper-mute);
+  }
+
+  .tr-duration {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--paper-dim);
+    letter-spacing: 0.06em;
+  }
+
+  .tr-eq {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 16px;
+    width: 18px;
+
+    span {
+      flex: 1;
+      background: var(--paper-mute);
+    }
+  }
+
+  &.playing {
+    .tr-play {
+      background: var(--signal);
+      color: #000;
+      border-color: var(--signal);
+    }
+    .tr-name { color: var(--signal); }
+    .tr-eq span {
+      background: var(--signal);
+      animation: eq 1.1s infinite ease-in-out;
+    }
+    .tr-eq span:nth-child(1) { height: 30%; animation-delay: -0.3s; }
+    .tr-eq span:nth-child(2) { height: 80%; animation-delay: -0.2s; }
+    .tr-eq span:nth-child(3) { height: 60%; animation-delay: -0.1s; }
   }
 }
 
-// ===========================================
-// Empty State
-// ===========================================
+// ---- Now playing bar ------------------------------------------------
+.now-playing {
+  margin: 20px;
+  padding: 12px 16px;
+  background: var(--ink-2);
+  border: 1px solid var(--ink-line);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .np-thumb {
+    width: 40px;
+    height: 40px;
+    background: var(--ink-3);
+    border: 1px solid var(--ink-line);
+    flex-shrink: 0;
+  }
+
+  .np-info {
+    flex: 1;
+    min-width: 0;
+
+    .np-t {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--paper);
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .np-a {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--paper-mute);
+      text-transform: uppercase;
+    }
+  }
+
+  .np-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--signal);
+    color: #000;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+}
+
+// ---- Empty state ---------------------------------------------------
 .empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem 2rem;
+  padding: 60px 24px;
   text-align: center;
-}
+  border: 1px dashed var(--ink-line);
+  margin: 20px;
 
-.empty-illustration {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, rgba($profile-accent, 0.2), rgba($profile-secondary, 0.2));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
+  .empty-ix {
+    font-family: var(--font-display);
+    font-size: 64px;
+    color: var(--ink-line);
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 12px;
+    line-height: 1;
 
-  span {
-    font-size: 3rem;
-  }
-}
-
-.empty-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: $profile-text;
-  margin: 0 0 0.5rem;
-}
-
-.empty-text {
-  font-size: 0.9rem;
-  color: $profile-muted;
-  margin: 0 0 1.5rem;
-}
-
-.empty-btn {
-  display: inline-block;
-  padding: 0.75rem 2rem;
-  background: linear-gradient(135deg, $profile-accent, darken($profile-accent, 10%));
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 15px rgba($profile-accent, 0.3);
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba($profile-accent, 0.4);
-    color: white;
-  }
-}
-
-// ===========================================
-// Responsive
-// ===========================================
-@media (min-width: 768px) {
-  .profile-page {
-    max-width: 600px;
-    margin: 0 auto;
+    &::before { content: "\201C"; }
+    &::after  { content: "\201D"; }
   }
 
-  .profile-avatar {
-    width: 100px;
-    height: 100px;
+  .empty-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--paper);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
   }
 
-  .stat-number {
-    font-size: 1.25rem;
+  .empty-text {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+    margin-bottom: 24px;
   }
 }

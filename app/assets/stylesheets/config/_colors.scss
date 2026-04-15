@@ -1,13 +1,34 @@
-// Define variables for your color scheme
+// ===================================================================
+// LE PLUG — Palette
+// Subtractive, industrial. Monochrome base, one signal color.
+// ===================================================================
 
-// For example:
-$red: #FD1015;
-$blue: #0D6EFD;
-$yellow: #FFC65A;
-$orange: #E67E22;
-$green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+// Core surfaces
+$ink:        #0A0A0A;   // deep black — primary background
+$ink-2:      #111111;   // card surface
+$ink-3:      #1A1A1A;   // elevated surface
+$ink-line:   #222222;   // hairlines
 
+// Type
+$paper:      #F5F5F0;   // off-white — primary text
+$paper-dim:  #A8A8A3;   // secondary text
+$paper-mute: #6B6B66;   // tertiary / meta
 
+// Signal
+$signal:     #FF4D00;   // the ONE color — CTAs, live dots, +N%
+$signal-dim: #CC3E00;
 
+// Semantic
+$live:       #FF4D00;
+$danger:     #FF4757;
+$success:    #1EDD88;
+
+// ---- Legacy bootstrap-expected names ---------------------------------
+// (kept so existing partials / bootstrap overrides still compile)
+$red:        #FD1015;
+$blue:       #0D6EFD;
+$yellow:     #FFC65A;
+$orange:     $signal;
+$green:      $success;
+$gray:       $ink;
+$light-gray: $paper;

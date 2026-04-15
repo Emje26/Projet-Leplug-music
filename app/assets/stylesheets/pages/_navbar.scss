@@ -1,245 +1,86 @@
-// ===========================================
-// 🎯 CYBER HEADER - No gap fix
-// ===========================================
-.cyber-header {
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  background: #0a0a0f !important;
-}
+// ===================================================================
+// LE PLUG — TOP NAVBAR (logged-out + inner pages)
+// ===================================================================
 
-body.bg-dark {
-  background: #0d0d14 !important;
-}
+.plug-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: var(--ink);
+  border-bottom: 1px solid var(--ink-line);
+  position: sticky;
+  top: 0;
+  z-index: 50;
 
-.mahe-navbar {
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
 
-  // ===========================================
-  // 🎨 COLOR PALETTE - CYBERPUNK PURPLE
-  // ===========================================
-  $cyber-darkest: #0a0a0f;
-  $cyber-dark: #12121a;
-  $cyber-medium: #1a1a2e;
-  $cyber-base: #252542;
-  $cyber-light: #3d3d6b;
-  $cyber-lighter: #5c5c8a;
-
-  $accent-primary: #bf00ff;
-  $accent-primary-dark: #9900cc;
-  $accent-secondary: #e040fb;
-  $accent-tertiary: #7c4dff;
-
-  $secondary: #00f5ff;
-  $secondary-dark: #00c4cc;
-  $secondary-light: #80faff;
-
-  $bg-primary: #0d0d14;
-  $bg-secondary: #13131f;
-  $bg-tertiary: #1a1a2e;
-  $bg-card: #16162a;
-
-  $text-primary: #f0f0ff;
-  $text-secondary: #c0c0e0;
-  $text-muted: #8080a0;
-  $text-light: #6060a0;
-
-  $border-color: rgba(191, 0, 255, 0.3);
-
-  $shadow-soft: 0 4px 10px rgba(191, 0, 255, 0.15);
-  $shadow-strong: 0 6px 20px rgba(191, 0, 255, 0.25);
-
-
-  // ===========================================
-  // 🧹 SUPPRIMER "My Recipes" + AVATAR
-  // ===========================================
-  .navbar-nav .nav-item:first-child {
-    display: none !important;     // My Recipes
-  }
-
-  .navbar-nav .nav-item.dropdown {
-    display: none !important;     // Avatar + dropdown
-  }
-
-
-  // ===========================================
-  // 🧭 NAVBAR STYLE GLOBAL
-  // ===========================================
-  background: linear-gradient(90deg, $cyber-darkest 0%, $cyber-dark 50%, $cyber-darkest 100%) !important;
-  border-bottom: 2px solid $accent-primary !important;
-  box-shadow:
-    $shadow-strong,
-    0 0 30px rgba($accent-primary, 0.2),
-    inset 0 -1px 0 rgba($accent-primary, 0.3) !important;
-  padding: 8px 0 !important;
-  position: relative;
-  overflow: hidden;
-
-
-  // ===========================================
-  // 🎵 MUSIC NOTES ANIMATION
-  // ===========================================
-  .music-notes-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
-  }
-
-  .music-note {
-    position: absolute;
-    font-size: 1.2rem;
-    opacity: 0;
-    animation: float-note 8s ease-in-out infinite;
-    filter: drop-shadow(0 0 8px currentColor);
-
-    &:nth-child(1) { left: 5%; animation-delay: 0s; color: $accent-primary; }
-    &:nth-child(2) { left: 15%; animation-delay: 1s; color: $secondary; }
-    &:nth-child(3) { left: 25%; animation-delay: 2s; color: $accent-secondary; }
-    &:nth-child(4) { left: 35%; animation-delay: 0.5s; color: $accent-tertiary; }
-    &:nth-child(5) { left: 45%; animation-delay: 1.5s; color: $accent-primary; }
-    &:nth-child(6) { left: 55%; animation-delay: 2.5s; color: $secondary; }
-    &:nth-child(7) { left: 65%; animation-delay: 0.8s; color: $accent-secondary; }
-    &:nth-child(8) { left: 75%; animation-delay: 1.8s; color: $accent-tertiary; }
-    &:nth-child(9) { left: 85%; animation-delay: 2.8s; color: $accent-primary; }
-    &:nth-child(10) { left: 95%; animation-delay: 3.5s; color: $secondary; }
-    &:nth-child(11) { left: 10%; animation-delay: 4s; color: $accent-secondary; }
-    &:nth-child(12) { left: 30%; animation-delay: 4.5s; color: $accent-tertiary; }
-    &:nth-child(13) { left: 50%; animation-delay: 5s; color: $accent-primary; }
-    &:nth-child(14) { left: 70%; animation-delay: 5.5s; color: $secondary; }
-    &:nth-child(15) { left: 90%; animation-delay: 6s; color: $accent-secondary; }
-  }
-
-  @keyframes float-note {
-    0% {
-      transform: translateY(60px) rotate(0deg) scale(0.5);
-      opacity: 0;
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--signal);
+      border-radius: 50%;
     }
-    10% {
-      opacity: 0.9;
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      letter-spacing: 0.08em;
+      color: var(--paper);
+      text-transform: uppercase;
     }
-    50% {
-      transform: translateY(-10px) rotate(15deg) scale(1);
-      opacity: 0.7;
-    }
-    90% {
-      opacity: 0.9;
-    }
-    100% {
-      transform: translateY(60px) rotate(-15deg) scale(0.5);
-      opacity: 0;
+
+    .brand-catalog {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      color: var(--paper-mute);
+      text-transform: uppercase;
+      border-left: 1px solid var(--ink-line);
+      padding-left: 10px;
     }
   }
 
-  // Notes qui dansent
-  .note-bounce {
-    animation: note-dance 0.5s ease-in-out infinite alternate;
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
-  @keyframes note-dance {
-    0% { transform: translateY(0) rotate(-5deg); }
-    100% { transform: translateY(-5px) rotate(5deg); }
-  }
-
-
-  // ===========================================
-  // 🎪 LOGO
-  // ===========================================
-  .navbar-brand {
-    position: relative;
-    z-index: 10;
-
-    span {
-      color: $text-primary !important;
-      font-weight: 700 !important;
-      font-size: 1.4rem;
-      text-shadow:
-        0 0 10px rgba($accent-primary, 0.5),
-        0 0 20px rgba($accent-primary, 0.3);
-      transition: all 0.3s ease;
-
-      &:hover {
-        text-shadow:
-          0 0 15px rgba($accent-primary, 0.8),
-          0 0 30px rgba($accent-primary, 0.5),
-          0 0 45px rgba($secondary, 0.3);
-      }
-    }
-
-    img {
-      border-radius: 12px !important;
-      box-shadow:
-        $shadow-soft,
-        0 0 15px rgba($accent-primary, 0.3);
-      border: 2px solid $accent-primary !important;
-      transition: all 0.3s ease;
-
-      &:hover {
-        box-shadow:
-          0 0 20px rgba($accent-primary, 0.5),
-          0 0 40px rgba($accent-primary, 0.3);
-        border-color: $secondary !important;
-      }
-    }
-  }
-
-
-  // ===========================================
-  // 🔗 LINKS (nav-link)
-  // ===========================================
   .nav-link {
-    position: relative;
-    z-index: 10;
-    color: $text-muted !important;
-    font-weight: 600 !important;
-    padding: 10px 14px !important;
-    border-radius: 12px !important;
-    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 14px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    text-decoration: none;
     border: 1px solid transparent;
 
-    &:hover {
-      color: $text-primary !important;
-      background: rgba($accent-primary, 0.15);
-      border: 1px solid $accent-primary;
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba($accent-primary, 0.3);
-      text-shadow: 0 0 10px rgba($accent-primary, 0.5);
-    }
+    &:hover { color: var(--paper); border-color: var(--ink-line); }
   }
 
+  .nav-cta {
+    padding: 10px 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000;
+    background: var(--signal);
+    border: 1px solid var(--signal);
+    text-decoration: none;
 
-  // ===========================================
-  // 🟧 SIGN UP BUTTON (Bootstrap .btn-primary)
-  // ===========================================
-  .btn-primary {
-    position: relative;
-    z-index: 10;
-    background: linear-gradient(135deg, $accent-primary 0%, $accent-primary-dark 100%) !important;
-    border: none !important;
-    border-radius: 999px !important;
-    padding: 8px 20px !important;
-    font-weight: 700 !important;
-    box-shadow:
-      0 4px 15px rgba($accent-primary, 0.4),
-      0 0 30px rgba($accent-primary, 0.2);
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: linear-gradient(135deg, $accent-secondary 0%, $accent-primary 100%) !important;
-      transform: translateY(-2px);
-      box-shadow:
-        0 6px 20px rgba($accent-primary, 0.5),
-        0 0 40px rgba($accent-primary, 0.3);
-    }
+    &:hover { background: #fff; border-color: #fff; }
   }
-
-  // Container fluid pour le z-index
-  .container-fluid {
-    position: relative;
-    z-index: 5;
-  }
-
 }

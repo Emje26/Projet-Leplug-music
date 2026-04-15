@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <title>Le Plug</title>
+    <title>Le Plug — c/o Music</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#0A0A0A">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,30 +14,22 @@
   <body class="bg-dark">
     <%= link_to "Skip to main content", "#main-content", class: "visually-hidden-focusable" %>
 
-    <% # Hide navbar when logged in user is on home page (feed page has its own bottom nav) %>
-    <% unless user_signed_in? && controller_name == 'home' && action_name == 'index' %>
-      <header class="cyber-header">
-        <%= render "shared/navbar" %>
-      </header>
+    <% # Hide navbar when in the logged-in app shell — those pages have their own headers. %>
+    <% show_global_nav = !user_signed_in? && !(controller_name == 'home' && action_name == 'index') && !(controller_path.start_with?('devise')) %>
+    <% if show_global_nav %>
+      <%= render "shared/navbar" %>
     <% end %>
 
-    <main id="main-content" class="">
-      <div class="">
+    <main id="main-content">
+      <% if notice %>
+        <div class="alert alert-primary"><%= notice %></div>
+      <% end %>
 
-        <% if notice %>
-          <div class="alert alert-primary border-0 rounded-3 shadow-sm py-2 px-3 mb-3 small">
-            <%= notice %>
-          </div>
-        <% end %>
+      <% if alert %>
+        <div class="alert alert-danger"><%= alert %></div>
+      <% end %>
 
-        <% if alert %>
-          <div class="alert alert-danger border-0 rounded-3 shadow-sm py-2 px-3 mb-3 small">
-            <%= alert %>
-          </div>
-        <% end %>
-
-        <%= yield %>
-      </div>
+      <%= yield %>
     </main>
   </body>
 </html>

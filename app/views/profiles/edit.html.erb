@@ -1,2 +1,45 @@
-<h1>Profiles#edit</h1>
-<p>Find me in app/views/profiles/edit.html.erb</p>
+<div class="settings-page">
+
+  <header class="settings-header">
+    <%= link_to profile_path, class: "back-btn" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+        <path d="M15 6l-6 6 6 6"/>
+      </svg>
+    <% end %>
+    <h1 class="settings-title">EDIT PROFILE</h1>
+    <span class="header-spacer"></span>
+  </header>
+
+  <div class="auth-panel" style="max-width: 520px; padding: 32px 20px;">
+    <div class="auth-heading">
+      <span class="h-kicker">PROFILE / EDIT</span>
+      <h1 style="font-size: 36px;">YOUR<br>INFO.</h1>
+      <p>Met à jour ton profil. Les infos visibles publiquement sur ta page artiste.</p>
+    </div>
+
+    <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--paper-mute); text-transform: uppercase;">
+      Ce formulaire est un placeholder — branche-le à l'action <code>profiles#update</code>.
+    </p>
+  </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <%= link_to root_path, class: "nav-item" do %>
+    <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/></svg>
+    <span>FEED</span>
+  <% end %>
+  <a class="nav-item" href="#">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+    <span>SEARCH</span>
+  </a>
+  <div class="nav-item nav-drop"><button class="drop-btn">+</button></div>
+  <%= link_to chats_path, class: "nav-item" do %>
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>DMS</span>
+  <% end %>
+  <%= link_to profile_path, class: "nav-item active" do %>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    <span>ME</span>
+  <% end %>
+</nav>
