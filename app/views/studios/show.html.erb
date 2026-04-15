@@ -1,0 +1,124 @@
+<div class="studio-page">
+
+  <!-- HEADER -->
+  <header class="studio-header">
+    <%= link_to search_path, class: "back-btn" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+        <path d="M15 6l-6 6 6 6"/>
+      </svg>
+    <% end %>
+    <span class="studio-hdr-handle">"STUDIO" / № <%= @studio.id.to_s.rjust(3, "0") %></span>
+    <button class="icon-btn" aria-label="Share">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M4 12v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8"/>
+        <path d="M16 6l-4-4-4 4"/>
+        <line x1="12" y1="2" x2="12" y2="15"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- GALLERY (carousel de placeholders) -->
+  <section class="studio-gallery">
+    <% 3.times do |i| %>
+      <div class="gallery-slide">
+        <span class="gs-num">№ <%= format("%02d", i + 1) %></span>
+        <span class="gs-initials"><%= @studio.initials %></span>
+      </div>
+    <% end %>
+  </section>
+
+  <!-- IDENTITY -->
+  <section class="studio-identity">
+    <div class="si-top">
+      <span class="si-category"><%= @studio.category&.upcase %></span>
+      <div class="si-rating">★ <%= format("%.1f", @studio.rating) %> <span>· <%= @studio.reviews_count %> AVIS</span></div>
+    </div>
+    <h1 class="si-name"><%= @studio.name.upcase %></h1>
+    <div class="si-address"><%= @studio.address %> — <%= @studio.city %></div>
+  </section>
+
+  <!-- PRICE CARD + CTA -->
+  <section class="studio-price-card">
+    <div class="spc-left">
+      <span class="spc-label">TARIF</span>
+      <div class="spc-amount">€<%= @studio.price_per_hour.to_i %><span class="spc-unit">/H</span></div>
+    </div>
+    <%= link_to new_booking_path(bookable_type: "Studio", bookable_id: @studio.id), class: "btn-signal", style: "min-width: 180px;" do %>
+      RÉSERVER →
+    <% end %>
+  </section>
+
+  <!-- DESCRIPTION -->
+  <section class="studio-desc">
+    <span class="label">"DESCRIPTION"</span>
+    <p><%= @studio.description %></p>
+  </section>
+
+  <!-- EQUIPMENT -->
+  <% if @studio.equipment.present? %>
+    <section class="studio-equipment">
+      <span class="label">"ÉQUIPEMENT"</span>
+      <div class="equip-pills">
+        <% @studio.equipment.each do |item| %>
+          <span class="equip-pill"><%= item %></span>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+
+  <!-- REVIEWS -->
+  <section class="studio-reviews">
+    <div class="section-head" style="padding: 0 0 14px;">
+      <h2 class="section-title">AVIS</h2>
+      <span class="section-link"><%= @reviews.size %></span>
+    </div>
+
+    <% if @reviews.any? %>
+      <div class="review-list">
+        <% @reviews.each do |r| %>
+          <article class="review-card">
+            <header>
+              <span class="rc-stars"><%= "★" * r.rating %><span class="dim"><%= "★" * (5 - r.rating) %></span></span>
+              <span class="rc-user"><%= r.user.email.split('@').first.upcase %></span>
+              <time class="rc-date"><%= r.created_at.strftime("%d.%m.%y") %></time>
+            </header>
+            <p><%= r.content %></p>
+          </article>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="empty-inline">AUCUN AVIS POUR L'INSTANT — SOIS LE PREMIER À PLUG CE STUDIO.</p>
+    <% end %>
+
+    <!-- New review form -->
+    <%= form_with model: @review, url: studio_reviews_path(@studio), class: "review-form", local: true do |f| %>
+      <span class="label">"LAISSER UN AVIS"</span>
+      <div class="rf-row">
+        <%= f.select :rating, (1..5).to_a.map { |n| ["#{'★' * n} (#{n}/5)", n] }, { selected: 5 }, class: "rf-select" %>
+      </div>
+      <%= f.text_area :content, rows: 3, placeholder: "Ton expérience en studio…", class: "rf-textarea" %>
+      <%= f.submit "PUBLIER L'AVIS", class: "btn-signal" %>
+    <% end %>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="studio-location">
+    <span class="label">"LOCALISATION"</span>
+    <div class="loc-card">
+      <div class="loc-map">
+        <span class="loc-pin">◉</span>
+        <div class="loc-grid"></div>
+      </div>
+      <div class="loc-info">
+        <div class="loc-address"><%= @studio.address %></div>
+        <div class="loc-city"><%= @studio.city.upcase %> · FR</div>
+        <div class="loc-coords mono">
+          <%= format("%.4f", @studio.latitude || 0) %>, <%= format("%.4f", @studio.longitude || 0) %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<%= render "shared/bottom_nav", active: :search %>

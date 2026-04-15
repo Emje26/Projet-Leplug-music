@@ -1,0 +1,353 @@
+// ===================================================================
+// LE PLUG — BOOKING FLOW
+// ===================================================================
+
+.booking-page {
+  background: var(--ink);
+  color: var(--paper);
+  min-height: 100vh;
+  padding-bottom: 140px;
+}
+
+.booking-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px 16px;
+  border-bottom: 1px solid var(--ink-line);
+  position: sticky;
+  top: 0;
+  background: var(--ink);
+  z-index: 10;
+
+  .back-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--ink-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--paper);
+    text-decoration: none;
+    flex-shrink: 0;
+
+    &:hover { border-color: var(--paper); }
+  }
+
+  .booking-title-wrap {
+    flex: 1;
+    line-height: 1;
+  }
+
+  .booking-kicker {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--signal);
+    margin-bottom: 8px;
+  }
+
+  .booking-title {
+    font-family: var(--font-display);
+    font-size: 30px;
+    letter-spacing: 0.03em;
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .header-spacer { width: 38px; flex-shrink: 0; }
+}
+
+// ---- Bookable summary ---------------------------------------------
+.booking-bookable {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 20px;
+  margin: 0;
+  border-bottom: 1px solid var(--ink-line);
+  background: var(--ink-2);
+
+  .bb-cover {
+    width: 72px;
+    height: 72px;
+    background: #2A2A2A;
+    border: 1px solid var(--ink-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-family: var(--font-display);
+      font-size: 26px;
+      color: var(--paper);
+    }
+  }
+
+  .bb-type {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--signal);
+    text-transform: uppercase;
+  }
+
+  .bb-name {
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin: 4px 0;
+    color: var(--paper);
+    line-height: 1;
+  }
+
+  .bb-price {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--paper-dim);
+  }
+}
+
+// ---- Sections ------------------------------------------------------
+.booking-section {
+  padding: 22px 20px 10px;
+
+  .bsec-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    margin-bottom: 14px;
+  }
+}
+
+// ---- Date strip ----------------------------------------------------
+.date-strip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.date-cell {
+  flex: 0 0 68px;
+  position: relative;
+  cursor: pointer;
+
+  input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+
+  > div {
+    padding: 12px 0;
+    text-align: center;
+    border: 1px solid var(--ink-line);
+    background: var(--ink-2);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    transition: all .12s ease;
+  }
+
+  .dc-dow {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+  }
+  .dc-num {
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+  }
+  .dc-mon {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+  }
+
+  input:checked + div {
+    background: var(--signal);
+    border-color: var(--signal);
+
+    .dc-dow, .dc-num, .dc-mon { color: #000; }
+  }
+
+  &:hover > div { border-color: var(--paper-dim); }
+}
+
+// ---- Slot grid ----------------------------------------------------
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.slot-cell {
+  position: relative;
+  cursor: pointer;
+
+  input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+
+  span {
+    display: block;
+    padding: 14px 0;
+    text-align: center;
+    border: 1px solid var(--ink-line);
+    background: var(--ink-2);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--paper);
+    transition: all .12s ease;
+  }
+
+  input:checked + span {
+    background: var(--signal);
+    color: #000;
+    border-color: var(--signal);
+  }
+
+  &:hover span { border-color: var(--paper-dim); }
+}
+
+// ---- Duration grid -------------------------------------------------
+.duration-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+
+.dur-cell {
+  position: relative;
+  cursor: pointer;
+
+  input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+
+  span {
+    display: block;
+    padding: 16px 0;
+    text-align: center;
+    border: 1px solid var(--ink-line);
+    background: var(--ink-2);
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+    transition: all .12s ease;
+  }
+
+  input:checked + span {
+    background: var(--signal);
+    color: #000;
+    border-color: var(--signal);
+  }
+
+  &:hover span { border-color: var(--paper-dim); }
+}
+
+// ---- Summary card -------------------------------------------------
+.summary-card {
+  border: 1px solid var(--ink-line);
+  background: var(--ink-2);
+  padding: 18px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--signal);
+  }
+
+  .sum-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 10px 0;
+
+    .sum-k {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--paper);
+      .sum-hint { font-family: var(--font-mono); font-size: 9px; color: var(--paper-mute); margin-left: 6px; }
+    }
+
+    .sum-v {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--paper);
+      letter-spacing: 0.04em;
+    }
+
+    &.total {
+      .sum-k { font-family: var(--font-display); font-size: 22px; text-transform: uppercase; letter-spacing: 0.04em; }
+      .sum-v { font-family: var(--font-display); font-size: 28px; color: var(--signal); letter-spacing: 0.02em; }
+    }
+  }
+
+  .sum-divider {
+    height: 1px;
+    background: var(--ink-line);
+    margin: 6px 0;
+  }
+}
+
+.booking-note {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--paper-mute);
+  margin: 14px 0 0;
+}
+
+.booking-cta {
+  padding: 14px 20px 24px;
+  margin-top: 12px;
+}
+
+// ---- Booking detail grid -------------------------------------------
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  > div {
+    padding: 16px;
+    border: 1px solid var(--ink-line);
+    background: var(--ink-2);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dg-k {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+  }
+
+  .dg-v {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    text-transform: uppercase;
+  }
+}

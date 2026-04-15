@@ -1,0 +1,97 @@
+<div class="search-page results">
+
+  <!-- HEADER -->
+  <header class="results-header">
+    <%= link_to search_path, class: "back-btn" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+        <path d="M15 6l-6 6 6 6"/>
+      </svg>
+    <% end %>
+    <div class="results-title-wrap">
+      <span class="results-kicker">"RÉSULTATS"</span>
+      <h1 class="results-title">
+        <%= @total %> ITEM<%= "S" if @total != 1 %>
+      </h1>
+    </div>
+    <span class="header-spacer"></span>
+  </header>
+
+  <!-- ACTIVE FILTERS -->
+  <div class="results-filters">
+    <%= form_with url: search_results_path, method: :get, class: "s-search-form compact", local: true do %>
+      <div class="s-search-box">
+        <span class="lbl">Q</span>
+        <input type="text" name="q" value="<%= @query %>" placeholder="RECHERCHER" autocomplete="off">
+        <% if @category.present? %>
+          <input type="hidden" name="category" value="<%= @category %>">
+        <% end %>
+        <button type="submit" class="s-search-submit">→</button>
+      </div>
+    <% end %>
+
+    <% if @query.present? || @category.present? || @city.present? %>
+      <div class="active-chips">
+        <% if @query.present?     %><span class="chip">Q: <%= @query %></span><% end %>
+        <% if @category.present?  %><span class="chip">CAT: <%= @category.upcase %></span><% end %>
+        <% if @city.present?      %><span class="chip">CITY: <%= @city.upcase %></span><% end %>
+        <%= link_to "CLEAR ✕", search_results_path, class: "chip clear" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- STUDIOS -->
+  <% if @studios.any? %>
+    <div class="section-head">
+      <h2 class="section-title">STUDIOS</h2>
+      <span class="section-link"><%= @studios.size %></span>
+    </div>
+
+    <div class="results-list">
+      <% @studios.each do |s| %>
+        <%= link_to studio_path(s), class: "result-row" do %>
+          <div class="rr-cover"><span><%= s.initials %></span></div>
+          <div class="rr-body">
+            <h3 class="rr-name"><%= s.name.upcase %></h3>
+            <div class="rr-sub"><%= s.category&.upcase %> · <%= s.city %> · ★ <%= format("%.1f", s.rating) %></div>
+          </div>
+          <span class="rr-price"><%= s.display_price %></span>
+          <span class="rr-arrow">›</span>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- TALENTS -->
+  <% if @talents.any? %>
+    <div class="section-head">
+      <h2 class="section-title">TALENTS</h2>
+      <span class="section-link"><%= @talents.size %></span>
+    </div>
+
+    <div class="results-list">
+      <% @talents.each do |t| %>
+        <%= link_to talent_path(t), class: "result-row talent" do %>
+          <div class="rr-cover"><span><%= t.initials %></span></div>
+          <div class="rr-body">
+            <h3 class="rr-name"><%= t.name %></h3>
+            <div class="rr-sub"><%= t.specialty&.upcase %> · <%= t.city %> · ★ <%= format("%.1f", t.rating) %></div>
+          </div>
+          <span class="rr-price"><%= t.display_price %></span>
+          <span class="rr-arrow">›</span>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @studios.empty? && @talents.empty? %>
+    <div class="empty-state" style="margin: 40px 20px;">
+      <span class="empty-ix">0</span>
+      <h3 class="empty-title">AUCUN RÉSULTAT</h3>
+      <p class="empty-text">ESSAIE UN AUTRE TERME OU UNE AUTRE CATÉGORIE</p>
+      <%= link_to "← RETOUR", search_path, class: "btn-ghost" %>
+    </div>
+  <% end %>
+
+</div>
+
+<%= render "shared/bottom_nav", active: :search %>

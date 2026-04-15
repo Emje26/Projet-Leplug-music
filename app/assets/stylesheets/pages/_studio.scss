@@ -1,0 +1,422 @@
+// ===================================================================
+// LE PLUG — STUDIO / TALENT PROFILE
+// ===================================================================
+
+.studio-page {
+  background: var(--ink);
+  color: var(--paper);
+  min-height: 100vh;
+  padding-bottom: 140px;
+}
+
+// ---- Header -------------------------------------------------------
+.studio-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--ink-line);
+  position: sticky;
+  top: 0;
+  background: var(--ink);
+  z-index: 10;
+
+  .back-btn,
+  .icon-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--ink-line);
+    background: transparent;
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-shrink: 0;
+
+    &:hover { border-color: var(--paper); }
+
+    svg { width: 16px; height: 16px; }
+  }
+
+  .studio-hdr-handle {
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+  }
+}
+
+// ---- Gallery ------------------------------------------------------
+.studio-gallery {
+  display: flex;
+  gap: 8px;
+  padding: 12px 20px 8px;
+  overflow-x: auto;
+  &::-webkit-scrollbar { display: none; }
+
+  .gallery-slide {
+    flex: 0 0 280px;
+    aspect-ratio: 4 / 3;
+    background: #2A2A2A;
+    border: 1px solid var(--ink-line);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--ink-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ink-line) 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.3;
+    }
+
+    &.big { flex: 1; aspect-ratio: 16 / 9; }
+
+    .gs-num {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      color: var(--paper-mute);
+    }
+
+    .gs-initials {
+      position: relative;
+      font-family: var(--font-display);
+      font-size: 72px;
+      letter-spacing: 0.04em;
+      color: var(--paper);
+      text-transform: uppercase;
+    }
+  }
+}
+
+// ---- Identity -----------------------------------------------------
+.studio-identity {
+  padding: 20px 20px 14px;
+  border-bottom: 1px solid var(--ink-line);
+
+  .si-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .si-category {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--signal);
+    border: 1px solid var(--signal);
+    padding: 5px 9px;
+    text-transform: uppercase;
+
+    &::before { content: "\201C"; }
+    &::after  { content: "\201D"; }
+  }
+
+  .si-rating {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--paper);
+    letter-spacing: 0.04em;
+
+    span { color: var(--paper-mute); font-size: 9px; margin-left: 4px; }
+  }
+
+  .si-name {
+    font-family: var(--font-display);
+    font-size: 44px;
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    color: var(--paper);
+  }
+
+  .si-address {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+  }
+
+  .si-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+}
+
+// ---- Price card + CTA --------------------------------------------
+.studio-price-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  margin: 14px 20px;
+  background: var(--ink-2);
+  border: 1px solid var(--ink-line);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--signal);
+  }
+
+  .spc-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .spc-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+
+    &::before { content: "\201C"; }
+    &::after  { content: "\201D"; }
+  }
+
+  .spc-amount {
+    font-family: var(--font-display);
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+
+    .spc-unit {
+      font-size: 18px;
+      color: var(--paper-mute);
+      letter-spacing: 0.06em;
+    }
+  }
+}
+
+// ---- Description & equipment --------------------------------------
+.studio-desc,
+.studio-equipment,
+.studio-reviews,
+.studio-location {
+  padding: 20px;
+  border-top: 1px solid var(--ink-line);
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--paper-dim);
+    margin: 0;
+    max-width: 600px;
+  }
+}
+
+.equip-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.equip-pill {
+  padding: 7px 11px;
+  border: 1px solid var(--ink-line);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  text-decoration: none;
+  background: var(--ink-2);
+}
+
+// ---- Reviews ------------------------------------------------------
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.review-card {
+  padding: 16px;
+  background: var(--ink-2);
+  border: 1px solid var(--ink-line);
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    .rc-stars {
+      color: var(--signal);
+      font-size: 13px;
+      letter-spacing: 2px;
+
+      .dim { color: var(--ink-line); }
+    }
+
+    .rc-user {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--paper);
+    }
+
+    .rc-date {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--paper-mute);
+      letter-spacing: 0.08em;
+    }
+  }
+
+  p {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--paper-dim);
+    margin: 0;
+  }
+}
+
+.empty-inline {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper-mute);
+  padding: 20px 0;
+  text-align: center;
+  border: 1px dashed var(--ink-line);
+  margin-bottom: 24px;
+}
+
+// Review form
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .rf-select,
+  .rf-textarea {
+    width: 100%;
+    background: var(--ink-2);
+    border: 1px solid var(--ink-line);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 12px 14px;
+    outline: 0;
+
+    &:focus { border-color: var(--paper); }
+  }
+
+  .rf-textarea {
+    min-height: 80px;
+    resize: vertical;
+
+    &::placeholder {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--paper-mute);
+    }
+  }
+}
+
+// ---- Location -----------------------------------------------------
+.loc-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  border: 1px solid var(--ink-line);
+  background: var(--ink-2);
+
+  .loc-map {
+    aspect-ratio: 1 / 1;
+    background: #1A1A1A;
+    position: relative;
+    border-right: 1px solid var(--ink-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .loc-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--ink-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ink-line) 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.6;
+    }
+
+    .loc-pin {
+      position: relative;
+      font-size: 22px;
+      color: var(--signal);
+    }
+  }
+
+  .loc-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+
+    .loc-address {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--paper);
+    }
+    .loc-city {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--paper-mute);
+    }
+    .loc-coords {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      color: var(--paper-mute);
+    }
+  }
+}
