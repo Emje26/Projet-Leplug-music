@@ -1281,7 +1281,378 @@ html {
 }
 
 // ===========================================
-// 📱 BOTTOM NAVIGATION BAR
+// � STORIES SECTION (Instagram-style)
+// ===========================================
+
+.stories-section {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba($border-color, 0.3);
+}
+
+.stories-scroll {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.story-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  cursor: pointer;
+
+  &.your-story .story-avatar {
+    background: $bg-card;
+    border: 2px dashed rgba($accent-primary, 0.5);
+    color: $accent-primary;
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+}
+
+.story-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.gradient-1 {
+    background: linear-gradient(135deg, $accent-primary, #ff6b6b);
+  }
+
+  &.gradient-2 {
+    background: linear-gradient(135deg, #1DB954, $secondary);
+  }
+
+  &.gradient-3 {
+    background: linear-gradient(135deg, $accent-secondary, #ffd700);
+  }
+}
+
+.story-avatar-inner {
+  width: 100%;
+  height: 100%;
+  background: $bg-primary;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.story-name {
+  font-size: 0.7rem;
+  color: $text-secondary;
+  max-width: 68px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ===========================================
+// 🎵 SPOTIFY-STYLE SECTIONS
+// ===========================================
+
+.spotify-section {
+  padding: 1.5rem 0;
+}
+
+.spotify-scroll {
+  display: flex;
+  gap: 1rem;
+  padding: 0 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.spotify-card {
+  flex-shrink: 0;
+  width: 150px;
+  scroll-snap-align: start;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+
+    .play-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.spotify-cover {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.cover-gradient {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+
+  &.gradient-1 {
+    background: linear-gradient(135deg, #5B21B6, $accent-primary, #EC4899);
+  }
+
+  &.gradient-2 {
+    background: linear-gradient(135deg, #1DB954, #191414, #1DB954);
+  }
+
+  &.gradient-3 {
+    background: linear-gradient(135deg, #E91E63, #9C27B0, #673AB7);
+  }
+}
+
+.play-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 48px;
+  height: 48px;
+  background: #1DB954;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 1.25rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.spotify-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spotify-subtitle {
+  font-size: 0.8rem;
+  color: $text-muted;
+  margin: 0.25rem 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ===========================================
+// 🎬 SHORTS/REELS GRID
+// ===========================================
+
+.shorts-section {
+  padding: 1.5rem 0;
+}
+
+.shorts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  padding: 0 1rem;
+}
+
+.short-card {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02);
+
+    .short-play {
+      opacity: 1;
+    }
+  }
+}
+
+.short-preview {
+  position: relative;
+  aspect-ratio: 9/16;
+  border-radius: 12px;
+  overflow: hidden;
+  background: $bg-card;
+}
+
+.short-gradient {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.gradient-1 {
+    background: linear-gradient(180deg, #1a1a2e 0%, $accent-primary 100%);
+  }
+
+  &.gradient-2 {
+    background: linear-gradient(180deg, #0d0d14 0%, #1DB954 100%);
+  }
+
+  &.gradient-3 {
+    background: linear-gradient(180deg, #2d1b4e 0%, #E91E63 100%);
+  }
+
+  &.gradient-4 {
+    background: linear-gradient(180deg, #1a1a2e 0%, $secondary 100%);
+  }
+
+  &.gradient-5 {
+    background: linear-gradient(180deg, #2d1b1b 0%, #ff6b6b 100%);
+  }
+
+  &.gradient-6 {
+    background: linear-gradient(180deg, #1b2d2d 0%, #ffd700 100%);
+  }
+}
+
+.short-icon {
+  font-size: 4rem;
+  opacity: 0.3;
+}
+
+.short-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+}
+
+.short-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.short-artist {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.short-song {
+  font-size: 0.7rem;
+  color: $text-secondary;
+}
+
+.short-stats {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  color: $text-muted;
+}
+
+.short-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+// ===========================================
+// 🎤 ARTISTS SCROLL
+// ===========================================
+
+.artists-scroll {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.artist-circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+
+    .artist-avatar {
+      box-shadow: 0 0 20px rgba($accent-primary, 0.4);
+    }
+  }
+}
+
+.artist-circle .artist-avatar {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, $bg-card, $cyber-base);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border: 2px solid $border-color;
+  transition: all 0.3s ease;
+}
+
+.artist-circle .artist-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: $text-secondary;
+  text-align: center;
+}
+
+// ===========================================
+// �📱 BOTTOM NAVIGATION BAR
 // ===========================================
 
 .bottom-nav {

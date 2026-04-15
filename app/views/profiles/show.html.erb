@@ -1,27 +1,137 @@
-<div class="container py-4">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <h2 class="mb-4">Your Profile</h2>
 
-      <div class="card bg-dark text-white">
-        <div class="card-body">
-          <% if @profile.name.present? %>
-            <h4><%= @profile.name %></h4>
-          <% else %>
-            <p class="text-muted">No name set yet.</p>
-          <% end %>
+<div class="profile-page">
 
-          <% if @profile.bio.present? %>
-            <p class="mt-3"><%= @profile.bio %></p>
-          <% else %>
-            <p class="text-muted">No bio yet.</p>
-          <% end %>
+  <!-- Header -->
+  <header class="profile-header">
+    <span class="header-icon">🔒</span>
+    <h1 class="profile-username"><%= current_user.email.split('@').first %></h1>
+    <div class="header-actions">
+      <span class="header-icon">🔔</span>
+      <%= link_to profile_settings_path do %>
+        <span class="header-icon">☰</span>
+      <% end %>
+    </div>
+  </header>
 
-          <hr class="my-4">
-
-          <%= link_to "Edit Profile", edit_profile_path, class: "btn btn-outline-primary" %>
-        </div>
+  <!-- Profile Info Section -->
+  <section class="profile-info">
+    <!-- Avatar -->
+    <div class="profile-avatar-container">
+      <div class="profile-avatar">
+        <div class="avatar-image">👤</div>
+        <span class="add-story-btn">+</span>
       </div>
     </div>
-  </div>
+
+
+
+    <!-- Stats -->
+    <div class="profile-stats">
+      <div class="stat-item">
+        <span class="stat-number">0</span>
+        <span class="stat-label">publications</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">302</span>
+        <span class="stat-label">followers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">371</span>
+        <span class="stat-label">suivi(e)s</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bio Section -->
+  <section class="profile-bio">
+    <h2 class="bio-name"><%= @profile&.name || current_user.email.split('@').first %></h2>
+    <% if @profile&.bio.present? %>
+      <p class="bio-text"><%= @profile.bio %></p>
+    <% end %>
+  </section>
+
+  <!-- Action Buttons -->
+  <section class="profile-actions">
+    <%= link_to edit_profile_path, class: "profile-btn" do %>
+      Modifier
+    <% end %>
+    <button class="profile-btn">Partager le profil</button>
+    <button class="profile-btn profile-btn-icon">👤+</button>
+  </section>
+
+  <!-- Story Highlights -->
+  <section class="profile-highlights">
+    <div class="highlights-scroll">
+      <div class="highlight-item">
+        <div class="highlight-circle highlight-add">
+          <span>+</span>
+        </div>
+        <span class="highlight-label">Nouveau</span>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-circle">
+          <img src="https://picsum.photos/70/70?random=1" alt="Highlight">
+        </div>
+        <span class="highlight-label">À la une</span>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-circle">
+          <img src="https://picsum.photos/70/70?random=2" alt="Highlight">
+        </div>
+        <span class="highlight-label">À la une</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Tabs -->
+  <section class="profile-tabs">
+    <button class="tab-item active">
+      <span>📷</span>
+    </button>
+    <button class="tab-item">
+      <span>🎬</span>
+    </button>
+    <button class="tab-item">
+      <span>🏷️</span>
+    </button>
+  </section>
+
+  <!-- Posts Grid / Empty State -->
+  <section class="profile-content">
+    <% if true %> <!-- Replace with actual posts check -->
+      <div class="empty-state">
+        <div class="empty-illustration">
+          <span>📸</span>
+        </div>
+        <h3 class="empty-title">Créez votre première publication</h3>
+        <p class="empty-text">Partagez votre musique avec le monde</p>
+        <%= link_to assistant_path, class: "empty-btn" do %>
+          Créer
+        <% end %>
+      </div>
+    <% else %>
+      <div class="posts-grid">
+        <!-- Posts would go here -->
+      </div>
+    <% end %>
+  </section>
+
 </div>
+
+<!-- Bottom Navigation Bar -->
+<nav class="bottom-nav">
+  <%= link_to root_path, class: "nav-item" do %>
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">Home</span>
+  <% end %>
+
+  <%= link_to chats_path, class: "nav-item" do %>
+    <span class="nav-icon">💬</span>
+    <span class="nav-label">Chat</span>
+  <% end %>
+
+  <%= link_to profile_path, class: "nav-item active" do %>
+    <span class="nav-icon">👤</span>
+    <span class="nav-label">Profile</span>
+  <% end %>
+</nav>
