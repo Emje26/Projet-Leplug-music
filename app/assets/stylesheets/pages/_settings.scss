@@ -1,223 +1,165 @@
-// ===========================================
-// ⚙️ SETTINGS PAGE - INSTAGRAM STYLE
-// ===========================================
-
-// Variables (same as profile)
-$settings-bg: #0d0d14;
-$settings-card: #16162a;
-$settings-border: rgba(191, 0, 255, 0.15);
-$settings-text: #f0f0ff;
-$settings-muted: #8080a0;
-$settings-accent: #bf00ff;
-$settings-secondary: #00f5ff;
+// ===================================================================
+// LE PLUG — SETTINGS
+// ===================================================================
 
 .settings-page {
+  background: var(--ink);
+  color: var(--paper);
   min-height: 100vh;
-  background: $settings-bg;
-  padding-bottom: 100px;
+  padding-bottom: 120px;
 }
 
-// ===========================================
-// Header
-// ===========================================
 .settings-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.25rem;
-  background: $settings-bg;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--ink-line);
   position: sticky;
   top: 0;
-  z-index: 100;
-  border-bottom: 1px solid $settings-border;
-}
+  background: var(--ink);
+  z-index: 10;
 
-.back-btn {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.75rem;
-  color: $settings-text;
-  text-decoration: none;
-  transition: all 0.2s ease;
-
-  &:hover {
-    color: $settings-accent;
-    transform: translateX(-2px);
-  }
-}
-
-.settings-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: $settings-text;
-  margin: 0;
-  text-align: center;
-}
-
-.header-spacer {
-  width: 40px;
-}
-
-// ===========================================
-// Search Bar
-// ===========================================
-.settings-search {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin: 1rem 1.25rem;
-  padding: 0.75rem 1rem;
-  background: rgba($settings-card, 0.8);
-  border-radius: 12px;
-  border: 1px solid $settings-border;
-  transition: all 0.3s ease;
-
-  &:focus-within {
-    border-color: $settings-accent;
-    box-shadow: 0 0 15px rgba($settings-accent, 0.2);
-  }
-}
-
-.search-icon {
-  font-size: 1rem;
-  opacity: 0.6;
-}
-
-.search-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  color: $settings-text;
-
-  &::placeholder {
-    color: $settings-muted;
-  }
-}
-
-// ===========================================
-// Settings Content
-// ===========================================
-.settings-content {
-  padding: 0 1.25rem;
-}
-
-// ===========================================
-// Settings Section
-// ===========================================
-.settings-section {
-  margin-bottom: 1.5rem;
-}
-
-.section-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: $settings-muted;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin: 0 0 0.75rem 0.5rem;
-}
-
-// ===========================================
-// Settings Item (FLEXBOX CLONABLE)
-// ===========================================
-.settings-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: $settings-card;
-  border-radius: 12px;
-  border: 1px solid $settings-border;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-
-  &:hover {
-    border-color: rgba($settings-accent, 0.4);
-    box-shadow: 0 0 20px rgba($settings-accent, 0.15);
-    transform: translateX(4px);
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-.item-icon {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  background: rgba($settings-accent, 0.1);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.item-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  min-width: 0;
-}
-
-.item-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: $settings-text;
-}
-
-.item-subtitle {
-  font-size: 0.8rem;
-  color: $settings-muted;
-  line-height: 1.4;
-}
-
-.item-arrow {
-  font-size: 1.5rem;
-  color: $settings-muted;
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-
-  .settings-item:hover & {
-    transform: translateX(4px);
-    color: $settings-accent;
-  }
-}
-
-// Variante sans sous-titre
-.settings-item--simple {
-  .item-content {
+  .back-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--ink-line);
+    display: flex;
+    align-items: center;
     justify-content: center;
+    color: var(--paper);
+    text-decoration: none;
+
+    &:hover { border-color: var(--paper); }
+  }
+
+  .settings-title {
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin: 0;
+
+    &::before { content: "\201C"; color: var(--paper-mute); }
+    &::after  { content: "\201D"; color: var(--paper-mute); }
+  }
+
+  .header-spacer { width: 38px; }
+}
+
+.settings-search {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--ink-line);
+
+  .search-box {
+    border: 1px solid var(--ink-line);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+
+    .lbl {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      color: var(--paper-mute);
+      text-transform: uppercase;
+      padding-right: 12px;
+      border-right: 1px solid var(--ink-line);
+    }
+
+    input {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--paper);
+      font-family: var(--font-body);
+      font-size: 13px;
+      padding: 0 12px;
+      height: 100%;
+
+      &::placeholder {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--paper-mute);
+      }
+    }
   }
 }
 
-// Variante avec badge/valeur à droite
-.item-value {
-  font-size: 0.9rem;
-  color: $settings-muted;
-  margin-right: 0.5rem;
+.settings-section {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ink-line);
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    padding: 0 20px 12px;
+    display: block;
+
+    &::before { content: "\201C"; }
+    &::after  { content: "\201D"; }
+  }
 }
 
-// ===========================================
-// Responsive
-// ===========================================
-@media (min-width: 768px) {
-  .settings-page {
-    max-width: 600px;
-    margin: 0 auto;
+.settings-item {
+  display: grid;
+  grid-template-columns: 24px 1fr 16px;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: background .15s ease;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover { background: var(--ink-2); }
+
+  .item-icon {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--paper);
+    text-align: center;
   }
 
-  .settings-item {
-    padding: 1.25rem;
+  .item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
   }
+
+  .item-title {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  .item-subtitle {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+
+  .item-arrow {
+    font-family: var(--font-mono);
+    color: var(--paper-mute);
+    font-size: 14px;
+  }
+}
+
+// Log out row = danger style
+.settings-item.danger {
+  .item-title { color: var(--signal); }
+  .item-icon { color: var(--signal); }
 }

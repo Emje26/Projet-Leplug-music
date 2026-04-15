@@ -1,444 +1,308 @@
-// ===========================================
-// 🎨 DEVISE PAGES - CYBERPUNK STYLE
-// ===========================================
+// ===================================================================
+// LE PLUG — AUTH (sign-in / sign-up)
+// Brutalist form. No gradients. Typographic hierarchy.
+// ===================================================================
 
-// Variables
-$cyber-darkest: #0a0a0f;
-$cyber-dark: #12121a;
-$cyber-medium: #1a1a2e;
-$cyber-base: #252542;
-$cyber-light: #3d3d6b;
-
-$accent-primary: #bf00ff;
-$accent-primary-dark: #9900cc;
-$accent-secondary: #e040fb;
-$accent-tertiary: #7c4dff;
-
-$secondary: #00f5ff;
-$secondary-dark: #00c4cc;
-
-$bg-primary: #0d0d14;
-$bg-card: #16162a;
-
-$text-primary: #f0f0ff;
-$text-secondary: #c0c0e0;
-$text-muted: #8080a0;
-
-$border-color: rgba(191, 0, 255, 0.25);
-
-// ===========================================
-// 🎵 MUSIC NOTES FLOATING - SHARED
-// ===========================================
-@keyframes float-note-devise {
-  0% {
-    transform: translateY(100vh) rotate(0deg) scale(0.5);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.7;
-  }
-  90% {
-    opacity: 0.7;
-  }
-  100% {
-    transform: translateY(-100px) rotate(360deg) scale(1);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba($accent-primary, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba($accent-primary, 0.5), 0 0 60px rgba($secondary, 0.2);
-  }
-}
-
-@keyframes input-glow-anim {
-  0%, 100% {
-    border-color: $border-color;
-  }
-  50% {
-    border-color: rgba($accent-primary, 0.6);
-  }
-}
-
-// ===========================================
-// 📦 BASE PAGE CONTAINER
-// ===========================================
-.cyber-auth-page {
+.auth-page {
   min-height: 100vh;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba($accent-primary, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba($secondary, 0.1) 0%, transparent 40%),
-    linear-gradient(180deg, $bg-primary 0%, $cyber-dark 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  display: grid;
+  grid-template-columns: 1fr;
   position: relative;
   overflow: hidden;
-}
 
-// ===========================================
-// 🎵 FLOATING NOTES
-// ===========================================
-.cyber-notes-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-
-  .note {
-    position: absolute;
-    font-size: 1.5rem;
-    opacity: 0;
-    animation: float-note-devise 12s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px currentColor);
-
-    &:nth-child(1) { left: 5%; animation-delay: 0s; color: $accent-primary; }
-    &:nth-child(2) { left: 15%; animation-delay: 2s; color: $secondary; }
-    &:nth-child(3) { left: 25%; animation-delay: 4s; color: $accent-secondary; }
-    &:nth-child(4) { left: 35%; animation-delay: 1s; color: $accent-tertiary; }
-    &:nth-child(5) { left: 45%; animation-delay: 3s; color: $accent-primary; }
-    &:nth-child(6) { left: 55%; animation-delay: 5s; color: $secondary; }
-    &:nth-child(7) { left: 65%; animation-delay: 1.5s; color: $accent-secondary; }
-    &:nth-child(8) { left: 75%; animation-delay: 3.5s; color: $accent-tertiary; }
-    &:nth-child(9) { left: 85%; animation-delay: 5.5s; color: $accent-primary; }
-    &:nth-child(10) { left: 95%; animation-delay: 0.5s; color: $secondary; }
+  @media (min-width: 900px) {
+    grid-template-columns: 1.1fr 1fr;
   }
-}
 
-// ===========================================
-// 📦 CARD
-// ===========================================
-.cyber-card {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  max-width: 420px;
-  background: rgba($bg-card, 0.95);
-  border: 1px solid $border-color;
-  border-radius: 24px;
-  padding: 2.5rem 2rem;
-  backdrop-filter: blur(20px);
-  animation: pulse-glow 4s ease-in-out infinite;
-
-  // Top neon bar
   &::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, $accent-primary, $secondary);
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 0 20px rgba($accent-primary, 0.5);
+    inset: 0;
+    background-image:
+      linear-gradient(var(--ink-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ink-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.2;
+    pointer-events: none;
   }
-}
 
-// ===========================================
-// 📝 HEADER
-// ===========================================
-.cyber-header-section {
-  text-align: center;
-  margin-bottom: 2rem;
+  .auth-poster {
+    display: none;
+    position: relative;
+    border-right: 1px solid var(--ink-line);
+    padding: 40px;
 
-  .cyber-icon {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, rgba($accent-primary, 0.2), rgba($accent-tertiary, 0.2));
-    border: 2px solid $accent-primary;
-    border-radius: 20px;
+    @media (min-width: 900px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .poster-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .brand-dot { width: 10px; height: 10px; background: var(--signal); border-radius: 50%; }
+      .brand-name { font-family: var(--font-display); font-size: 20px; letter-spacing: 0.08em; }
+      .catalog { margin-left: auto; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; color: var(--paper-mute); text-transform: uppercase; }
+    }
+
+    .poster-mid {
+      .poster-catalog {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        color: var(--paper-mute);
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        display: block;
+      }
+      .poster-title {
+        font-family: var(--font-display);
+        font-size: 120px;
+        line-height: 0.85;
+        letter-spacing: 0.01em;
+        margin: 0;
+        text-transform: uppercase;
+
+        .slash { color: var(--signal); }
+      }
+      .poster-sub {
+        margin-top: 24px;
+        font-family: var(--font-body);
+        font-size: 14px;
+        line-height: 1.55;
+        color: var(--paper-dim);
+        max-width: 420px;
+      }
+    }
+
+    .poster-bottom {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      color: var(--paper-mute);
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .auth-panel {
+    position: relative;
+    z-index: 2;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    background: var(--ink);
+
+    @media (min-width: 900px) {
+      padding: 60px 56px;
+      justify-content: center;
+    }
+  }
+
+  .auth-mobile-brand {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    margin: 0 auto 1rem;
-    box-shadow: 0 0 30px rgba($accent-primary, 0.3);
+    gap: 10px;
+    margin-bottom: 40px;
+
+    @media (min-width: 900px) { display: none; }
+
+    .brand-dot { width: 10px; height: 10px; background: var(--signal); border-radius: 50%; }
+    .brand-name { font-family: var(--font-display); font-size: 20px; letter-spacing: 0.08em; }
   }
 
-  .cyber-title {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: $text-primary;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 0 20px rgba($accent-primary, 0.4);
-  }
+  .auth-heading {
+    .h-kicker {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--signal);
+      margin-bottom: 12px;
+      display: block;
 
-  .cyber-subtitle {
-    color: $text-muted;
-    font-size: 1rem;
-
-    .highlight {
-      color: $accent-primary;
-      font-weight: 600;
-    }
-  }
-}
-
-// ===========================================
-// 🔤 FORM INPUTS
-// ===========================================
-.cyber-form {
-  .form-group,
-  .input {
-    margin-bottom: 1.25rem;
-  }
-
-  label {
-    display: block;
-    color: $text-secondary;
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
-
-  input[type="email"],
-  input[type="password"],
-  input[type="text"] {
-    width: 100%;
-    padding: 1rem 1.25rem;
-    background: rgba($cyber-medium, 0.5);
-    border: 2px solid $border-color;
-    border-radius: 14px;
-    color: $text-primary;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    outline: none;
-
-    &::placeholder {
-      color: $text-muted;
+      &::before { content: "\201C"; }
+      &::after  { content: "\201D"; }
     }
 
-    &:focus {
-      border-color: $accent-primary;
-      background: rgba($cyber-medium, 0.8);
-      box-shadow:
-        0 0 0 4px rgba($accent-primary, 0.1),
-        0 0 20px rgba($accent-primary, 0.2);
+    h1 {
+      font-family: var(--font-display);
+      font-size: 52px;
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+      color: var(--paper);
+    }
+
+    p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--paper-dim);
+      margin: 0 0 32px;
+      max-width: 420px;
     }
   }
 
-  // Checkbox
-  .boolean {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+  .auth-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 24px;
+    border: 1px solid var(--ink-line);
 
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      accent-color: $accent-primary;
+    .auth-tab {
+      padding: 14px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--paper-mute);
+      background: transparent;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+
+      & + .auth-tab { border-left: 1px solid var(--ink-line); }
+
+      &:hover { color: var(--paper); }
+
+      &.active {
+        background: var(--paper);
+        color: var(--ink);
+      }
     }
+  }
+
+  .auth-form {
+    .form-inputs { display: flex; flex-direction: column; gap: 18px; margin-bottom: 24px; }
 
     label {
-      margin: 0;
-      color: $text-muted;
-      font-size: 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--paper-mute);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      height: 48px;
+      background: transparent;
+      border: 1px solid var(--ink-line);
+      padding: 0 14px;
+      color: var(--paper);
+      font-family: var(--font-body);
+      font-size: 14px;
+      outline: 0;
+      transition: border-color .15s ease;
+
+      &:focus { border-color: var(--paper); }
+      &::placeholder {
+        color: var(--paper-mute);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+      }
+    }
+
+    .form-control,
+    textarea {
+      width: 100%;
+      min-height: 48px;
+      background: transparent;
+      border: 1px solid var(--ink-line);
+      padding: 12px 14px;
+      color: var(--paper);
+      font-family: var(--font-body);
+      font-size: 14px;
+      outline: 0;
+
+      &:focus { border-color: var(--paper); }
+    }
+
+    .boolean {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--paper-dim);
+
+      input[type="checkbox"] {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--ink-line);
+        background: transparent;
+        cursor: pointer;
+        position: relative;
+
+        &:checked {
+          background: var(--signal);
+          border-color: var(--signal);
+        }
+      }
+    }
+
+    .auth-submit {
+      width: 100%;
+      height: 52px;
+      background: var(--signal);
+      color: #000;
+      border: 0;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .15s ease;
+
+      &:hover { background: var(--paper); }
     }
   }
 
-  // Hint text
-  .hint,
-  .form-text {
-    color: $text-muted;
-    font-size: 0.8rem;
-    margin-top: 0.5rem;
-  }
-
-  // Error messages
-  .invalid-feedback,
-  .error {
-    color: #ff4757;
-    font-size: 0.85rem;
-    margin-top: 0.25rem;
-  }
-}
-
-// ===========================================
-// 🔘 BUTTONS
-// ===========================================
-.cyber-btn {
-  display: block;
-  width: 100%;
-  padding: 1rem 2rem;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: $text-primary;
-  text-decoration: none;
-  background: linear-gradient(135deg, $accent-primary 0%, $accent-primary-dark 100%);
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow:
-    0 4px 20px rgba($accent-primary, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  margin-top: 1.5rem;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 8px 30px rgba($accent-primary, 0.5),
-      0 0 50px rgba($accent-primary, 0.2);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-}
-
-.cyber-btn-danger {
-  background: linear-gradient(135deg, #ff4757 0%, #c0392b 100%);
-  box-shadow: 0 4px 20px rgba(255, 71, 87, 0.3);
-  margin-top: 1rem;
-  font-size: 0.9rem;
-
-  &:hover {
-    box-shadow: 0 8px 30px rgba(255, 71, 87, 0.4);
-  }
-}
-
-// ===========================================
-// 🔗 LINKS
-// ===========================================
-.cyber-links {
-  text-align: center;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid $border-color;
-
-  a {
-    color: $accent-primary;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.2s ease;
-
-    &:hover {
-      color: $secondary;
-      text-shadow: 0 0 10px rgba($secondary, 0.5);
-    }
-  }
-
-  span {
-    color: $text-muted;
-    font-size: 0.9rem;
-  }
-}
-
-// ===========================================
-// 📏 DIVIDER
-// ===========================================
-.cyber-divider {
-  display: flex;
-  align-items: center;
-  margin: 2rem 0;
-
-  &::before,
-  &::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, $border-color, transparent);
-  }
-
-  span {
-    padding: 0 1rem;
-    color: $text-muted;
-    font-size: 0.85rem;
+  .auth-links {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--ink-line);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-}
-
-// ===========================================
-// 🛡️ SECURITY BADGE
-// ===========================================
-.cyber-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  background: rgba($cyber-medium, 0.3);
-  border-radius: 10px;
-  border: 1px solid rgba($secondary, 0.2);
-
-  .badge-icon {
-    font-size: 1rem;
-  }
-
-  .badge-text {
-    color: $text-muted;
-    font-size: 0.8rem;
-  }
-}
-
-// ===========================================
-// 🎹 TABS (Sign in / Sign up)
-// ===========================================
-.cyber-tabs {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-
-  .cyber-tab {
-    flex: 1;
-    padding: 1rem;
-    text-align: center;
-    color: $text-muted;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 12px;
-    background: rgba($cyber-medium, 0.3);
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
-
-    &:hover {
-      color: $text-secondary;
-      background: rgba($cyber-medium, 0.5);
-    }
-
-    &.active {
-      color: $text-primary;
-      background: rgba($accent-primary, 0.15);
-      border-color: $accent-primary;
-      box-shadow: 0 0 20px rgba($accent-primary, 0.2);
-    }
-  }
-}
-
-// ===========================================
-// 📱 RESPONSIVE
-// ===========================================
-@media (max-width: 480px) {
-  .cyber-card {
-    padding: 2rem 1.5rem;
-    border-radius: 20px;
-  }
-
-  .cyber-header-section {
-    .cyber-title {
-      font-size: 1.75rem;
-    }
-  }
-
-  .cyber-tabs {
+    color: var(--paper-mute);
+    display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 10px;
+
+    a { color: var(--signal); text-decoration: none; &:hover { color: var(--paper); } }
+  }
+
+  .auth-badge {
+    margin-top: 32px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
   }
 }
