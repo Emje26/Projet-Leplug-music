@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: Projet-Leplug-music
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec rails server -b 0.0.0.0 -p $PORT"
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: RENDER
+        value: "true"

@@ -10,9 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_12_161107) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_15_120004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "bookable_type", null: false
+    t.bigint "bookable_id", null: false
+    t.date "date", null: false
+    t.time "start_time"
+    t.time "end_time"
+    t.decimal "duration_hours", precision: 4, scale: 1
+    t.decimal "subtotal", precision: 8, scale: 2
+    t.decimal "service_fee", precision: 8, scale: 2
+    t.decimal "total", precision: 8, scale: 2
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bookable_type", "bookable_id"], name: "index_bookings_on_bookable"
+    t.index ["status"], name: "index_bookings_on_status"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
 
   create_table "meal_plans", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -60,6 +79,59 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_12_161107) do
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "reviewable_type", null: false
+    t.bigint "reviewable_id", null: false
+    t.integer "rating", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "studios", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.text "description"
+    t.string "address"
+    t.string "city"
+    t.decimal "price_per_hour", precision: 8, scale: 2
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
+    t.decimal "rating", precision: 3, scale: 2, default: "0.0"
+    t.integer "reviews_count", default: 0
+    t.string "category"
+    t.jsonb "equipment", default: []
+    t.string "cover_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category"], name: "index_studios_on_category"
+    t.index ["city"], name: "index_studios_on_city"
+    t.index ["user_id"], name: "index_studios_on_user_id"
+  end
+
+  create_table "talents", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.string "specialty"
+    t.jsonb "genres", default: []
+    t.decimal "hourly_rate", precision: 8, scale: 2
+    t.text "description"
+    t.string "portfolio_url"
+    t.string "city"
+    t.decimal "rating", precision: 3, scale: 2, default: "0.0"
+    t.integer "reviews_count", default: 0
+    t.boolean "available", default: true
+    t.string "cover_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city"], name: "index_talents_on_city"
+    t.index ["specialty"], name: "index_talents_on_specialty"
+    t.index ["user_id"], name: "index_talents_on_user_id"
+  end
+
   create_table "user_preferences", force: :cascade do |t|
     t.integer "age"
     t.string "gender"
@@ -88,8 +160,12 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_12_161107) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "users"
   add_foreign_key "meal_plans", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "recipes", "users"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "studios", "users"
+  add_foreign_key "talents", "users"
   add_foreign_key "user_preferences", "users"
 end
