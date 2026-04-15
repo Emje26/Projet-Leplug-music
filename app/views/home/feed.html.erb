@@ -1,0 +1,160 @@
+<%
+  categories   = ["POUR TOI", "RAP FR", "AFRO", "DRILL", "R&B", "JAZZ FUSION", "ELECTRO"]
+  hero_artist  = { name: "YASSINE",  city: "Paris 18e",     plugs: "847",  track: "Minuit à Barbès", time: "02:34" }
+  live_artists = [
+    { name: "AMIRA K.", genre: "R&B",  city: "Marseille", plugs: "234" },
+    { name: "DJIBRIL",  genre: "Drill", city: "Lyon",      plugs: "189" }
+  ]
+  trending = [
+    { rank: "01", name: "SOLÈNE B.", sub: "Pop urbaine · Nantes",    delta: "+312%" },
+    { rank: "02", name: "KARIM O.",  sub: "Rap · Toulouse",          delta: "+187%" },
+    { rank: "03", name: "NINA F.",   sub: "Jazz fusion · Bordeaux",  delta: "+156%" },
+    { rank: "04", name: "THÉO R.",   sub: "Electro · Lille",         delta: "+142%" },
+    { rank: "05", name: "MAYA B.",   sub: "Afrobeats · Paris 19e",   delta: "+128%" }
+  ]
+  new_talents = [
+    { name: "PROD.X",  city: "MTL" },
+    { name: "LUNA",    city: "PAR" },
+    { name: "JAY.B",   city: "LIL" },
+    { name: "MELODIE", city: "LYN" },
+    { name: "WAVE",    city: "MRS" },
+    { name: "TEMPO",   city: "REN" },
+    { name: "KEYS",    city: "NTE" },
+    { name: "MC FLOW", city: "BDX" }
+  ]
+  drops = [
+    { catalog: "№ 001/24", artist: "@new_talent_1", title: "ALPHA WAVE",  plays: "12K" },
+    { catalog: "№ 002/24", artist: "@new_talent_2", title: "GHOST TRAIN", plays: "24K" },
+    { catalog: "№ 003/24", artist: "@new_talent_3", title: "PARALLAX",    plays: "36K" },
+    { catalog: "№ 004/24", artist: "@new_talent_4", title: "LOW TIDE",    plays: "48K" }
+  ]
+%>
+
+<div class="feed-page">
+
+  <header class="feed-topbar">
+    <div>
+      <div class="brand">LE PLUG</div>
+      <span class="brand-sub">"FEED" / INDEX</span>
+    </div>
+    <div class="topbar-actions">
+      <%= link_to search_path, class: "icon-btn", "aria-label": "Search" do %>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="21" y1="21" x2="16.5" y2="16.5"/>
+        </svg>
+      <% end %>
+      <button class="icon-btn" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2h16l-2-2z"/>
+          <path d="M10 20a2 2 0 0 0 4 0"/>
+        </svg>
+        <span class="dot"></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="feed-tabs">
+    <% categories.each_with_index do |c, i| %>
+      <button class="feed-tab <%= 'active' if i == 0 %>"><%= c %></button>
+    <% end %>
+  </nav>
+
+  <div class="section-head">
+    <h2 class="section-title">NOUVEAU</h2>
+    <a class="section-link" href="#">SEE ALL →</a>
+  </div>
+
+  <article class="hero-card">
+    <div class="hero-tag">NOUVEAU</div>
+    <div class="hero-catalog">№ 847 / 24 · 18E</div>
+
+    <div class="hero-meta">
+      <h1 class="hero-name"><%= hero_artist[:name] %></h1>
+      <p class="hero-sub"><%= hero_artist[:city] %> · <%= hero_artist[:plugs] %> "PLUGS"</p>
+
+      <div class="hero-track">
+        <button class="play">▶</button>
+        <div class="track-info">
+          <span class="t-name"><%= hero_artist[:track] %></span>
+          <span class="t-time"><%= hero_artist[:time] %></span>
+        </div>
+        <div class="eq"><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </article>
+
+  <div class="section-head">
+    <h2 class="section-title">EN DIRECT</h2>
+    <a class="section-link" href="#">ALL LIVES →</a>
+  </div>
+
+  <div class="live-grid">
+    <% live_artists.each do |a| %>
+      <article class="live-card">
+        <div class="live-badge"><span class="pulse"></span>LIVE</div>
+        <div>
+          <h3 class="live-name"><%= a[:name] %></h3>
+          <div class="live-genre"><%= a[:genre] %> · <%= a[:city] %></div>
+          <div class="live-plugs"><%= a[:plugs] %> "PLUGS"</div>
+        </div>
+      </article>
+    <% end %>
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-title">TENDANCES</h2>
+    <a class="section-link" href="#">VOIR TOUT →</a>
+  </div>
+
+  <div class="trend-list">
+    <% trending.each do |t| %>
+      <div class="trend-row">
+        <span class="trend-rank"><%= t[:rank] %></span>
+        <div class="trend-cover"></div>
+        <div>
+          <h4 class="trend-name"><%= t[:name] %></h4>
+          <div class="trend-sub"><%= t[:sub] %></div>
+        </div>
+        <span class="trend-delta"><%= t[:delta] %></span>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-title">NEW TALENTS</h2>
+    <a class="section-link" href="#">DISCOVER →</a>
+  </div>
+
+  <div class="artist-row">
+    <% new_talents.each do |a| %>
+      <div class="artist-chip">
+        <div class="a-cover"></div>
+        <span class="a-name"><%= a[:name] %></span>
+        <span class="a-city"><%= a[:city] %></span>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-title">DROPS</h2>
+    <a class="section-link" href="#">FEED →</a>
+  </div>
+
+  <div class="drops-grid">
+    <% drops.each do |d| %>
+      <article class="drop-card">
+        <span class="drop-catalog"><%= d[:catalog] %></span>
+        <span class="drop-plays">▶ <%= d[:plays] %></span>
+        <div class="drop-meta">
+          <span class="drop-artist"><%= d[:artist] %></span>
+          <h4 class="drop-title"><%= d[:title] %></h4>
+        </div>
+        <button class="drop-play">▶</button>
+      </article>
+    <% end %>
+  </div>
+
+</div>
+
+<%= render "shared/bottom_nav", active: :feed %>

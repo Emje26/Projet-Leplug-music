@@ -1,251 +1,55 @@
-<% if user_signed_in? %>
-  <%
-    categories   = ["POUR TOI", "RAP FR", "AFRO", "DRILL", "R&B", "JAZZ FUSION", "ELECTRO"]
-    hero_artist  = { name: "YASSINE",  city: "Paris 18e",     plugs: "847",  track: "Minuit à Barbès", time: "02:34" }
-    live_artists = [
-      { name: "AMIRA K.", genre: "R&B",  city: "Marseille", plugs: "234" },
-      { name: "DJIBRIL",  genre: "Drill", city: "Lyon",      plugs: "189" }
-    ]
-    trending = [
-      { rank: "01", name: "SOLÈNE B.", sub: "Pop urbaine · Nantes",    delta: "+312%" },
-      { rank: "02", name: "KARIM O.",  sub: "Rap · Toulouse",          delta: "+187%" },
-      { rank: "03", name: "NINA F.",   sub: "Jazz fusion · Bordeaux",  delta: "+156%" },
-      { rank: "04", name: "THÉO R.",   sub: "Electro · Lille",         delta: "+142%" },
-      { rank: "05", name: "MAYA B.",   sub: "Afrobeats · Paris 19e",   delta: "+128%" }
-    ]
-    new_talents = [
-      { name: "PROD.X",    city: "MTL" },
-      { name: "LUNA",      city: "PAR" },
-      { name: "JAY.B",     city: "LIL" },
-      { name: "MELODIE",   city: "LYN" },
-      { name: "WAVE",      city: "MRS" },
-      { name: "TEMPO",     city: "REN" },
-      { name: "KEYS",      city: "NTE" },
-      { name: "MC FLOW",   city: "BDX" }
-    ]
-    drops = [
-      { catalog: "№ 001/24", artist: "@new_talent_1", title: "ALPHA WAVE",  plays: "12K" },
-      { catalog: "№ 002/24", artist: "@new_talent_2", title: "GHOST TRAIN", plays: "24K" },
-      { catalog: "№ 003/24", artist: "@new_talent_3", title: "PARALLAX",    plays: "36K" },
-      { catalog: "№ 004/24", artist: "@new_talent_4", title: "LOW TIDE",    plays: "48K" }
-    ]
-  %>
+<%# NB: logged-in users never reach this template — HomeController#index
+    redirects them to search_path. This template is for the landing only. %>
 
-  <div class="feed-page">
+<div class="plug-landing">
+  <header class="landing-topbar">
+    <div class="lt-left">
+      <span class="lt-dot"></span>
+      <span class="lt-brand">LE PLUG</span>
+    </div>
+    <span class="lt-right">C/O "MUSIC" — <%= Date.today.year %></span>
+  </header>
 
-    <!-- ============ TOPBAR ============ -->
-    <header class="feed-topbar">
-      <div>
-        <div class="brand">LE PLUG</div>
-        <span class="brand-sub">"FEED" / INDEX</span>
+  <section class="landing-body">
+    <span class="catalog-code">№ 001 · MANIFESTO</span>
+    <h1 class="landing-title">
+      DÉMOCRATISER<br>
+      LA <span class="slash">/MUSIQUE/</span>
+    </h1>
+    <p class="landing-sub">
+      Une plateforme construite pour les artistes qui <strong>créent</strong>,
+      pas pour ceux qui ont déjà une équipe marketing. Tu te "plug", tu partages,
+      tu rencontres des producteurs, des ingés son, d'autres artistes. L'algorithme
+      te sert — pas l'inverse.
+    </p>
+
+    <div class="landing-actions">
+      <%= link_to "PLUG IN →", new_user_registration_path, class: "btn-signal" %>
+      <%= link_to "\"LOGIN\"",  new_user_session_path,      class: "btn-ghost" %>
+    </div>
+
+    <div class="landing-manifest">
+      <div class="manifest-item">
+        <span class="mn-num">№ 01</span>
+        <div class="mn-head">"PLUG"</div>
+        <p class="mn-text">Remplace le follow. Plus organique, plus social, plus street. Tu te plug à un son, pas à une marque.</p>
       </div>
-      <div class="topbar-actions">
-        <button class="icon-btn" aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <circle cx="11" cy="11" r="7"/>
-            <line x1="21" y1="21" x2="16.5" y2="16.5"/>
-          </svg>
-        </button>
-        <button class="icon-btn" aria-label="Notifications">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2h16l-2-2z"/>
-            <path d="M10 20a2 2 0 0 0 4 0"/>
-          </svg>
-          <span class="dot"></span>
-        </button>
+      <div class="manifest-item">
+        <span class="mn-num">№ 02</span>
+        <div class="mn-head">"REACH"</div>
+        <p class="mn-text">Pas de pay-to-play. Pas d'algorithme qui privilégie les gros comptes. Tout le monde démarre sur la même ligne.</p>
       </div>
-    </header>
-
-    <!-- ============ CATEGORIES ============ -->
-    <nav class="feed-tabs">
-      <% categories.each_with_index do |c, i| %>
-        <button class="feed-tab <%= 'active' if i == 0 %>"><%= c %></button>
-      <% end %>
-    </nav>
-
-    <!-- ============ HERO / NOUVEAU ============ -->
-    <div class="section-head">
-      <h2 class="section-title">NOUVEAU</h2>
-      <a class="section-link" href="#">SEE ALL →</a>
-    </div>
-
-    <article class="hero-card">
-      <div class="hero-tag">NOUVEAU</div>
-      <div class="hero-catalog">№ 847 / 24 · 18E</div>
-
-      <div class="hero-meta">
-        <h1 class="hero-name"><%= hero_artist[:name] %></h1>
-        <p class="hero-sub"><%= hero_artist[:city] %> · <%= hero_artist[:plugs] %> "PLUGS"</p>
-
-        <div class="hero-track">
-          <button class="play">▶</button>
-          <div class="track-info">
-            <span class="t-name"><%= hero_artist[:track] %></span>
-            <span class="t-time"><%= hero_artist[:time] %></span>
-          </div>
-          <div class="eq"><span></span><span></span><span></span><span></span></div>
-        </div>
+      <div class="manifest-item">
+        <span class="mn-num">№ 03</span>
+        <div class="mn-head">"LINK"</div>
+        <p class="mn-text">Contacte des ingés son, trouve un feat, envoie tes sons à des labels. Tous les outils pro, zéro intermédiaire.</p>
       </div>
-    </article>
-
-    <!-- ============ LIVE ============ -->
-    <div class="section-head">
-      <h2 class="section-title">EN DIRECT</h2>
-      <a class="section-link" href="#">ALL LIVES →</a>
     </div>
+  </section>
 
-    <div class="live-grid">
-      <% live_artists.each do |a| %>
-        <article class="live-card">
-          <div class="live-badge"><span class="pulse"></span>LIVE</div>
-          <div>
-            <h3 class="live-name"><%= a[:name] %></h3>
-            <div class="live-genre"><%= a[:genre] %> · <%= a[:city] %></div>
-            <div class="live-plugs"><%= a[:plugs] %> "PLUGS"</div>
-          </div>
-        </article>
-      <% end %>
-    </div>
-
-    <!-- ============ TRENDING ============ -->
-    <div class="section-head">
-      <h2 class="section-title">TENDANCES</h2>
-      <a class="section-link" href="#">VOIR TOUT →</a>
-    </div>
-
-    <div class="trend-list">
-      <% trending.each do |t| %>
-        <div class="trend-row">
-          <span class="trend-rank"><%= t[:rank] %></span>
-          <div class="trend-cover"></div>
-          <div>
-            <h4 class="trend-name"><%= t[:name] %></h4>
-            <div class="trend-sub"><%= t[:sub] %></div>
-          </div>
-          <span class="trend-delta"><%= t[:delta] %></span>
-        </div>
-      <% end %>
-    </div>
-
-    <!-- ============ NEW TALENTS (horizontal) ============ -->
-    <div class="section-head">
-      <h2 class="section-title">NEW TALENTS</h2>
-      <a class="section-link" href="#">DISCOVER →</a>
-    </div>
-
-    <div class="artist-row">
-      <% new_talents.each do |a| %>
-        <div class="artist-chip">
-          <div class="a-cover"></div>
-          <span class="a-name"><%= a[:name] %></span>
-          <span class="a-city"><%= a[:city] %></span>
-        </div>
-      <% end %>
-    </div>
-
-    <!-- ============ DROPS ============ -->
-    <div class="section-head">
-      <h2 class="section-title">DROPS</h2>
-      <a class="section-link" href="#">FEED →</a>
-    </div>
-
-    <div class="drops-grid">
-      <% drops.each do |d| %>
-        <article class="drop-card">
-          <span class="drop-catalog"><%= d[:catalog] %></span>
-          <span class="drop-plays">▶ <%= d[:plays] %></span>
-          <div class="drop-meta">
-            <span class="drop-artist"><%= d[:artist] %></span>
-            <h4 class="drop-title"><%= d[:title] %></h4>
-          </div>
-          <button class="drop-play">▶</button>
-        </article>
-      <% end %>
-    </div>
-
-  </div>
-
-  <!-- ============ BOTTOM NAV ============ -->
-  <nav class="bottom-nav">
-    <%= link_to root_path, class: "nav-item active" do %>
-      <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/></svg>
-      <span>FEED</span>
-    <% end %>
-
-    <a class="nav-item" href="#">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
-      <span>SEARCH</span>
-    </a>
-
-    <div class="nav-item nav-drop">
-      <button class="drop-btn" aria-label="Drop">+</button>
-    </div>
-
-    <%= link_to chats_path, class: "nav-item" do %>
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <span>DMS</span>
-    <% end %>
-
-    <%= link_to profile_path, class: "nav-item" do %>
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
-      <span>ME</span>
-    <% end %>
-  </nav>
-
-<% else %>
-  <!-- ========================================================== -->
-  <!-- LANDING — logged out -->
-  <!-- ========================================================== -->
-  <div class="plug-landing">
-    <header class="landing-topbar">
-      <div class="lt-left">
-        <span class="lt-dot"></span>
-        <span class="lt-brand">LE PLUG</span>
-      </div>
-      <span class="lt-right">C/O "MUSIC" — <%= Date.today.year %></span>
-    </header>
-
-    <section class="landing-body">
-      <span class="catalog-code">№ 001 · MANIFESTO</span>
-      <h1 class="landing-title">
-        DÉMOCRATISER<br>
-        LA <span class="slash">/MUSIQUE/</span>
-      </h1>
-      <p class="landing-sub">
-        Une plateforme construite pour les artistes qui <strong>créent</strong>,
-        pas pour ceux qui ont déjà une équipe marketing. Tu te "plug", tu partages,
-        tu rencontres des producteurs, des ingés son, d'autres artistes. L'algorithme
-        te sert — pas l'inverse.
-      </p>
-
-      <div class="landing-actions">
-        <%= link_to "PLUG IN →", new_user_registration_path, class: "btn-signal" %>
-        <%= link_to "\"LOGIN\"",  new_user_session_path,      class: "btn-ghost" %>
-      </div>
-
-      <div class="landing-manifest">
-        <div class="manifest-item">
-          <span class="mn-num">№ 01</span>
-          <div class="mn-head">"PLUG"</div>
-          <p class="mn-text">Remplace le follow. Plus organique, plus social, plus street. Tu te plug à un son, pas à une marque.</p>
-        </div>
-        <div class="manifest-item">
-          <span class="mn-num">№ 02</span>
-          <div class="mn-head">"REACH"</div>
-          <p class="mn-text">Pas de pay-to-play. Pas d'algorithme qui privilégie les gros comptes. Tout le monde démarre sur la même ligne.</p>
-        </div>
-        <div class="manifest-item">
-          <span class="mn-num">№ 03</span>
-          <div class="mn-head">"LINK"</div>
-          <p class="mn-text">Contacte des ingés son, trouve un feat, envoie tes sons à des labels. Tous les outils pro, zéro intermédiaire.</p>
-        </div>
-      </div>
-    </section>
-
-    <footer class="landing-footer">
-      <span>"MADE IN LE WAGON"</span>
-      <span class="marquee">● LIVE · 2.1K ARTISTS PLUGGED</span>
-      <span>V.1.0</span>
-    </footer>
-  </div>
-<% end %>
+  <footer class="landing-footer">
+    <span>"MADE IN LE WAGON"</span>
+    <span class="marquee">● LIVE · 2.1K ARTISTS PLUGGED</span>
+    <span>V.1.0</span>
+  </footer>
+</div>

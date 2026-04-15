@@ -14,8 +14,14 @@
   <body class="bg-dark">
     <%= link_to "Skip to main content", "#main-content", class: "visually-hidden-focusable" %>
 
-    <% # Hide navbar when in the logged-in app shell — those pages have their own headers. %>
-    <% show_global_nav = !user_signed_in? && !(controller_name == 'home' && action_name == 'index') && !(controller_path.start_with?('devise')) %>
+    <%
+      # Global top navbar is only rendered for anonymous visitors, and only
+      # outside of the landing page, devise flows and the (rare) logged-out
+      # feed fallback. Logged-in users get per-screen headers.
+      on_landing = controller_name == 'home' && action_name == 'index'
+      in_devise  = controller_path.start_with?('devise')
+      show_global_nav = !user_signed_in? && !on_landing && !in_devise
+    %>
     <% if show_global_nav %>
       <%= render "shared/navbar" %>
     <% end %>

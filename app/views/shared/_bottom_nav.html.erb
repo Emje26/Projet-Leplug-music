@@ -1,0 +1,31 @@
+<%# Shared bottom nav for the logged-in app shell.
+    Usage: <%%= render "shared/bottom_nav", active: :search %>
+    Valid keys: :search, :feed, :dms, :me, nil
+%>
+<% current = local_assigns[:active] %>
+
+<nav class="bottom-nav">
+  <%= link_to search_path, class: "nav-item #{'active' if current == :search}" do %>
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+    <span>SEARCH</span>
+  <% end %>
+
+  <%= link_to feed_path, class: "nav-item #{'active' if current == :feed}" do %>
+    <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/></svg>
+    <span>FEED</span>
+  <% end %>
+
+  <div class="nav-item nav-drop">
+    <button class="drop-btn" aria-label="Drop">+</button>
+  </div>
+
+  <%= link_to chats_path, class: "nav-item #{'active' if current == :dms}" do %>
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>DMS</span>
+  <% end %>
+
+  <%= link_to profile_path, class: "nav-item #{'active' if current == :me}" do %>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    <span>ME</span>
+  <% end %>
+</nav>

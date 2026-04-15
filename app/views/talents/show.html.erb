@@ -1,0 +1,99 @@
+<div class="studio-page">
+
+  <header class="studio-header">
+    <%= link_to search_path, class: "back-btn" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+        <path d="M15 6l-6 6 6 6"/>
+      </svg>
+    <% end %>
+    <span class="studio-hdr-handle">"TALENT" / № <%= @talent.id.to_s.rjust(3, "0") %></span>
+    <button class="icon-btn" aria-label="Share">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M4 12v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8"/>
+        <path d="M16 6l-4-4-4 4"/>
+        <line x1="12" y1="2" x2="12" y2="15"/>
+      </svg>
+    </button>
+  </header>
+
+  <section class="studio-gallery">
+    <div class="gallery-slide big">
+      <span class="gs-num">№ 01</span>
+      <span class="gs-initials"><%= @talent.initials %></span>
+    </div>
+  </section>
+
+  <section class="studio-identity">
+    <div class="si-top">
+      <span class="si-category"><%= @talent.specialty&.upcase %></span>
+      <div class="si-rating">★ <%= format("%.1f", @talent.rating) %> <span>· <%= @talent.reviews_count %> AVIS</span></div>
+    </div>
+    <h1 class="si-name"><%= @talent.name %></h1>
+    <div class="si-address"><%= @talent.city %></div>
+    <% if @talent.genres.present? %>
+      <div class="si-genres">
+        <% @talent.genres.each do |g| %>
+          <span class="equip-pill"><%= g %></span>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+
+  <section class="studio-price-card">
+    <div class="spc-left">
+      <span class="spc-label">TARIF</span>
+      <div class="spc-amount">€<%= @talent.hourly_rate.to_i %><span class="spc-unit">/H</span></div>
+    </div>
+    <%= link_to new_booking_path(bookable_type: "Talent", bookable_id: @talent.id), class: "btn-signal", style: "min-width: 180px;" do %>
+      RÉSERVER →
+    <% end %>
+  </section>
+
+  <section class="studio-desc">
+    <span class="label">"DESCRIPTION"</span>
+    <p><%= @talent.description %></p>
+  </section>
+
+  <% if @talent.portfolio_url.present? %>
+    <section class="studio-equipment">
+      <span class="label">"PORTFOLIO"</span>
+      <a href="<%= @talent.portfolio_url %>" target="_blank" rel="noopener" class="equip-pill"><%= @talent.portfolio_url %></a>
+    </section>
+  <% end %>
+
+  <section class="studio-reviews">
+    <div class="section-head" style="padding: 0 0 14px;">
+      <h2 class="section-title">AVIS</h2>
+      <span class="section-link"><%= @reviews.size %></span>
+    </div>
+
+    <% if @reviews.any? %>
+      <div class="review-list">
+        <% @reviews.each do |r| %>
+          <article class="review-card">
+            <header>
+              <span class="rc-stars"><%= "★" * r.rating %><span class="dim"><%= "★" * (5 - r.rating) %></span></span>
+              <span class="rc-user"><%= r.user.email.split('@').first.upcase %></span>
+              <time class="rc-date"><%= r.created_at.strftime("%d.%m.%y") %></time>
+            </header>
+            <p><%= r.content %></p>
+          </article>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="empty-inline">AUCUN AVIS POUR L'INSTANT.</p>
+    <% end %>
+
+    <%= form_with model: @review, url: talent_reviews_path(@talent), class: "review-form", local: true do |f| %>
+      <span class="label">"LAISSER UN AVIS"</span>
+      <div class="rf-row">
+        <%= f.select :rating, (1..5).to_a.map { |n| ["#{'★' * n} (#{n}/5)", n] }, { selected: 5 }, class: "rf-select" %>
+      </div>
+      <%= f.text_area :content, rows: 3, placeholder: "Ton expérience avec ce talent…", class: "rf-textarea" %>
+      <%= f.submit "PUBLIER L'AVIS", class: "btn-signal" %>
+    <% end %>
+  </section>
+
+</div>
+
+<%= render "shared/bottom_nav", active: :search %>

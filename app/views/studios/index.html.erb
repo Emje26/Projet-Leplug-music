@@ -1,0 +1,28 @@
+<div class="search-page results">
+  <header class="results-header">
+    <%= link_to search_path, class: "back-btn" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M15 6l-6 6 6 6"/></svg>
+    <% end %>
+    <div class="results-title-wrap">
+      <span class="results-kicker">"DIRECTORY"</span>
+      <h1 class="results-title">TOUS LES STUDIOS</h1>
+    </div>
+    <span class="header-spacer"></span>
+  </header>
+
+  <div class="results-list">
+    <% @studios.each do |s| %>
+      <%= link_to studio_path(s), class: "result-row" do %>
+        <div class="rr-cover"><span><%= s.initials %></span></div>
+        <div class="rr-body">
+          <h3 class="rr-name"><%= s.name.upcase %></h3>
+          <div class="rr-sub"><%= s.category&.upcase %> · <%= s.city %> · ★ <%= format("%.1f", s.rating) %></div>
+        </div>
+        <span class="rr-price"><%= s.display_price %></span>
+        <span class="rr-arrow">›</span>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<%= render "shared/bottom_nav", active: :search %>

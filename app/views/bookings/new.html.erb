@@ -1,0 +1,108 @@
+<% hourly = case @bookable when Studio then @bookable.price_per_hour when Talent then @bookable.hourly_rate end %>
+<% preview_subtotal    = (@booking.duration_hours.to_f * hourly.to_f).round(2) %>
+<% preview_service_fee = (preview_subtotal * Booking::SERVICE_FEE_RATE).round(2) %>
+<% preview_total       = (preview_subtotal + preview_service_fee).round(2) %>
+<% bookable_path       = @bookable.is_a?(Studio) ? studio_path(@bookable) : talent_path(@bookable) %>
+
+<div class="booking-page">
+
+  <header class="booking-header">
+    <%= link_to bookable_path, class: "back-btn" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M15 6l-6 6 6 6"/></svg>
+    <% end %>
+    <div class="booking-title-wrap">
+      <span class="booking-kicker">"RÉSERVATION"</span>
+      <h1 class="booking-title">NOUVEAU<br>BOOKING.</h1>
+    </div>
+    <span class="header-spacer"></span>
+  </header>
+
+  <!-- Bookable summary -->
+  <section class="booking-bookable">
+    <div class="bb-cover"><span><%= @bookable.initials %></span></div>
+    <div class="bb-body">
+      <span class="bb-type"><%= @bookable.is_a?(Studio) ? "\"STUDIO\"" : "\"TALENT\"" %></span>
+      <h2 class="bb-name"><%= @bookable.name.upcase %></h2>
+      <span class="bb-price">€<%= hourly.to_i %>/H</span>
+    </div>
+  </section>
+
+  <%= form_with model: @booking, url: bookings_path, local: true, class: "booking-form" do |f| %>
+    <%= f.hidden_field :bookable_type, value: @bookable.class.name %>
+    <%= f.hidden_field :bookable_id,   value: @bookable.id %>
+
+    <!-- DATE STRIP -->
+    <section class="booking-section">
+      <span class="bsec-label">"DATE"</span>
+      <div class="date-strip">
+        <% (0..6).each do |offset| %>
+          <% d = Date.today + offset + 1 %>
+          <label class="date-cell">
+            <%= f.radio_button :date, d.iso8601, checked: @booking.date == d %>
+            <div>
+              <span class="dc-dow"><%= I18n.l(d, format: "%a").upcase rescue d.strftime("%a").upcase %></span>
+              <span class="dc-num"><%= d.day %></span>
+              <span class="dc-mon"><%= d.strftime("%b").upcase %></span>
+            </div>
+          </label>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- TIMESLOT -->
+    <section class="booking-section">
+      <span class="bsec-label">"CRÉNEAU"</span>
+      <div class="slot-grid">
+        <% %w[09:00 11:00 13:00 15:00 17:00 19:00 21:00 23:00].each do |slot| %>
+          <label class="slot-cell">
+            <%= f.radio_button :start_time, slot, checked: slot == "15:00" %>
+            <span><%= slot %></span>
+          </label>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- DURATION -->
+    <section class="booking-section">
+      <span class="bsec-label">"DURÉE"</span>
+      <div class="duration-grid">
+        <% [1, 2, 3, 4, 6, 8].each do |h| %>
+          <label class="dur-cell">
+            <%= f.radio_button :duration_hours, h, checked: @booking.duration_hours.to_i == h %>
+            <span><%= h %>H</span>
+          </label>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- PREVIEW / SUMMARY -->
+    <section class="booking-section">
+      <span class="bsec-label">"RÉCAPITULATIF"</span>
+      <div class="summary-card">
+        <div class="sum-row">
+          <span class="sum-k">Sous-total</span>
+          <span class="sum-v mono">€<%= format("%.2f", preview_subtotal) %></span>
+        </div>
+        <div class="sum-row">
+          <span class="sum-k">Frais de service <span class="sum-hint">(15%)</span></span>
+          <span class="sum-v mono">€<%= format("%.2f", preview_service_fee) %></span>
+        </div>
+        <div class="sum-divider"></div>
+        <div class="sum-row total">
+          <span class="sum-k">Total</span>
+          <span class="sum-v mono">€<%= format("%.2f", preview_total) %></span>
+        </div>
+      </div>
+      <p class="booking-note">
+        NB : ce récapitulatif est basé sur la durée sélectionnée. Il sera recalculé à la confirmation.
+      </p>
+    </section>
+
+    <div class="booking-cta">
+      <%= f.submit "CONFIRMER LE BOOKING →", class: "btn-signal", style: "width: 100%; height: 54px;" %>
+    </div>
+  <% end %>
+
+</div>
+
+<%= render "shared/bottom_nav", active: :search %>
