@@ -131,6 +131,11 @@ button { font-family: inherit; color: inherit; }
 
 ::selection { background: var(--accent); color: #000; }
 
+// PWA: prevent bounce-scroll and disable text selection (feels native).
+html { overscroll-behavior: none; }
+body { -webkit-user-select: none; user-select: none; }
+.bottom-nav { padding-bottom: env(safe-area-inset-bottom); }
+
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-btn); border-radius: 0; }
