@@ -1,308 +1,170 @@
 // ===================================================================
-// LE PLUG — AUTH (sign-in / sign-up)
-// Brutalist form. No gradients. Typographic hierarchy.
+// LE PLUG — AUTH (WLR: void black, starburst, drip)
 // ===================================================================
 
 .auth-page {
   min-height: 100vh;
-  background: var(--ink);
-  color: var(--paper);
-  display: grid;
-  grid-template-columns: 1fr;
+  background: var(--void);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.auth-panel {
+  width: 100%;
+  max-width: 380px;
   position: relative;
-  overflow: hidden;
+  text-align: center;
 
-  @media (min-width: 900px) {
-    grid-template-columns: 1.1fr 1fr;
-  }
-
-  &::before {
-    content: "";
+  .auth-starburst {
     position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--ink-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--ink-line) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.2;
+    top: -45px;
+    right: -45px;
     pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
   }
 
-  .auth-poster {
-    display: none;
+  .auth-title {
+    font-family: var(--font-display);
+    font-size: 52px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+    color: var(--ink);
     position: relative;
-    border-right: 1px solid var(--ink-line);
-    padding: 40px;
-
-    @media (min-width: 900px) {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .poster-top {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      .brand-dot { width: 10px; height: 10px; background: var(--signal); border-radius: 50%; }
-      .brand-name { font-family: var(--font-display); font-size: 20px; letter-spacing: 0.08em; }
-      .catalog { margin-left: auto; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; color: var(--paper-mute); text-transform: uppercase; }
-    }
-
-    .poster-mid {
-      .poster-catalog {
-        font-family: var(--font-mono);
-        font-size: 10px;
-        letter-spacing: 0.16em;
-        color: var(--paper-mute);
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        display: block;
-      }
-      .poster-title {
-        font-family: var(--font-display);
-        font-size: 120px;
-        line-height: 0.85;
-        letter-spacing: 0.01em;
-        margin: 0;
-        text-transform: uppercase;
-
-        .slash { color: var(--signal); }
-      }
-      .poster-sub {
-        margin-top: 24px;
-        font-family: var(--font-body);
-        font-size: 14px;
-        line-height: 1.55;
-        color: var(--paper-dim);
-        max-width: 420px;
-      }
-    }
-
-    .poster-bottom {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.16em;
-      color: var(--paper-mute);
-      text-transform: uppercase;
-      display: flex;
-      justify-content: space-between;
-    }
+    z-index: 1;
   }
 
-  .auth-panel {
+  .plug-drip {
+    max-width: 200px;
+    margin: 0 auto 16px;
     position: relative;
-    z-index: 2;
-    padding: 40px 24px;
+    z-index: 1;
+  }
+
+  .auth-sub {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--text-sec);
+    margin: 0 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.auth-form {
+  text-align: left;
+  position: relative;
+  z-index: 1;
+
+  .form-inputs {
     display: flex;
     flex-direction: column;
-    background: var(--ink);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
 
-    @media (min-width: 900px) {
-      padding: 60px 56px;
-      justify-content: center;
+  label { display: none; }
+
+  .form-group { margin-bottom: 0; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  .form-control {
+    width: 100%;
+    height: 50px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0 18px;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    outline: 0;
+    transition: border-color .15s ease;
+
+    &:focus { border-color: var(--accent); }
+
+    &::placeholder {
+      color: var(--text-sec);
     }
   }
 
-  .auth-mobile-brand {
+  textarea {
+    width: 100%;
+    min-height: 50px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 18px;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    outline: 0;
+
+    &:focus { border-color: var(--accent); }
+  }
+
+  .boolean {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 40px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--text-sec);
 
-    @media (min-width: 900px) { display: none; }
+    label { display: inline; }
 
-    .brand-dot { width: 10px; height: 10px; background: var(--signal); border-radius: 50%; }
-    .brand-name { font-family: var(--font-display); font-size: 20px; letter-spacing: 0.08em; }
-  }
-
-  .auth-heading {
-    .h-kicker {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--signal);
-      margin-bottom: 12px;
-      display: block;
-
-      &::before { content: "\201C"; }
-      &::after  { content: "\201D"; }
-    }
-
-    h1 {
-      font-family: var(--font-display);
-      font-size: 52px;
-      line-height: 0.9;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      margin: 0 0 14px;
-      color: var(--paper);
-    }
-
-    p {
-      font-family: var(--font-body);
-      font-size: 14px;
-      line-height: 1.55;
-      color: var(--paper-dim);
-      margin: 0 0 32px;
-      max-width: 420px;
-    }
-  }
-
-  .auth-tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 24px;
-    border: 1px solid var(--ink-line);
-
-    .auth-tab {
-      padding: 14px;
-      text-align: center;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--paper-mute);
+    input[type="checkbox"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--border-btn);
+      border-radius: 4px;
       background: transparent;
-      text-decoration: none;
-      border: 0;
       cursor: pointer;
+      position: relative;
 
-      & + .auth-tab { border-left: 1px solid var(--ink-line); }
-
-      &:hover { color: var(--paper); }
-
-      &.active {
-        background: var(--paper);
-        color: var(--ink);
+      &:checked {
+        background: var(--accent);
+        border-color: var(--accent);
       }
     }
   }
 
-  .auth-form {
-    .form-inputs { display: flex; flex-direction: column; gap: 18px; margin-bottom: 24px; }
-
-    label {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--paper-mute);
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      height: 48px;
-      background: transparent;
-      border: 1px solid var(--ink-line);
-      padding: 0 14px;
-      color: var(--paper);
-      font-family: var(--font-body);
-      font-size: 14px;
-      outline: 0;
-      transition: border-color .15s ease;
-
-      &:focus { border-color: var(--paper); }
-      &::placeholder {
-        color: var(--paper-mute);
-        font-family: var(--font-mono);
-        font-size: 10px;
-        letter-spacing: 0.1em;
-      }
-    }
-
-    .form-control,
-    textarea {
-      width: 100%;
-      min-height: 48px;
-      background: transparent;
-      border: 1px solid var(--ink-line);
-      padding: 12px 14px;
-      color: var(--paper);
-      font-family: var(--font-body);
-      font-size: 14px;
-      outline: 0;
-
-      &:focus { border-color: var(--paper); }
-    }
-
-    .boolean {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--paper-dim);
-
-      input[type="checkbox"] {
-        appearance: none;
-        width: 16px;
-        height: 16px;
-        border: 1px solid var(--ink-line);
-        background: transparent;
-        cursor: pointer;
-        position: relative;
-
-        &:checked {
-          background: var(--signal);
-          border-color: var(--signal);
-        }
-      }
-    }
-
-    .auth-submit {
-      width: 100%;
-      height: 52px;
-      background: var(--signal);
-      color: #000;
-      border: 0;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background .15s ease;
-
-      &:hover { background: var(--paper); }
-    }
-  }
-
-  .auth-links {
-    margin-top: 28px;
-    padding-top: 20px;
-    border-top: 1px solid var(--ink-line);
+  .hint {
     font-family: var(--font-mono);
     font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--paper-mute);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    a { color: var(--signal); text-decoration: none; &:hover { color: var(--paper); } }
+    color: var(--text-ter);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
   }
 
-  .auth-badge {
-    margin-top: 32px;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--paper-mute);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  .auth-submit {
+    width: 100%;
+    height: 52px;
+    margin-top: 4px;
+  }
+}
 
-    .dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
+.auth-links {
+  margin-top: 28px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-sec);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+
+  a {
+    color: var(--accent);
+    &:hover { color: var(--ink); }
   }
 }
