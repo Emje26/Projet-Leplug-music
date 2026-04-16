@@ -54,35 +54,11 @@
 }
 
 // ===================================================================
-// LIGHT MODE
+// LIGHT MODE — disabled by default. Activate only via body.light-mode.
+// The @media prefers-color-scheme was causing the app to render in
+// crème/terracotta when the user's OS was in light mode, which broke
+// the dark-first WLR design. Now dark is ALWAYS the default.
 // ===================================================================
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --accent:     #C45A3C;
-    --accent-rgb: 196, 90, 60;
-
-    --void:       #F2EDE4;
-    --surface:    #FFFFFF;
-    --card:       #E8DFD2;
-    --ink:        #1A1A1A;
-    --green:      #16A34A;
-
-    --text-sec:   rgba(0,0,0,0.3);
-    --text-ter:   rgba(0,0,0,0.15);
-    --border:     rgba(0,0,0,0.04);
-    --border-btn: rgba(0,0,0,0.12);
-
-    --ink-2:      #FFFFFF;
-    --ink-3:      #E8DFD2;
-    --ink-line:   rgba(0,0,0,0.04);
-    --paper:      #1A1A1A;
-    --paper-dim:  rgba(0,0,0,0.3);
-    --paper-mute: rgba(0,0,0,0.15);
-    --signal:     #C45A3C;
-    --signal-dim: #A0452E;
-  }
-}
 
 body.light-mode {
   --accent:     #C45A3C;
@@ -113,8 +89,10 @@ body.light-mode {
 * { box-sizing: border-box; }
 
 html, body {
-  background: var(--void);
-  color: var(--ink);
+  background: #000 !important;
+  background: var(--void) !important;
+  color: #fff !important;
+  color: var(--ink) !important;
   font-family: var(--font-body);
   font-size: 15px;
   line-height: 1.5;

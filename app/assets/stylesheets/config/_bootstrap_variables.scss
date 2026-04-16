@@ -1,28 +1,33 @@
-// This is where you override default Bootstrap variables
-// 1. Find all Bootstrap variables that you can override at the end of each component's documentation under the `Sass variables` anchor
-// e.g. here are the ones you can override for the navbar https://getbootstrap.com/docs/5.3/components/navbar/#sass-variables
-// 2. These variables are defined with default value (see https://robots.thoughtbot.com/sass-default)
-// 3. You can override them below!
+// Bootstrap variable overrides for WLR dark-first design.
+// These SCSS vars are evaluated at compile time, before CSS custom
+// properties exist, so they must use the static dark-mode values.
 
-// General style
 $font-family-sans-serif: $body-font;
 $headings-font-family:   $headers-font;
-$body-bg:                $light-gray;
+$body-bg:                #000000;
+$body-color:             #FFFFFF;
 $font-size-base:         1rem;
 
 // Colors
-$body-color: $gray;
-$primary:    $blue;
+$primary:    $signal;
 $success:    $green;
 $info:       $yellow;
 $danger:     $red;
-$warning:    $orange;
+$warning:    $signal;
+
+// Override Bootstrap card defaults so they don't leak white backgrounds
+$card-bg:                transparent;
+$card-border-color:      transparent;
+$card-color:             #FFFFFF;
 
 // Buttons & inputs' radius
-$border-radius-sm:            .0625rem;
-$border-radius:               .125rem;
-$border-radius-lg:            .25rem;
-$border-radius-xl:            .5rem;
-$border-radius-xxl:           1rem;
+$border-radius-sm:       .5rem;
+$border-radius:          .75rem;
+$border-radius-lg:       1rem;
+$border-radius-xl:       1rem;
+$border-radius-xxl:      1rem;
 
-// Override other variables below!
+// Kill Bootstrap's default box-shadow on inputs/buttons
+$input-btn-focus-box-shadow: none;
+$input-focus-box-shadow:     none;
+$btn-focus-box-shadow:       none;

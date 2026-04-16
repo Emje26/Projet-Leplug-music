@@ -57,7 +57,6 @@
             <span class="sc-initials"><%= s.initials %></span>
             <% if i == 0 %>
               <span class="sc-featured q">FEATURED</span>
-              <div class="sc-starburst"><%= render "shared/starburst", size: :mini %></div>
             <% end %>
             <span class="sc-category q"><%= s.category&.upcase %></span>
           </div>
@@ -83,7 +82,7 @@
         <%= link_to talent_path(t), class: "studio-card talent" do %>
           <div class="sc-cover">
             <span class="sc-initials"><%= t.initials %></span>
-            <div class="sc-starburst"><%= render "shared/starburst", size: :mini %></div>
+
             <span class="sc-category"><%= t.specialty&.upcase %></span>
           </div>
           <div class="sc-body">
