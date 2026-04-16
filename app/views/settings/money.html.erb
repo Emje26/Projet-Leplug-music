@@ -1,0 +1,92 @@
+<div class="money-page">
+
+  <!-- HEADER -->
+  <header class="money-header">
+    <%= link_to profile_settings_path, class: "money-back" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18">
+        <path d="M15 6l-6 6 6 6"/>
+      </svg>
+    <% end %>
+    <div class="money-header-title">
+      <h1 class="q">ARGENT</h1>
+    </div>
+    <div class="money-header-spacer"></div>
+  </header>
+  <%= render "shared/drip" %>
+
+  <!-- BALANCE CARD -->
+  <section class="money-balance-card">
+    <div class="mbc-starburst">
+      <%= render "shared/starburst", size: :mini %>
+    </div>
+    <div class="mbc-bills">
+      <%= render "shared/laser_bills" %>
+    </div>
+    <div class="mbc-content">
+      <span class="mbc-label q">SOLDE DISPONIBLE</span>
+      <div class="mbc-amount">
+        <span class="mbc-main">€247</span><span class="mbc-cents">.80</span>
+      </div>
+      <span class="mbc-badge">+34.2%</span>
+    </div>
+  </section>
+
+  <!-- RETIRER -->
+  <div class="money-withdraw">
+    <a href="#" class="btn-signal" style="width: 100%;">RETIRER</a>
+  </div>
+  <%= render "shared/drip" %>
+
+  <!-- SOURCES GRID -->
+  <section class="money-sources">
+    <span class="money-section-label q">SOURCES</span>
+    <div class="money-sources-grid">
+      <% [
+        { label: "ÉCOUTES", amount: "€142", pct: 57 },
+        { label: "PLUGS",   amount: "€68",  pct: 27 },
+        { label: "TIPS",    amount: "€25",  pct: 10 },
+        { label: "COLLABS", amount: "€12",  pct: 5 }
+      ].each do |src| %>
+        <div class="money-source-card">
+          <span class="msc-label"><%= src[:label] %></span>
+          <span class="msc-amount"><%= src[:amount] %></span>
+          <div class="msc-bar">
+            <div class="msc-bar-fill" style="width: <%= src[:pct] %>%;"></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- TRANSACTIONS -->
+  <section class="money-transactions">
+    <span class="money-section-label q">TRANSACTIONS</span>
+    <% [
+      { label: "Écoutes Spotify",   amount: "+€24.50",  date: "12 AVR", type: :income },
+      { label: "Plug @marwa.beats", amount: "+€12.00",  date: "11 AVR", type: :income },
+      { label: "Retrait bancaire",  amount: "-€100.00", date: "10 AVR", type: :expense },
+      { label: "Tip @djfade",       amount: "+€5.00",   date: "09 AVR", type: :income },
+      { label: "Collab Studio Mix", amount: "+€8.00",   date: "08 AVR", type: :income }
+    ].each do |tx| %>
+      <div class="money-tx-row">
+        <div class="mtx-icon <%= tx[:type] == :income ? 'mtx-income' : 'mtx-expense' %>">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <% if tx[:type] == :income %>
+              <path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>
+            <% else %>
+              <path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/>
+            <% end %>
+          </svg>
+        </div>
+        <div class="mtx-info">
+          <span class="mtx-label"><%= tx[:label] %></span>
+          <span class="mtx-date"><%= tx[:date] %></span>
+        </div>
+        <span class="mtx-amount <%= tx[:type] == :income ? 'mtx-income' : 'mtx-expense' %>"><%= tx[:amount] %></span>
+      </div>
+    <% end %>
+  </section>
+
+</div>
+
+<%= render "shared/bottom_nav", active: :me %>
