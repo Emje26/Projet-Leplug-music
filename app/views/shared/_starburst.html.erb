@@ -1,0 +1,32 @@
+<%# Params: size: :large (260) | :medium (90) | :mini (44) %>
+<% sz = local_assigns.fetch(:size, :large) %>
+<% dims = { large: 260, medium: 90, mini: 44 }[sz] || 260 %>
+<% cx = dims / 2 %>
+<% op_outer = sz == :mini ? 0.08 : 0.15 %>
+<% op_inner = sz == :mini ? 0.06 : 0.10 %>
+
+<div class="starburst-wrap starburst-<%= sz %>">
+  <svg class="starburst-outer" width="<%= dims %>" height="<%= dims %>" viewBox="0 0 <%= dims %> <%= dims %>">
+    <g opacity="<%= op_outer %>">
+      <% 15.times do |i| %>
+        <% angle = (360.0 / 15 * i).round %>
+        <% ry = (cx * 0.75 + (i % 5) * (cx * 0.04)).round %>
+        <% rx = (cx * 0.08 + (i % 3) * (cx * 0.01)).round %>
+        <ellipse cx="<%= cx %>" cy="<%= cx %>" rx="<%= rx %>" ry="<%= ry %>" fill="currentColor" transform="rotate(<%= angle %> <%= cx %> <%= cx %>)"/>
+      <% end %>
+    </g>
+  </svg>
+
+  <% if sz == :large %>
+    <svg class="starburst-inner" width="<%= (dims * 0.62).round %>" height="<%= (dims * 0.62).round %>" viewBox="0 0 160 160">
+      <g opacity="<%= op_inner %>">
+        <% 12.times do |i| %>
+          <% angle = (360.0 / 12 * i).round %>
+          <% ry = 58 + (i % 4) * 3 %>
+          <% rx = 6 + (i % 3) %>
+          <ellipse cx="80" cy="80" rx="<%= rx %>" ry="<%= ry %>" fill="currentColor" transform="rotate(<%= angle %> 80 80)"/>
+        <% end %>
+      </g>
+    </svg>
+  <% end %>
+</div>

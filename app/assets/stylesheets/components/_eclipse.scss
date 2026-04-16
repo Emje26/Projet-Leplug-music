@@ -1,0 +1,6 @@
+.plug-eclipse {
+  display: inline-flex;
+  color: var(--accent);
+  animation: eclipse-glow 4s ease-in-out infinite;
+  pointer-events: none;
+}
