@@ -1,63 +1,183 @@
 // ===================================================================
-// LE PLUG — BOOKING FLOW
+// LE PLUG — BOOKING FLOW (WLR design system)
+// Rounded corners (12-16px), --void/--surface/--card/--accent tokens
 // ===================================================================
 
 .booking-page {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--void);
+  color: var(--ink);
   min-height: 100vh;
-  padding-bottom: 140px;
+  padding-bottom: 60px;
+  position: relative;
+  overflow: hidden;
 }
 
-.booking-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 18px 20px 16px;
-  border-bottom: 1px solid var(--ink-line);
-  position: sticky;
-  top: 0;
-  background: var(--ink);
-  z-index: 10;
+// ---- Clouds top & bottom -------------------------------------------
+.booking-clouds-top {
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+  height: 80px;
+  overflow: hidden;
 
-  .back-btn {
-    width: 38px;
-    height: 38px;
-    border: 1px solid var(--ink-line);
+  .plug-clouds { width: 100%; height: 100%; }
+}
+
+.booking-clouds-bottom {
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+  height: 80px;
+  overflow: hidden;
+  margin-top: 20px;
+
+  .plug-clouds {
+    width: 100%;
+    height: 100%;
+    transform: rotate(180deg);
+  }
+}
+
+// ---- Confetti -------------------------------------------------------
+.booking-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+
+  .confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+
+  .confetti:nth-child(1) {
+    background: var(--accent);
+    top: 8%;
+    left: 12%;
+    animation: confetti-fall-1 3s ease-in-out infinite;
+  }
+  .confetti:nth-child(2) {
+    background: var(--ink);
+    top: 5%;
+    left: 35%;
+    width: 6px;
+    height: 10px;
+    animation: confetti-fall-2 3.4s ease-in-out infinite 0.3s;
+  }
+  .confetti:nth-child(3) {
+    background: var(--accent);
+    top: 10%;
+    left: 58%;
+    animation: confetti-fall-1 2.8s ease-in-out infinite 0.6s;
+  }
+  .confetti:nth-child(4) {
+    background: var(--ink);
+    top: 3%;
+    left: 78%;
+    width: 10px;
+    height: 6px;
+    animation: confetti-fall-2 3.2s ease-in-out infinite 0.2s;
+  }
+  .confetti:nth-child(5) {
+    background: var(--accent);
+    top: 7%;
+    left: 90%;
+    animation: confetti-fall-1 3.6s ease-in-out infinite 0.5s;
+  }
+  .confetti:nth-child(6) {
+    background: var(--ink);
+    top: 12%;
+    left: 48%;
+    width: 6px;
+    height: 6px;
+    animation: confetti-fall-2 2.6s ease-in-out infinite 0.8s;
+  }
+}
+
+@keyframes confetti-fall-1 {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(200px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes confetti-fall-2 {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+  100% { transform: translateY(180px) rotate(-270deg); opacity: 0; }
+}
+
+// ---- Check circle + starburst --------------------------------------
+.booking-check-zone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  z-index: 2;
+
+  .booking-starburst {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .booking-check-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--paper);
-    text-decoration: none;
-    flex-shrink: 0;
+    color: var(--void);
+    position: relative;
+    z-index: 1;
+    animation: check-pop 0.5s ease-out;
+  }
+}
 
-    &:hover { border-color: var(--paper); }
+@keyframes check-pop {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+// ---- Title zone ----------------------------------------------------
+.booking-title-zone {
+  text-align: center;
+  padding: 8px 24px 20px;
+  position: relative;
+  z-index: 2;
+
+  .booking-confirmed-title {
+    font-family: var(--font-display);
+    font-size: 56px;
+    letter-spacing: 0.04em;
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    color: var(--ink);
   }
 
-  .booking-title-wrap {
-    flex: 1;
-    line-height: 1;
+  .booking-drip-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+
+    .plug-drip {
+      max-width: 240px;
+      width: 100%;
+      color: var(--text-sec);
+    }
   }
 
   .booking-kicker {
-    display: block;
     font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.18em;
-    color: var(--signal);
-    margin-bottom: 8px;
-  }
-
-  .booking-title {
-    font-family: var(--font-display);
-    font-size: 30px;
-    letter-spacing: 0.03em;
-    line-height: 0.9;
     text-transform: uppercase;
-    margin: 0;
+    color: var(--accent);
   }
-
-  .header-spacer { width: 38px; flex-shrink: 0; }
 }
 
 // ---- Bookable summary ---------------------------------------------
@@ -67,15 +187,17 @@
   gap: 16px;
   align-items: center;
   padding: 20px;
-  margin: 0;
-  border-bottom: 1px solid var(--ink-line);
-  background: var(--ink-2);
+  margin: 0 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
 
   .bb-cover {
     width: 72px;
     height: 72px;
-    background: #2A2A2A;
-    border: 1px solid var(--ink-line);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,7 +205,7 @@
     span {
       font-family: var(--font-display);
       font-size: 26px;
-      color: var(--paper);
+      color: var(--ink);
     }
   }
 
@@ -91,7 +213,7 @@
     font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.18em;
-    color: var(--signal);
+    color: var(--accent);
     text-transform: uppercase;
   }
 
@@ -101,7 +223,7 @@
     letter-spacing: 0.03em;
     text-transform: uppercase;
     margin: 4px 0;
-    color: var(--paper);
+    color: var(--ink);
     line-height: 1;
   }
 
@@ -109,7 +231,7 @@
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.06em;
-    color: var(--paper-dim);
+    color: var(--text-sec);
   }
 }
 
@@ -123,12 +245,93 @@
     font-size: 9px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--paper-mute);
+    color: var(--text-sec);
     margin-bottom: 14px;
   }
 }
 
-// ---- Date strip ----------------------------------------------------
+// ---- Summary card -------------------------------------------------
+.summary-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  padding: 18px;
+  position: relative;
+  border-left: 3px solid var(--accent);
+
+  .sum-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 10px 0;
+
+    .sum-k {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--ink);
+      .sum-hint { font-family: var(--font-mono); font-size: 9px; color: var(--text-sec); margin-left: 6px; }
+    }
+
+    .sum-v {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+    }
+
+    &.total {
+      .sum-k { font-family: var(--font-display); font-size: 22px; text-transform: uppercase; letter-spacing: 0.04em; }
+      .sum-v { font-family: var(--font-display); font-size: 28px; color: var(--accent); letter-spacing: 0.02em; }
+    }
+  }
+
+  .sum-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 6px 0;
+  }
+}
+
+.booking-cta {
+  padding: 20px 20px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+// ---- Booking detail grid -------------------------------------------
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  > div {
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--card);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dg-k {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--text-sec);
+    text-transform: uppercase;
+  }
+
+  .dg-v {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+}
+
+// ---- Date strip (new booking form, kept for compat) ----------------
 .date-strip {
   display: flex;
   gap: 8px;
@@ -146,44 +349,45 @@
   > div {
     padding: 12px 0;
     text-align: center;
-    border: 1px solid var(--ink-line);
-    background: var(--ink-2);
+    border: 1px solid var(--border-btn);
+    border-radius: 12px;
+    background: var(--card);
     display: flex;
     flex-direction: column;
     gap: 2px;
-    transition: all .12s ease;
+    transition: all 0.12s ease;
   }
 
   .dc-dow {
     font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.14em;
-    color: var(--paper-mute);
+    color: var(--text-sec);
     text-transform: uppercase;
   }
   .dc-num {
     font-family: var(--font-display);
     font-size: 24px;
     line-height: 1;
-    color: var(--paper);
+    color: var(--ink);
     letter-spacing: 0.02em;
   }
   .dc-mon {
     font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.1em;
-    color: var(--paper-mute);
+    color: var(--text-sec);
     text-transform: uppercase;
   }
 
   input:checked + div {
-    background: var(--signal);
-    border-color: var(--signal);
+    background: var(--accent);
+    border-color: var(--accent);
 
-    .dc-dow, .dc-num, .dc-mon { color: #000; }
+    .dc-dow, .dc-num, .dc-mon { color: var(--void); }
   }
 
-  &:hover > div { border-color: var(--paper-dim); }
+  &:hover > div { border-color: var(--text-sec); }
 }
 
 // ---- Slot grid ----------------------------------------------------
@@ -203,22 +407,23 @@
     display: block;
     padding: 14px 0;
     text-align: center;
-    border: 1px solid var(--ink-line);
-    background: var(--ink-2);
+    border: 1px solid var(--border-btn);
+    border-radius: 12px;
+    background: var(--card);
     font-family: var(--font-mono);
     font-size: 12px;
     letter-spacing: 0.08em;
-    color: var(--paper);
-    transition: all .12s ease;
+    color: var(--ink);
+    transition: all 0.12s ease;
   }
 
   input:checked + span {
-    background: var(--signal);
-    color: #000;
-    border-color: var(--signal);
+    background: var(--accent);
+    color: var(--void);
+    border-color: var(--accent);
   }
 
-  &:hover span { border-color: var(--paper-dim); }
+  &:hover span { border-color: var(--text-sec); }
 }
 
 // ---- Duration grid -------------------------------------------------
@@ -238,72 +443,23 @@
     display: block;
     padding: 16px 0;
     text-align: center;
-    border: 1px solid var(--ink-line);
-    background: var(--ink-2);
+    border: 1px solid var(--border-btn);
+    border-radius: 12px;
+    background: var(--card);
     font-family: var(--font-display);
     font-size: 18px;
-    color: var(--paper);
+    color: var(--ink);
     letter-spacing: 0.02em;
-    transition: all .12s ease;
+    transition: all 0.12s ease;
   }
 
   input:checked + span {
-    background: var(--signal);
-    color: #000;
-    border-color: var(--signal);
+    background: var(--accent);
+    color: var(--void);
+    border-color: var(--accent);
   }
 
-  &:hover span { border-color: var(--paper-dim); }
-}
-
-// ---- Summary card -------------------------------------------------
-.summary-card {
-  border: 1px solid var(--ink-line);
-  background: var(--ink-2);
-  padding: 18px;
-  position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--signal);
-  }
-
-  .sum-row {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    padding: 10px 0;
-
-    .sum-k {
-      font-family: var(--font-body);
-      font-size: 13px;
-      color: var(--paper);
-      .sum-hint { font-family: var(--font-mono); font-size: 9px; color: var(--paper-mute); margin-left: 6px; }
-    }
-
-    .sum-v {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--paper);
-      letter-spacing: 0.04em;
-    }
-
-    &.total {
-      .sum-k { font-family: var(--font-display); font-size: 22px; text-transform: uppercase; letter-spacing: 0.04em; }
-      .sum-v { font-family: var(--font-display); font-size: 28px; color: var(--signal); letter-spacing: 0.02em; }
-    }
-  }
-
-  .sum-divider {
-    height: 1px;
-    background: var(--ink-line);
-    margin: 6px 0;
-  }
+  &:hover span { border-color: var(--text-sec); }
 }
 
 .booking-note {
@@ -311,43 +467,6 @@
   font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--paper-mute);
+  color: var(--text-sec);
   margin: 14px 0 0;
-}
-
-.booking-cta {
-  padding: 14px 20px 24px;
-  margin-top: 12px;
-}
-
-// ---- Booking detail grid -------------------------------------------
-.details-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-
-  > div {
-    padding: 16px;
-    border: 1px solid var(--ink-line);
-    background: var(--ink-2);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .dg-k {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    color: var(--paper-mute);
-    text-transform: uppercase;
-  }
-
-  .dg-v {
-    font-family: var(--font-display);
-    font-size: 18px;
-    letter-spacing: 0.02em;
-    color: var(--paper);
-    text-transform: uppercase;
-  }
 }

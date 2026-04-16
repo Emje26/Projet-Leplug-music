@@ -1,55 +1,41 @@
-<%# NB: logged-in users never reach this template — HomeController#index
-    redirects them to search_path. This template is for the landing only. %>
+<%# Logged-in users are redirected to search_path by HomeController#index.
+    This template is the landing page for anonymous visitors only. %>
 
 <div class="plug-landing">
+  <!-- Clouds behind everything -->
+  <%= render "shared/clouds" %>
+
   <header class="landing-topbar">
-    <div class="lt-left">
-      <span class="lt-dot"></span>
-      <span class="lt-brand">LE PLUG</span>
-    </div>
-    <span class="lt-right">C/O "MUSIC" — <%= Date.today.year %></span>
+    <span class="lt-brand" style="animation: flicker 6s ease-in-out infinite;">LE PLUG</span>
+    <span class="lt-right"><%= Date.today.year %></span>
   </header>
 
   <section class="landing-body">
-    <span class="catalog-code">№ 001 · MANIFESTO</span>
-    <h1 class="landing-title">
-      DÉMOCRATISER<br>
-      LA <span class="slash">/MUSIQUE/</span>
-    </h1>
+    <!-- Starburst behind the title -->
+    <div class="landing-starburst">
+      <%= render "shared/starburst", size: :large %>
+    </div>
+
+    <h1 class="landing-title">LE PLUG</h1>
+    <%= render "shared/drip" %>
+
     <p class="landing-sub">
-      Une plateforme construite pour les artistes qui <strong>créent</strong>,
-      pas pour ceux qui ont déjà une équipe marketing. Tu te "plug", tu partages,
-      tu rencontres des producteurs, des ingés son, d'autres artistes. L'algorithme
-      te sert — pas l'inverse.
+      La musique. Les studios. Les talents.<br>
+      <strong>Tout connecté.</strong>
     </p>
 
     <div class="landing-actions">
-      <%= link_to "PLUG IN →", new_user_registration_path, class: "btn-signal" %>
-      <%= link_to "\"LOGIN\"",  new_user_session_path,      class: "btn-ghost" %>
-    </div>
-
-    <div class="landing-manifest">
-      <div class="manifest-item">
-        <span class="mn-num">№ 01</span>
-        <div class="mn-head">"PLUG"</div>
-        <p class="mn-text">Remplace le follow. Plus organique, plus social, plus street. Tu te plug à un son, pas à une marque.</p>
-      </div>
-      <div class="manifest-item">
-        <span class="mn-num">№ 02</span>
-        <div class="mn-head">"REACH"</div>
-        <p class="mn-text">Pas de pay-to-play. Pas d'algorithme qui privilégie les gros comptes. Tout le monde démarre sur la même ligne.</p>
-      </div>
-      <div class="manifest-item">
-        <span class="mn-num">№ 03</span>
-        <div class="mn-head">"LINK"</div>
-        <p class="mn-text">Contacte des ingés son, trouve un feat, envoie tes sons à des labels. Tous les outils pro, zéro intermédiaire.</p>
-      </div>
+      <%= link_to new_user_registration_path, class: "btn-signal" do %>
+        "CRÉER UN COMPTE"
+      <% end %>
+      <%= link_to new_user_session_path, class: "btn-ghost" do %>
+        "SE CONNECTER"
+      <% end %>
     </div>
   </section>
 
   <footer class="landing-footer">
-    <span>"MADE IN LE WAGON"</span>
-    <span class="marquee">● LIVE · 2.1K ARTISTS PLUGGED</span>
-    <span>V.1.0</span>
+    <span class="q">MADE IN LE WAGON</span>
+    <span style="color: var(--accent);">● 2.1K ARTISTS PLUGGED</span>
   </footer>
 </div>

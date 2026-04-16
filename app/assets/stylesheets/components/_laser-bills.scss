@@ -1,0 +1,23 @@
+.laser-bills {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  color: var(--accent);
+  z-index: 0;
+
+  .laser-bill {
+    position: absolute;
+    bottom: 0;
+    animation-fill-mode: both;
+    will-change: transform, opacity;
+
+    svg { animation: sway 3s ease-in-out infinite, glow-pulse 2s ease-in-out infinite; }
+  }
+
+  .bill-1 { right: 10px;  animation: float-up-1 6s ease-in-out infinite both; }
+  .bill-2 { right: 40px;  animation: float-up-2 8s ease-in-out infinite both; animation-delay: 1.5s; }
+  .bill-3 { left: 15px;   animation: float-up-3 7s ease-in-out infinite both; animation-delay: 3s; }
+  .bill-4 { left: 50%;    animation: float-up-4 9s ease-in-out infinite both; animation-delay: 4.5s; }
+  .bill-5 { right: 25px;  animation: float-up-5 7.5s ease-in-out infinite both; animation-delay: 2s; }
+}

@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   # ---- HOME / FEED --------------------------------------------------
   # home#index dispatche : logged-in → redirect search_path, logged-out → landing.
   # Le feed (ancien home logged-in) devient un onglet secondaire.
-  get "feed", to: "home#feed", as: :feed
+  get "feed",   to: "home#feed",   as: :feed
+  get "player", to: "home#player", as: :player
 
   # ---- SEARCH / MARKETPLACE ----------------------------------------
   get "search",         to: "search#index",   as: :search
@@ -44,6 +45,9 @@ Rails.application.routes.draw do
   post 'meal_plans/generate', to: 'meal_plans#generate', as: :meal_plans_generate
   resources :recipes, only: [:index, :show, :destroy, :new, :create]
   get "planner", to: "pages#planner"
+
+  # ---- SETTINGS (money dashboard) ------------------------------------
+  get "settings/money", to: "settings#money", as: :settings_money
 
   # ---- HEALTH -------------------------------------------------------
   get "up" => "rails/health#show", as: :rails_health_check

@@ -1,0 +1,17 @@
+<div class="laser-bills" aria-hidden="true">
+  <% [
+    { w: 50, h: 26, class: "bill-1" },
+    { w: 44, h: 22, class: "bill-2" },
+    { w: 46, h: 24, class: "bill-3" },
+    { w: 40, h: 20, class: "bill-4" },
+    { w: 42, h: 22, class: "bill-5" }
+  ].each do |b| %>
+    <div class="laser-bill <%= b[:class] %>">
+      <svg width="<%= b[:w] %>" height="<%= b[:h] %>" viewBox="0 0 <%= b[:w] %> <%= b[:h] %>" fill="none">
+        <rect x="1" y="1" width="<%= b[:w] - 2 %>" height="<%= b[:h] - 2 %>" rx="2" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+        <circle cx="<%= b[:w] / 2 %>" cy="<%= b[:h] / 2 %>" r="<%= [b[:w], b[:h]].min / 4 %>" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+        <text x="<%= b[:w] / 2 %>" y="<%= b[:h] / 2 + 2 %>" text-anchor="middle" font-size="<%= b[:h] / 4 %>" font-family="'JetBrains Mono',monospace" fill="currentColor" opacity="0.6">€</text>
+      </svg>
+    </div>
+  <% end %>
+</div>

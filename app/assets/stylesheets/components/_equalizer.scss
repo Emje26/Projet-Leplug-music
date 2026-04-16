@@ -1,0 +1,14 @@
+.plug-equalizer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  height: 24px;
+
+  .eq-bar {
+    width: 3px;
+    background: var(--accent);
+    border-radius: 1px;
+    will-change: height;
+  }
+}

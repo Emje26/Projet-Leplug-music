@@ -14,4 +14,9 @@ class HomeController < ApplicationController
   def feed
     authenticate_user!
   end
+
+  # Full-screen player view.
+  def player
+    authenticate_user!
+  end
 end

@@ -1,0 +1,43 @@
+// ===================================================================
+// LE PLUG — All @keyframes
+// ===================================================================
+
+// ---- STARBURST ----------------------------------------------------
+@keyframes spin-slow    { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
+@keyframes spin-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+@keyframes pulse-scale  { 0%, 100% { transform: scale(1); }  50% { transform: scale(1.08); } }
+@keyframes breathe      { 0%, 100% { opacity: 0.7; }         50% { opacity: 1; } }
+
+// ---- CLOUDS -------------------------------------------------------
+@keyframes cloud-drift-1 { 0% { transform: translateX(0); }            50% { transform: translateX(12px); }           100% { transform: translateX(0); } }
+@keyframes cloud-drift-2 { 0% { transform: translateX(0); }            50% { transform: translateX(-10px); }          100% { transform: translateX(0); } }
+@keyframes cloud-drift-3 { 0% { transform: translateX(0) scaleX(1); }  50% { transform: translateX(8px) scaleX(1.05); } 100% { transform: translateX(0) scaleX(1); } }
+
+// ---- LASER BILLS --------------------------------------------------
+@keyframes float-up-1 { 0% { transform: translateY(40px) rotate(-8deg);  opacity: 0; } 15% { opacity: 0.6; } 85% { opacity: 0.6; } 100% { transform: translateY(-320px) rotate(5deg);  opacity: 0; } }
+@keyframes float-up-2 { 0% { transform: translateY(60px) rotate(6deg);   opacity: 0; } 10% { opacity: 0.5; } 80% { opacity: 0.5; } 100% { transform: translateY(-350px) rotate(-4deg); opacity: 0; } }
+@keyframes float-up-3 { 0% { transform: translateY(30px) rotate(-3deg);  opacity: 0; } 20% { opacity: 0.4; } 75% { opacity: 0.4; } 100% { transform: translateY(-300px) rotate(8deg);  opacity: 0; } }
+@keyframes float-up-4 { 0% { transform: translateY(50px) rotate(10deg);  opacity: 0; } 12% { opacity: 0.35;} 82% { opacity: 0.35;} 100% { transform: translateY(-340px) rotate(-6deg); opacity: 0; } }
+@keyframes float-up-5 { 0% { transform: translateY(45px) rotate(-12deg); opacity: 0; } 18% { opacity: 0.5; } 78% { opacity: 0.5; } 100% { transform: translateY(-310px) rotate(3deg);  opacity: 0; } }
+@keyframes sway        { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(3px); } 75% { transform: translateX(-3px); } }
+@keyframes glow-pulse  { 0%, 100% { filter: drop-shadow(0 0 2px rgba(var(--accent-rgb), 0.3)); } 50% { filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.6)); } }
+
+// ---- EQUALIZER ----------------------------------------------------
+@keyframes eq-1 { 0%, 100% { height: 4px; }  50% { height: 16px; } }
+@keyframes eq-2 { 0%, 100% { height: 8px; }  50% { height: 20px; } }
+@keyframes eq-3 { 0%, 100% { height: 12px; } 50% { height: 6px; } }
+@keyframes eq-4 { 0%, 100% { height: 6px; }  50% { height: 18px; } }
+@keyframes eq-5 { 0%, 100% { height: 10px; } 50% { height: 4px; } }
+
+// ---- ECLIPSE ------------------------------------------------------
+@keyframes eclipse-glow { 0%, 100% { filter: drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.2)); } 50% { filter: drop-shadow(0 0 16px rgba(var(--accent-rgb), 0.4)); } }
+
+// ---- CONFETTI -----------------------------------------------------
+@keyframes confetti-1 { 0% { transform: translateY(0) rotate(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(120px) rotate(360deg); opacity: 0; } }
+@keyframes confetti-2 { 0% { transform: translateY(0) rotate(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(100px) rotate(-270deg); opacity: 0; } }
+
+// ---- CHECK DRAW ---------------------------------------------------
+@keyframes check-draw { 0% { stroke-dashoffset: 30; } 100% { stroke-dashoffset: 0; } }
+
+// ---- FLICKER (logo) -----------------------------------------------
+@keyframes flicker { 0%, 95%, 100% { opacity: 1; } 96% { opacity: 0.3; } 98% { opacity: 0.7; } }

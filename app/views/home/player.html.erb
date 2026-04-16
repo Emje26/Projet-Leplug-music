@@ -1,0 +1,90 @@
+<%
+  track_title = "MINUIT À BARBÈS"
+  track_artist = "YASSINE"
+  next_track = { title: "BÉTON FT. MARWA", artist: "YASSINE", time: "02:58" }
+%>
+
+<div class="player-page">
+
+  <!-- HEADER -->
+  <header class="player-header">
+    <%= link_to feed_path, class: "player-hdr-btn" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    <% end %>
+    <span class="player-hdr-label">NOW PLAYING</span>
+    <button class="player-hdr-btn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20">
+        <circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- ARTWORK ZONE -->
+  <div class="player-artwork">
+    <div class="player-clouds-wrap">
+      <%= render "shared/clouds" %>
+    </div>
+    <div class="player-eclipse-wrap">
+      <%= render "shared/eclipse" %>
+    </div>
+  </div>
+
+  <!-- TRACK INFO -->
+  <section class="player-track-info">
+    <h1 class="player-track-title"><%= track_title %></h1>
+    <span class="player-track-artist"><%= track_artist %></span>
+  </section>
+
+  <!-- PROGRESS BAR -->
+  <div class="player-progress">
+    <div class="player-progress-bar">
+      <div class="player-progress-fill" style="width: 38%;"></div>
+      <div class="player-progress-dot" style="left: 38%;"></div>
+    </div>
+    <div class="player-progress-times">
+      <span>01:18</span>
+      <span>03:24</span>
+    </div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="player-controls">
+    <button class="player-ctrl" aria-label="Previous">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+      </svg>
+    </button>
+    <button class="player-ctrl player-ctrl-play" aria-label="Pause">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+        <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+      </svg>
+    </button>
+    <button class="player-ctrl" aria-label="Next">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+        <path d="M16 18h2V6h-2zM6 6v12l8.5-6z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- EQUALIZER + DRIP -->
+  <div class="player-eq-wrap">
+    <%= render "shared/equalizer" %>
+    <%= render "shared/drip" %>
+  </div>
+
+  <!-- SUIVANT -->
+  <section class="player-next">
+    <span class="player-next-label q">SUIVANT</span>
+    <div class="player-next-card">
+      <div class="pnc-thumb"></div>
+      <div class="pnc-info">
+        <span class="pnc-title"><%= next_track[:title] %></span>
+        <span class="pnc-artist"><%= next_track[:artist] %></span>
+      </div>
+      <span class="pnc-time"><%= next_track[:time] %></span>
+    </div>
+  </section>
+
+</div>

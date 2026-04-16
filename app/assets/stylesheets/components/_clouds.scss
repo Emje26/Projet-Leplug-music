@@ -1,0 +1,19 @@
+.plug-clouds {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  color: var(--accent);
+
+  .cloud-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    will-change: transform;
+
+    &.cloud-1 { height: 60%; animation: cloud-drift-1 8s ease-in-out infinite; }
+    &.cloud-2 { height: 50%; animation: cloud-drift-2 12s ease-in-out infinite; }
+    &.cloud-3 { height: 40%; bottom: -10px; animation: cloud-drift-3 10s ease-in-out infinite; }
+  }
+}

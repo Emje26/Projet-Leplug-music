@@ -1,0 +1,38 @@
+.starburst-wrap {
+  position: relative;
+  display: inline-block;
+  pointer-events: none;
+  color: var(--accent);
+  will-change: transform, opacity;
+
+  &.starburst-large  { width: 260px; height: 260px; animation: pulse-scale 4s ease-in-out infinite, breathe 3s ease-in-out infinite; }
+  &.starburst-medium { width: 90px;  height: 90px;  animation: pulse-scale 4s ease-in-out infinite, breathe 3s ease-in-out infinite; }
+  &.starburst-small  { width: 70px;  height: 70px; }
+  &.starburst-mini   { width: 44px;  height: 44px; }
+}
+
+.starburst-outer {
+  display: block;
+  will-change: transform;
+  animation: spin-slow 20s linear infinite;
+  filter: drop-shadow(0 0 15px rgba(var(--accent-rgb), 0.3));
+}
+
+.starburst-inner {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  will-change: transform;
+  animation: spin-reverse 30s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.2));
+}
+
+.starburst-small .starburst-outer {
+  animation: spin-slow 18s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.25));
+}
+
+.starburst-mini .starburst-outer {
+  animation: spin-slow 15s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(var(--accent-rgb), 0.2));
+}

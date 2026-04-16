@@ -1,46 +1,14 @@
 <div class="auth-page">
 
-  <aside class="auth-poster">
-    <div class="poster-top">
-      <span class="brand-dot"></span>
-      <span class="brand-name">LE PLUG</span>
-      <span class="catalog">C/O "MUSIC" — V.1.0</span>
-    </div>
-
-    <div class="poster-mid">
-      <span class="poster-catalog">№ 001 / LOGIN</span>
-      <h2 class="poster-title">
-        RE&nbsp;<span class="slash">/</span><br>
-        PLUG<span class="slash">.</span>
-      </h2>
-      <p class="poster-sub">
-        Tu reprends là où t'avais laissé. Ton feed, tes plugs, tes messages
-        — tout t'attend. Aucune DM ne se perd sur Le Plug.
-      </p>
-    </div>
-
-    <div class="poster-bottom">
-      <span>"MADE IN PARIS"</span>
-      <span>— <%= Date.today.year %> —</span>
-    </div>
-  </aside>
-
   <div class="auth-panel">
-    <div class="auth-mobile-brand">
-      <span class="brand-dot"></span>
-      <span class="brand-name">LE PLUG</span>
+    <div class="auth-starburst">
+      <%= render "shared/starburst", size: :medium %>
     </div>
 
-    <div class="auth-heading">
-      <span class="h-kicker">LOGIN</span>
-      <h1>RE/<br>CONNECT.</h1>
-      <p>Entre tes identifiants pour accéder à ton feed.</p>
-    </div>
+    <h1 class="auth-title">LE PLUG</h1>
+    <%= render "shared/drip" %>
 
-    <div class="auth-tabs">
-      <span class="auth-tab active">SE CONNECTER</span>
-      <%= link_to "CRÉER UN COMPTE", new_registration_path(resource_name), class: "auth-tab" %>
-    </div>
+    <p class="auth-sub">Entre tes identifiants pour accéder à ton feed.</p>
 
     <% if flash[:alert] %>
       <div class="alert alert-danger"><%= flash[:alert] %></div>
@@ -51,34 +19,29 @@
         <%= f.input :email,
             required: true,
             autofocus: true,
-            label: "EMAIL",
-            placeholder: "ton@email.com",
+            label: false,
+            placeholder: "Email",
             input_html: { autocomplete: "email" } %>
 
         <%= f.input :password,
             required: true,
-            label: "MOT DE PASSE",
-            placeholder: "••••••••",
+            label: false,
+            placeholder: "Mot de passe",
             input_html: { autocomplete: "current-password" } %>
 
         <% if devise_mapping.rememberable? %>
           <div class="boolean">
-            <%= f.input :remember_me, as: :boolean, label: "SE SOUVENIR" %>
+            <%= f.input :remember_me, as: :boolean, label: "Se souvenir" %>
           </div>
         <% end %>
       </div>
 
-      <%= f.button :submit, "SE CONNECTER →", class: "auth-submit" %>
+      <%= f.button :submit, "\"SE CONNECTER\"", class: "btn-signal auth-submit" %>
     <% end %>
 
     <div class="auth-links">
       <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
-      <span>Pas encore inscrit ? <%= link_to "PLUG IN →", new_registration_path(resource_name) %></span>
-    </div>
-
-    <div class="auth-badge">
-      <span class="dot"></span>
-      CONNEXION "SÉCURISÉE"
+      <span>Pas encore inscrit ? <%= link_to "Créer un compte →", new_registration_path(resource_name) %></span>
     </div>
   </div>
 </div>

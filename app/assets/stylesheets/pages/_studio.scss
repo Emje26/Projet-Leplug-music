@@ -1,10 +1,11 @@
 // ===================================================================
-// LE PLUG — STUDIO / TALENT PROFILE
+// LE PLUG — STUDIO / TALENT PROFILE (WLR design system)
+// Rounded corners (12-16px), --void/--surface/--card/--accent tokens
 // ===================================================================
 
 .studio-page {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--void);
+  color: var(--ink);
   min-height: 100vh;
   padding-bottom: 140px;
 }
@@ -15,26 +16,28 @@
   align-items: center;
   gap: 14px;
   padding: 18px 20px 14px;
-  border-bottom: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: var(--ink);
+  background: var(--void);
   z-index: 10;
 
   .back-btn,
   .icon-btn {
     width: 38px;
     height: 38px;
-    border: 1px solid var(--ink-line);
+    border: 1px solid var(--border-btn);
+    border-radius: 12px;
     background: transparent;
-    color: var(--paper);
+    color: var(--ink);
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     flex-shrink: 0;
+    cursor: pointer;
 
-    &:hover { border-color: var(--paper); }
+    &:hover { border-color: var(--ink); }
 
     svg { width: 16px; height: 16px; }
   }
@@ -46,7 +49,7 @@
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--paper-dim);
+    color: var(--text-sec);
   }
 }
 
@@ -56,30 +59,42 @@
   gap: 8px;
   padding: 12px 20px 8px;
   overflow-x: auto;
+  position: relative;
   &::-webkit-scrollbar { display: none; }
+
+  .studio-gallery-clouds {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+
+    .plug-clouds { width: 100%; height: 100%; }
+  }
 
   .gallery-slide {
     flex: 0 0 280px;
     aspect-ratio: 4 / 3;
-    background: #2A2A2A;
-    border: 1px solid var(--ink-line);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 
     &::before {
       content: "";
       position: absolute;
       inset: 0;
+      border-radius: 14px;
       background-image:
-        linear-gradient(var(--ink-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--ink-line) 1px, transparent 1px);
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
       background-size: 30px 30px;
       opacity: 0.3;
     }
-
-    &.big { flex: 1; aspect-ratio: 16 / 9; }
 
     .gs-num {
       position: absolute;
@@ -88,7 +103,7 @@
       font-family: var(--font-mono);
       font-size: 9px;
       letter-spacing: 0.16em;
-      color: var(--paper-mute);
+      color: var(--text-sec);
     }
 
     .gs-initials {
@@ -96,7 +111,7 @@
       font-family: var(--font-display);
       font-size: 72px;
       letter-spacing: 0.04em;
-      color: var(--paper);
+      color: var(--ink);
       text-transform: uppercase;
     }
   }
@@ -105,7 +120,7 @@
 // ---- Identity -----------------------------------------------------
 .studio-identity {
   padding: 20px 20px 14px;
-  border-bottom: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--border);
 
   .si-top {
     display: flex;
@@ -118,22 +133,25 @@
     font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.2em;
-    color: var(--signal);
-    border: 1px solid var(--signal);
-    padding: 5px 9px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 5px 10px;
     text-transform: uppercase;
-
-    &::before { content: "\201C"; }
-    &::after  { content: "\201D"; }
   }
 
   .si-rating {
     font-family: var(--font-mono);
     font-size: 12px;
-    color: var(--paper);
+    color: var(--ink);
     letter-spacing: 0.04em;
 
-    span { color: var(--paper-mute); font-size: 9px; margin-left: 4px; }
+    .si-stars { color: var(--accent); }
+    .si-reviews-count {
+      color: var(--text-sec);
+      font-size: 9px;
+      margin-left: 4px;
+    }
   }
 
   .si-name {
@@ -143,22 +161,15 @@
     letter-spacing: 0.02em;
     text-transform: uppercase;
     margin: 0 0 10px;
-    color: var(--paper);
+    color: var(--ink);
   }
 
   .si-address {
     font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
-    color: var(--paper-mute);
+    color: var(--text-sec);
     text-transform: uppercase;
-  }
-
-  .si-genres {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 14px;
   }
 }
 
@@ -170,19 +181,11 @@
   gap: 20px;
   padding: 20px;
   margin: 14px 20px;
-  background: var(--ink-2);
-  border: 1px solid var(--ink-line);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  border-left: 3px solid var(--accent);
   position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--signal);
-  }
 
   .spc-left {
     display: flex;
@@ -194,11 +197,8 @@
     font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.2em;
-    color: var(--paper-mute);
+    color: var(--text-sec);
     text-transform: uppercase;
-
-    &::before { content: "\201C"; }
-    &::after  { content: "\201D"; }
   }
 
   .spc-amount {
@@ -206,13 +206,28 @@
     font-size: 44px;
     line-height: 1;
     letter-spacing: 0.02em;
-    color: var(--paper);
+    color: var(--ink);
 
     .spc-unit {
       font-size: 18px;
-      color: var(--paper-mute);
+      color: var(--text-sec);
       letter-spacing: 0.06em;
     }
+  }
+
+  .btn-signal { min-width: 160px; }
+}
+
+// ---- Drip wrap ----------------------------------------------------
+.studio-drip-wrap {
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+
+  .plug-drip {
+    max-width: 300px;
+    width: 100%;
+    color: var(--text-sec);
   }
 }
 
@@ -222,14 +237,14 @@
 .studio-reviews,
 .studio-location {
   padding: 20px;
-  border-top: 1px solid var(--ink-line);
+  border-top: 1px solid var(--border);
 
   .label {
     font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--paper-mute);
+    color: var(--text-sec);
     display: block;
     margin-bottom: 14px;
   }
@@ -238,7 +253,7 @@
     font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.55;
-    color: var(--paper-dim);
+    color: var(--text-sec);
     margin: 0;
     max-width: 600px;
   }
@@ -251,15 +266,16 @@
 }
 
 .equip-pill {
-  padding: 7px 11px;
-  border: 1px solid var(--ink-line);
+  padding: 7px 12px;
+  border: 1px solid var(--border-btn);
+  border-radius: 10px;
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--paper-dim);
+  color: var(--text-sec);
   text-decoration: none;
-  background: var(--ink-2);
+  background: var(--card);
 }
 
 // ---- Reviews ------------------------------------------------------
@@ -272,8 +288,9 @@
 
 .review-card {
   padding: 16px;
-  background: var(--ink-2);
-  border: 1px solid var(--ink-line);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
 
   header {
     display: flex;
@@ -282,25 +299,25 @@
     margin-bottom: 10px;
 
     .rc-stars {
-      color: var(--signal);
+      color: var(--accent);
       font-size: 13px;
       letter-spacing: 2px;
 
-      .dim { color: var(--ink-line); }
+      .dim { color: var(--border-btn); }
     }
 
     .rc-user {
       font-family: var(--font-mono);
       font-size: 10px;
       letter-spacing: 0.12em;
-      color: var(--paper);
+      color: var(--ink);
     }
 
     .rc-date {
       margin-left: auto;
       font-family: var(--font-mono);
       font-size: 9px;
-      color: var(--paper-mute);
+      color: var(--text-sec);
       letter-spacing: 0.08em;
     }
   }
@@ -309,7 +326,7 @@
     font-family: var(--font-body);
     font-size: 13px;
     line-height: 1.5;
-    color: var(--paper-dim);
+    color: var(--text-sec);
     margin: 0;
   }
 }
@@ -319,10 +336,11 @@
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--paper-mute);
+  color: var(--text-sec);
   padding: 20px 0;
   text-align: center;
-  border: 1px dashed var(--ink-line);
+  border: 1px dashed var(--border-btn);
+  border-radius: 12px;
   margin-bottom: 24px;
 }
 
@@ -335,15 +353,16 @@
   .rf-select,
   .rf-textarea {
     width: 100%;
-    background: var(--ink-2);
-    border: 1px solid var(--ink-line);
-    color: var(--paper);
+    background: var(--card);
+    border: 1px solid var(--border-btn);
+    border-radius: 12px;
+    color: var(--ink);
     font-family: var(--font-body);
     font-size: 13px;
     padding: 12px 14px;
     outline: 0;
 
-    &:focus { border-color: var(--paper); }
+    &:focus { border-color: var(--ink); }
   }
 
   .rf-textarea {
@@ -354,7 +373,7 @@
       font-family: var(--font-mono);
       font-size: 10px;
       letter-spacing: 0.1em;
-      color: var(--paper-mute);
+      color: var(--text-sec);
     }
   }
 }
@@ -364,14 +383,16 @@
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 16px;
-  border: 1px solid var(--ink-line);
-  background: var(--ink-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  overflow: hidden;
 
   .loc-map {
     aspect-ratio: 1 / 1;
-    background: #1A1A1A;
+    background: var(--surface);
     position: relative;
-    border-right: 1px solid var(--ink-line);
+    border-right: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -380,8 +401,8 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(var(--ink-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--ink-line) 1px, transparent 1px);
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
       background-size: 20px 20px;
       opacity: 0.6;
     }
@@ -389,7 +410,7 @@
     .loc-pin {
       position: relative;
       font-size: 22px;
-      color: var(--signal);
+      color: var(--accent);
     }
   }
 
@@ -404,19 +425,19 @@
       font-family: var(--font-body);
       font-size: 14px;
       font-weight: 600;
-      color: var(--paper);
+      color: var(--ink);
     }
     .loc-city {
       font-family: var(--font-mono);
       font-size: 10px;
       letter-spacing: 0.14em;
-      color: var(--paper-mute);
+      color: var(--text-sec);
     }
     .loc-coords {
       font-family: var(--font-mono);
       font-size: 9px;
       letter-spacing: 0.08em;
-      color: var(--paper-mute);
+      color: var(--text-sec);
     }
   }
 }

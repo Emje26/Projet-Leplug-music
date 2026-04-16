@@ -1,31 +1,28 @@
 // ===================================================================
 // LE PLUG — Palette
-// Subtractive, industrial. Monochrome base, one signal color.
+// "Whole Lotta Red" mode: void black, blood red, pure white.
+// Dark mode by default, light mode via prefers-color-scheme + .light-mode.
 // ===================================================================
 
-// Core surfaces
-$ink:        #0A0A0A;   // deep black — primary background
-$ink-2:      #111111;   // card surface
-$ink-3:      #1A1A1A;   // elevated surface
-$ink-line:   #222222;   // hairlines
+// SCSS build-time variables (used by bootstrap_variables.scss)
+$ink:        #000000;
+$ink-2:      #111111;
+$ink-3:      #1A1A1A;
+$ink-line:   rgba(255,255,255,0.03);
 
-// Type
-$paper:      #F5F5F0;   // off-white — primary text
-$paper-dim:  #A8A8A3;   // secondary text
-$paper-mute: #6B6B66;   // tertiary / meta
+$paper:      #FFFFFF;
+$paper-dim:  rgba(255,255,255,0.25);
+$paper-mute: rgba(255,255,255,0.15);
 
-// Signal
-$signal:     #FF4D00;   // the ONE color — CTAs, live dots, +N%
-$signal-dim: #CC3E00;
+$signal:     #D12326;
+$signal-dim: #A01E1E;
 
-// Semantic
-$live:       #FF4D00;
+$live:       #D12326;
 $danger:     #FF4757;
-$success:    #1EDD88;
+$success:    #4ADE80;
 
-// ---- Legacy bootstrap-expected names ---------------------------------
-// (kept so existing partials / bootstrap overrides still compile)
-$red:        #FD1015;
+// Legacy bootstrap-expected names
+$red:        #D12326;
 $blue:       #0D6EFD;
 $yellow:     #FFC65A;
 $orange:     $signal;
