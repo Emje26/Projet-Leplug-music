@@ -2,21 +2,47 @@
 
 <div class="booking-page">
 
-  <header class="booking-header">
-    <%= link_to bookings_path, class: "back-btn" do %>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M15 6l-6 6 6 6"/></svg>
-    <% end %>
-    <div class="booking-title-wrap">
-      <span class="booking-kicker">"CONFIRMÉ" — № <%= @booking.id.to_s.rjust(4, "0") %></span>
-      <h1 class="booking-title">BOOKING<br>RÉCAP.</h1>
-    </div>
-    <span class="header-spacer"></span>
-  </header>
+  <!-- CLOUDS TOP -->
+  <div class="booking-clouds-top">
+    <%= render "shared/clouds" %>
+  </div>
 
+  <!-- CONFETTI -->
+  <div class="booking-confetti" aria-hidden="true">
+    <div class="confetti confetti-1"></div>
+    <div class="confetti confetti-2"></div>
+    <div class="confetti confetti-1"></div>
+    <div class="confetti confetti-2"></div>
+    <div class="confetti confetti-1"></div>
+    <div class="confetti confetti-2"></div>
+  </div>
+
+  <!-- CHECK CIRCLE + STARBURST -->
+  <div class="booking-check-zone">
+    <div class="booking-starburst">
+      <%= render "shared/starburst", size: :medium %>
+    </div>
+    <div class="booking-check-circle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="32" height="32">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- TITLE + DRIP -->
+  <div class="booking-title-zone">
+    <h1 class="booking-confirmed-title">RÉSERVÉ</h1>
+    <div class="booking-drip-wrap">
+      <%= render "shared/drip" %>
+    </div>
+    <span class="booking-kicker q">CONFIRMÉ — № <%= @booking.id.to_s.rjust(4, "0") %></span>
+  </div>
+
+  <!-- BOOKABLE SUMMARY -->
   <section class="booking-bookable">
     <div class="bb-cover"><span><%= @bookable.initials %></span></div>
     <div class="bb-body">
-      <span class="bb-type"><%= @booking.bookable_label.gsub(/^/, '"') + '"' %></span>
+      <span class="bb-type q"><%= @booking.bookable_label.upcase %></span>
       <h2 class="bb-name">
         <%= link_to @bookable.name.upcase, bookable_path, style: "color:inherit;text-decoration:none;" %>
       </h2>
@@ -24,8 +50,9 @@
     </div>
   </section>
 
+  <!-- DETAILS -->
   <section class="booking-section">
-    <span class="bsec-label">"DÉTAILS"</span>
+    <span class="bsec-label q">DÉTAILS</span>
     <div class="details-grid">
       <div>
         <span class="dg-k">DATE</span>
@@ -41,13 +68,14 @@
       </div>
       <div>
         <span class="dg-k">STATUT</span>
-        <span class="dg-v" style="color: var(--signal);"><%= @booking.status.upcase %></span>
+        <span class="dg-v" style="color: var(--accent);"><%= @booking.status.upcase %></span>
       </div>
     </div>
   </section>
 
+  <!-- SUMMARY -->
   <section class="booking-section">
-    <span class="bsec-label">"RÉCAPITULATIF"</span>
+    <span class="bsec-label q">RÉCAPITULATIF</span>
     <div class="summary-card">
       <div class="sum-row">
         <span class="sum-k">Sous-total</span>
@@ -65,10 +93,15 @@
     </div>
   </section>
 
+  <!-- CTAs -->
   <div class="booking-cta">
-    <%= link_to "← RETOUR AU SEARCH", search_path, class: "btn-ghost", style: "width: 100%; height: 54px;" %>
+    <%= link_to "VOIR MES RÉSERVATIONS", bookings_path, class: "btn-signal", style: "width: 100%;" %>
+    <%= link_to "RETOUR", search_path, class: "btn-ghost", style: "width: 100%; margin-top: 10px;" %>
+  </div>
+
+  <!-- CLOUDS BOTTOM -->
+  <div class="booking-clouds-bottom">
+    <%= render "shared/clouds" %>
   </div>
 
 </div>
-
-<%= render "shared/bottom_nav", active: :search %>
