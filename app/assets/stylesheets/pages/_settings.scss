@@ -331,10 +331,11 @@
 
   .mbc-starburst {
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: -20px;
+    right: -20px;
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.8;
+    z-index: 1;
   }
 
   .mbc-bills {
