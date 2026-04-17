@@ -4,7 +4,7 @@
 // ===================================================================
 
 .settings-page {
-  background: var(--ink);
+  background: var(--void);
   color: var(--paper);
   min-height: 100vh;
   padding: 0 0 140px;
@@ -19,7 +19,7 @@
   border-bottom: 1px solid var(--ink-line);
   position: sticky;
   top: 0;
-  background: var(--ink);
+  background: var(--void);
   z-index: 10;
 
   .back-btn {
@@ -171,7 +171,7 @@
   .card-icon {
     width: 48px;
     height: 48px;
-    background: var(--ink);
+    background: var(--void);
     border: 1px solid var(--ink-line);
     display: flex;
     align-items: center;

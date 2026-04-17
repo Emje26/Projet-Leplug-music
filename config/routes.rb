@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   # ---- PROFILE (inchangé) ------------------------------------------
   resource :profile, only: [:show, :edit, :update]
   get 'profile/settings', to: 'profiles#settings', as: :profile_settings
+  get 'profile/revenues', to: 'profiles#revenues', as: :profile_revenues
   get 'who_you_are',      to: 'profiles#edit',     as: :who_you_are
 
   # ---- CHAT (inchangé) ---------------------------------------------

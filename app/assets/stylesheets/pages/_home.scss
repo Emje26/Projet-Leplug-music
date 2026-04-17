@@ -5,7 +5,7 @@
 
 .feed-page {
   min-height: 100vh;
-  background: var(--ink);
+  background: var(--void);
   color: var(--paper);
   padding-bottom: 120px;
 }
@@ -19,7 +19,7 @@
   border-bottom: 1px solid var(--ink-line);
   position: sticky;
   top: 0;
-  background: var(--ink);
+  background: var(--void);
   z-index: 20;
 
   .brand {
@@ -537,7 +537,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, var(--ink) 0%, transparent 45%);
+    background: linear-gradient(to top, var(--void) 0%, transparent 45%);
   }
 
   .drop-catalog {
@@ -619,7 +619,7 @@
   bottom: 0;
   height: calc(72px + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
-  background: var(--ink);
+  background: var(--void);
   border-top: 1px solid var(--ink-line);
   display: flex;
   align-items: center;
@@ -826,7 +826,7 @@
 
 .assistant-page {
   min-height: 100vh;
-  background: var(--ink);
+  background: var(--void);
   color: var(--paper);
   padding-bottom: 140px;
   display: flex;
@@ -841,7 +841,7 @@
   border-bottom: 1px solid var(--ink-line);
   position: sticky;
   top: 0;
-  background: var(--ink);
+  background: var(--void);
   z-index: 10;
 
   .hdr-back {
@@ -1115,7 +1115,7 @@
     transform: translate(-50%, -50%);
     width: 12px;
     height: 12px;
-    background: var(--ink);
+    background: var(--void);
     border-radius: 50%;
     box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
   }

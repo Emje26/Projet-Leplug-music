@@ -45,7 +45,7 @@
   <section class="settings-section">
     <h2 class="section-label">ARGENT</h2>
 
-    <a class="settings-card" href="#">
+    <%= link_to profile_revenues_path, class: "settings-card" do %>
       <span class="card-icon signal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <line x1="12" y1="2"  x2="12" y2="22"/>
@@ -58,7 +58,7 @@
       </div>
       <span class="card-amount">€247.80</span>
       <span class="card-arrow">›</span>
-    </a>
+    <% end %>
 
     <a class="settings-card" href="#">
       <span class="card-icon">

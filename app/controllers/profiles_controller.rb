@@ -8,6 +8,9 @@ class ProfilesController < ApplicationController
   def settings
   end
 
+  def revenues
+  end
+
   def edit
   end
 
