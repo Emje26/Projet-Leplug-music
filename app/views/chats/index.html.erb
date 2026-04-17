@@ -12,13 +12,13 @@
   ]
 
   messages = [
-    { name: "KØNG",        preview: "A aimé un message",           time: "5H",  unread: false },
-    { name: "DJ STORM",    preview: "Vu par DJ Storm",             time: "8H",  unread: false },
-    { name: "PIELO",       preview: "A envoyé un reel de legend…", time: "3J",  unread: true  },
-    { name: "ULYSSE N.",   preview: "A aimé un message",           time: "3J",  unread: false },
-    { name: "DODO",        preview: "Regarde sur Shotgun",         time: "4J",  unread: false },
-    { name: "J2",          preview: "Tu connais le morceau ?",     time: "5J",  unread: false },
-    { name: "MAYA B.",     preview: "On fait la collab ?",         time: "1S",  unread: true  }
+    { id: 1, name: "KØNG",        preview: "Tiens check mon pricing :",  time: "5H",  unread: false },
+    { id: 2, name: "STUDIO BARBÈS", preview: "Nickel ! À mardi 📍",     time: "8H",  unread: false },
+    { id: 3, name: "PIELO",       preview: "Voilà ce que je propose :", time: "3J",  unread: true  },
+    { id: nil, name: "ULYSSE N.",   preview: "A aimé un message",        time: "3J",  unread: false },
+    { id: nil, name: "DODO",        preview: "Regarde sur Shotgun",       time: "4J",  unread: false },
+    { id: nil, name: "J2",          preview: "Tu connais le morceau ?",   time: "5J",  unread: false },
+    { id: nil, name: "MAYA B.",     preview: "On fait la collab ?",       time: "1S",  unread: true  }
   ]
 %>
 
@@ -59,14 +59,14 @@
 
   <div class="chat-list">
     <% messages.each do |m| %>
-      <div class="chat-row <%= 'unread' if m[:unread] %>">
+      <%= link_to (m[:id] ? conversation_path(m[:id]) : "#"), class: "chat-row #{'unread' if m[:unread]}", style: "text-decoration:none;color:inherit;" do %>
         <div class="cr-av"></div>
         <div>
           <h3 class="cr-name"><%= m[:name] %></h3>
           <div class="cr-preview"><%= m[:preview] %></div>
         </div>
         <span class="cr-time"><%= m[:time] %></span>
-      </div>
+      <% end %>
     <% end %>
   </div>
 

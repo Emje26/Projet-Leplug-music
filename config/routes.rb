@@ -39,8 +39,9 @@ Rails.application.routes.draw do
   get 'profile/revenues', to: 'profiles#revenues', as: :profile_revenues
   get 'who_you_are',      to: 'profiles#edit',     as: :who_you_are
 
-  # ---- CHAT (inchangé) ---------------------------------------------
+  # ---- CHAT + CONVERSATIONS -----------------------------------------
   resources :chats, only: [:index]
+  resources :conversations, only: [:show]
 
   # ---- LEGACY (résidus KitchenGuru, inchangés) ---------------------
   post 'meal_plans/generate', to: 'meal_plans#generate', as: :meal_plans_generate
