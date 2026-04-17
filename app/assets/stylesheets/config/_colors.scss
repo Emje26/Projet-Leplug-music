@@ -1,14 +1,13 @@
 // ===================================================================
 // LE PLUG — Palette
-// "Whole Lotta Red" mode: void black, blood red, pure white.
-// Dark mode by default, light mode via prefers-color-scheme + .light-mode.
+// Warm dark mode: charcoal browns instead of pure black.
 // ===================================================================
 
 // SCSS build-time variables (used by bootstrap_variables.scss)
-$ink:        #000000;
-$ink-2:      #111111;
-$ink-3:      #1A1A1A;
-$ink-line:   rgba(255,255,255,0.03);
+$ink:        #2C2926;
+$ink-2:      #39352F;
+$ink-3:      #443E3B;
+$ink-line:   rgba(255,255,255,0.05);
 
 $paper:      #FFFFFF;
 $paper-dim:  rgba(255,255,255,0.25);
