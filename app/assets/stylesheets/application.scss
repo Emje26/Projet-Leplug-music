@@ -25,21 +25,21 @@
   --accent:     #D12326;
   --accent-rgb: 209, 35, 38;
 
-  --void:       #000000;
-  --surface:    #111111;
-  --card:       #1A1A1A;
+  --void:       #2C2926;
+  --surface:    #39352F;
+  --card:       #443E3B;
   --ink:        #FFFFFF;
   --green:      #4ADE80;
 
   --text-sec:   rgba(255,255,255,0.25);
   --text-ter:   rgba(255,255,255,0.15);
-  --border:     rgba(255,255,255,0.03);
-  --border-btn: rgba(255,255,255,0.12);
+  --border:     rgba(255,255,255,0.05);
+  --border-btn: rgba(255,255,255,0.14);
 
   // Legacy aliases (so existing pages still compile)
-  --ink-2:      #111111;
-  --ink-3:      #1A1A1A;
-  --ink-line:   rgba(255,255,255,0.03);
+  --ink-2:      #39352F;
+  --ink-3:      #443E3B;
+  --ink-line:   rgba(255,255,255,0.05);
   --paper:      #FFFFFF;
   --paper-dim:  rgba(255,255,255,0.25);
   --paper-mute: rgba(255,255,255,0.15);
@@ -89,7 +89,7 @@ body.light-mode {
 * { box-sizing: border-box; }
 
 html, body {
-  background: #000 !important;
+  background: #2C2926 !important;
   background: var(--void) !important;
   color: #fff !important;
   color: var(--ink) !important;
