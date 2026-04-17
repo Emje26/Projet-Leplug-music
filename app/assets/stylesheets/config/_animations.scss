@@ -39,5 +39,16 @@
 // ---- CHECK DRAW ---------------------------------------------------
 @keyframes check-draw { 0% { stroke-dashoffset: 30; } 100% { stroke-dashoffset: 0; } }
 
+// ---- REVENUES LASER BILLS (6 variants, more organic than the generic float-up set) ----
+@keyframes float-1 { 0% { transform: translateY(50px) rotate(-8deg); opacity: 0; } 12% { opacity: 0.55; } 88% { opacity: 0.55; } 100% { transform: translateY(-380px) rotate(6deg); opacity: 0; } }
+@keyframes float-2 { 0% { transform: translateY(70px) rotate(5deg); opacity: 0; } 10% { opacity: 0.45; } 82% { opacity: 0.45; } 100% { transform: translateY(-400px) rotate(-5deg); opacity: 0; } }
+@keyframes float-3 { 0% { transform: translateY(35px) rotate(-4deg); opacity: 0; } 18% { opacity: 0.4; } 78% { opacity: 0.4; } 100% { transform: translateY(-360px) rotate(7deg); opacity: 0; } }
+@keyframes float-4 { 0% { transform: translateY(55px) rotate(9deg); opacity: 0; } 14% { opacity: 0.35; } 84% { opacity: 0.35; } 100% { transform: translateY(-390px) rotate(-3deg); opacity: 0; } }
+@keyframes float-5 { 0% { transform: translateY(42px) rotate(-11deg); opacity: 0; } 16% { opacity: 0.5; } 80% { opacity: 0.5; } 100% { transform: translateY(-370px) rotate(4deg); opacity: 0; } }
+@keyframes float-6 { 0% { transform: translateY(60px) rotate(3deg); opacity: 0; } 13% { opacity: 0.3; } 85% { opacity: 0.3; } 100% { transform: translateY(-350px) rotate(-8deg); opacity: 0; } }
+
 // ---- FLICKER (logo) -----------------------------------------------
 @keyframes flicker { 0%, 95%, 100% { opacity: 1; } 96% { opacity: 0.3; } 98% { opacity: 0.7; } }
+
+// ---- CHARGE BAR (revenue source bars) -----------------------------
+@keyframes charge-bar { from { width: 0; } to { width: var(--w); } }

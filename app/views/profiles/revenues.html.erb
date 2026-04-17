@@ -1,0 +1,167 @@
+<div class="revenues-page">
+
+  <!-- HEADER -->
+  <header class="rev-header">
+    <%= link_to profile_settings_path, class: "rev-back" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <% end %>
+    <div class="rev-header-title">
+      <h1 class="q">REVENUS</h1>
+      <span class="rev-header-sub">REVENUS & RETRAITS</span>
+    </div>
+    <button class="rev-dots" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+    </button>
+  </header>
+  <%= render "shared/drip" %>
+
+  <!-- CARTE SOLDE + BILLETS LASER -->
+  <section class="rev-balance-card">
+    <!-- 6 billets laser animés -->
+    <div class="laser-bill" style="right:8px;bottom:-10px;animation:float-1 6.5s infinite">
+      <svg width="56" height="30" viewBox="0 0 56 30" fill="none">
+        <rect x="1" y="1" width="54" height="28" rx="3" stroke="#D12326" stroke-width="0.7" opacity="0.5"/>
+        <circle cx="28" cy="15" r="7" stroke="#D12326" stroke-width="0.5" opacity="0.4"/>
+        <line x1="9" y1="8" x2="9" y2="22" stroke="#D12326" stroke-width="0.4" opacity="0.25"/>
+        <line x1="47" y1="8" x2="47" y2="22" stroke="#D12326" stroke-width="0.4" opacity="0.25"/>
+        <rect x="4" y="4" width="8" height="5" rx="1" stroke="#D12326" stroke-width="0.3" opacity="0.2"/>
+        <rect x="44" y="21" width="8" height="5" rx="1" stroke="#D12326" stroke-width="0.3" opacity="0.2"/>
+        <text x="28" y="17" text-anchor="middle" font-size="7" font-family="'JetBrains Mono',monospace" fill="#D12326" opacity="0.55">€</text>
+      </svg>
+    </div>
+    <div class="laser-bill" style="left:20px;bottom:-15px;animation:float-2 8.5s infinite;animation-delay:1.8s">
+      <svg width="50" height="26" viewBox="0 0 50 26" fill="none">
+        <rect x="1" y="1" width="48" height="24" rx="3" stroke="#D12326" stroke-width="0.6" opacity="0.45"/>
+        <circle cx="25" cy="13" r="6" stroke="#D12326" stroke-width="0.5" opacity="0.35"/>
+        <line x1="8" y1="7" x2="8" y2="19" stroke="#D12326" stroke-width="0.35" opacity="0.2"/>
+        <line x1="42" y1="7" x2="42" y2="19" stroke="#D12326" stroke-width="0.35" opacity="0.2"/>
+        <text x="25" y="15" text-anchor="middle" font-size="6" font-family="'JetBrains Mono',monospace" fill="#D12326" opacity="0.5">€</text>
+      </svg>
+    </div>
+    <div class="laser-bill" style="right:35px;bottom:0;animation:float-3 7s infinite;animation-delay:3.2s">
+      <svg width="48" height="25" viewBox="0 0 48 25" fill="none">
+        <rect x="1" y="1" width="46" height="23" rx="3" stroke="#D12326" stroke-width="0.6" opacity="0.4"/>
+        <circle cx="24" cy="12.5" r="5.5" stroke="#D12326" stroke-width="0.45" opacity="0.3"/>
+        <text x="24" y="14.5" text-anchor="middle" font-size="6" font-family="'JetBrains Mono',monospace" fill="#D12326" opacity="0.45">€</text>
+      </svg>
+    </div>
+    <div class="laser-bill" style="left:45%;bottom:-20px;animation:float-4 9s infinite;animation-delay:4.8s">
+      <svg width="44" height="23" viewBox="0 0 44 23" fill="none">
+        <rect x="1" y="1" width="42" height="21" rx="2" stroke="#D12326" stroke-width="0.5" opacity="0.35"/>
+        <circle cx="22" cy="11.5" r="5" stroke="#D12326" stroke-width="0.4" opacity="0.25"/>
+        <text x="22" y="13.5" text-anchor="middle" font-size="5.5" font-family="'JetBrains Mono',monospace" fill="#D12326" opacity="0.4">€</text>
+      </svg>
+    </div>
+    <div class="laser-bill" style="left:8px;bottom:5px;animation:float-5 7.5s infinite;animation-delay:2.2s">
+      <svg width="52" height="27" viewBox="0 0 52 27" fill="none">
+        <rect x="1" y="1" width="50" height="25" rx="3" stroke="#D12326" stroke-width="0.6" opacity="0.45"/>
+        <circle cx="26" cy="13.5" r="6.5" stroke="#D12326" stroke-width="0.5" opacity="0.35"/>
+        <line x1="8" y1="7" x2="8" y2="20" stroke="#D12326" stroke-width="0.35" opacity="0.2"/>
+        <line x1="44" y1="7" x2="44" y2="20" stroke="#D12326" stroke-width="0.35" opacity="0.2"/>
+        <text x="26" y="15.5" text-anchor="middle" font-size="6.5" font-family="'JetBrains Mono',monospace" fill="#D12326" opacity="0.5">€</text>
+      </svg>
+    </div>
+    <div class="laser-bill" style="right:18px;bottom:-8px;animation:float-6 10s infinite;animation-delay:6s">
+      <svg width="42" height="22" viewBox="0 0 42 22" fill="none">
+        <rect x="1" y="1" width="40" height="20" rx="2" stroke="#D12326" stroke-width="0.5" opacity="0.3"/>
+        <circle cx="21" cy="11" r="4.5" stroke="#D12326" stroke-width="0.4" opacity="0.25"/>
+        <text x="21" y="13" text-anchor="middle" font-size="5" font-family="'JetBrains Mono',monospace" fill="#D12326" opacity="0.35">€</text>
+      </svg>
+    </div>
+
+    <!-- Starburst coin -->
+    <div class="rev-starburst"><%= render "shared/starburst", size: :small %></div>
+
+    <!-- Contenu par-dessus -->
+    <div class="rev-balance-content">
+      <span class="rev-label q">SOLDE DISPONIBLE</span>
+      <div class="rev-amount">
+        <span class="rev-amount-main" style="animation: flicker 5s infinite;">247</span>
+        <span class="rev-amount-cents">.80€</span>
+      </div>
+      <div class="rev-delta">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#4ADE80" stroke="#4ADE80" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+        <span class="rev-delta-pct">+34.2%</span>
+        <span class="rev-delta-vs">vs mois dernier</span>
+      </div>
+      <a href="#" class="btn-signal rev-withdraw">"RETIRER"</a>
+      <span class="rev-withdraw-hint">Min. 50€ · Virement 2-3j</span>
+    </div>
+  </section>
+
+  <!-- SOURCES DE REVENUS -->
+  <section class="rev-sources">
+    <span class="rev-section-label q">SOURCES DE REVENUS</span>
+    <div class="rev-sources-grid">
+      <% [
+        { label: "ÉCOUTES", amount: "142.50€", pct: 58 },
+        { label: "PLUGS",   amount: "68.30€",  pct: 28 },
+        { label: "TIPS",    amount: "25.00€",  pct: 10 },
+        { label: "COLLABS", amount: "12.00€",  pct: 4  }
+      ].each do |src| %>
+        <div class="rev-source-card">
+          <span class="rev-source-label q"><%= src[:label] %></span>
+          <span class="rev-source-amount"><%= src[:amount] %></span>
+          <div class="rev-source-bar">
+            <div class="rev-source-fill" style="--w: <%= src[:pct] %>%;"></div>
+          </div>
+          <span class="rev-source-pct"><%= src[:pct] %>%</span>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- ÉVOLUTION -->
+  <section class="rev-evolution">
+    <div class="rev-evo-header">
+      <span class="rev-section-label q">ÉVOLUTION</span>
+      <div class="rev-evo-tabs">
+        <span class="rev-evo-tab">7J</span>
+        <span class="rev-evo-tab active">30J</span>
+        <span class="rev-evo-tab">90J</span>
+      </div>
+    </div>
+    <div class="rev-chart">
+      <svg viewBox="0 0 300 100" preserveAspectRatio="none" class="rev-chart-svg">
+        <polyline fill="none" stroke="#D12326" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          points="10,80 30,75 50,70 70,72 90,65 110,60 130,55 150,58 170,50 190,45 210,42 230,35 250,30 270,25 290,18"/>
+        <circle cx="290" cy="18" r="3" fill="#D12326"/>
+      </svg>
+      <div class="rev-chart-labels">
+        <span>16 MAR</span><span>23 MAR</span><span>30 MAR</span><span>06 AVR</span><span>15 AVR</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DERNIÈRES TRANSACTIONS -->
+  <section class="rev-transactions">
+    <span class="rev-section-label q">DERNIÈRES TRANSACTIONS</span>
+    <% [
+      { label: "Écoutes — Minuit à Barbès", date: "15 AVR", amount: "+8.40€", type: :income },
+      { label: "Tip de @samira.k",          date: "14 AVR", amount: "+5.00€", type: :income },
+      { label: "Plug bonus x3",             date: "13 AVR", amount: "+3.20€", type: :income },
+      { label: "Retrait IBAN",              date: "12 AVR", amount: "-150€",  type: :expense },
+      { label: "Écoutes — Béton ft. Marwa", date: "11 AVR", amount: "+6.80€", type: :income }
+    ].each do |tx| %>
+      <div class="rev-tx-row">
+        <div class="rev-tx-icon <%= tx[:type] == :income ? 'income' : 'expense' %>">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+            <% if tx[:type] == :income %>
+              <path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>
+            <% else %>
+              <path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/>
+            <% end %>
+          </svg>
+        </div>
+        <div class="rev-tx-info">
+          <span class="rev-tx-label"><%= tx[:label] %></span>
+          <span class="rev-tx-date"><%= tx[:date] %></span>
+        </div>
+        <span class="rev-tx-amount <%= tx[:type] == :income ? 'income' : 'expense' %>"><%= tx[:amount] %></span>
+      </div>
+    <% end %>
+  </section>
+
+</div>
+
+<%= render "shared/bottom_nav", active: :me %>
