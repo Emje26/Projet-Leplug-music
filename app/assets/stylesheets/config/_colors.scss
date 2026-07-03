@@ -1,30 +1,27 @@
 // ===================================================================
 // LE PLUG — Palette
-// Warm dark mode: charcoal browns instead of pure black.
+// Deep navy studio-at-night, électrifié par un dégradé bleu → cyan.
 // ===================================================================
 
 // SCSS build-time variables (used by bootstrap_variables.scss)
-$ink:        #2C2926;
-$ink-2:      #39352F;
-$ink-3:      #443E3B;
-$ink-line:   rgba(255,255,255,0.05);
+$ink:        #060E22;   // le plus profond — footers, fonds de console
+$navy:       #0A1631;   // fond global
+$surface:    #102047;   // cartes
+$surface-2:  #162A57;   // cartes surélevées / hover
 
-$paper:      #FFFFFF;
-$paper-dim:  rgba(255,255,255,0.25);
-$paper-mute: rgba(255,255,255,0.15);
+$line:        rgba(120, 150, 220, 0.16);
+$line-strong: rgba(120, 150, 220, 0.32);
 
-$signal:     #D12326;
-$signal-dim: #A01E1E;
+$blue:        #2F6BFF;
+$blue-bright: #5189FF;
+$cyan:        #57E1FF;
 
-$live:       #D12326;
-$danger:     #FF4757;
-$success:    #4ADE80;
+$text:    #EAF1FF;
+$muted:   #93A6D4;
+$muted-2: #5E72A0;
 
-// Legacy bootstrap-expected names
-$red:        #D12326;
-$blue:       #0D6EFD;
-$yellow:     #FFC65A;
-$orange:     $signal;
-$green:      $success;
-$gray:       $ink;
-$light-gray: $paper;
+$on-accent: #04122E;   // texte posé sur le dégradé bleu/cyan
+
+$danger:  #FF5470;
+$success: #3DDC97;
+$gold:    #FFD66B;

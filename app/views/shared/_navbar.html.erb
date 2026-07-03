@@ -1,25 +1,22 @@
 <nav class="plug-navbar">
-  <%= link_to root_path, class: "nav-brand" do %>
-    <span class="brand-dot"></span>
-    <span class="brand-name">LE&nbsp;PLUG</span>
-    <span class="brand-catalog">C/O&nbsp;MUSIC</span>
+  <%= link_to root_path, class: "logo", "aria-label": "Le Plug — accueil" do %>
+    <span class="logo-mark"><span></span><span></span><span></span><span></span></span>
+    LE PLUG
   <% end %>
 
   <ul class="nav-links">
     <% if user_signed_in? %>
-      <li><%= link_to "\"FEED\"", root_path, class: "nav-link" %></li>
-      <li><%= link_to "\"MESSAGES\"", chats_path, class: "nav-link" %></li>
-      <li><%= link_to "\"PROFILE\"", profile_path, class: "nav-link" %></li>
+      <li><%= link_to "Feed", feed_path, class: "nav-link" %></li>
+      <li><%= link_to "Messages", chats_path, class: "nav-link" %></li>
+      <li><%= link_to "Profil", profile_path, class: "nav-link" %></li>
       <li>
-        <%= link_to destroy_user_session_path,
+        <%= link_to "Déconnexion", destroy_user_session_path,
                     data: { turbo_method: :delete },
-                    class: "nav-link" do %>
-          "LOGOUT"
-        <% end %>
+                    class: "nav-link" %>
       </li>
     <% else %>
-      <li><%= link_to "\"LOGIN\"", new_user_session_path, class: "nav-link" %></li>
-      <li><%= link_to "PLUG IN", new_user_registration_path, class: "nav-cta" %></li>
+      <li><%= link_to "Se connecter", new_user_session_path, class: "nav-link" %></li>
+      <li><%= link_to "Créer un compte", new_user_registration_path, class: "nav-cta" %></li>
     <% end %>
   </ul>
 </nav>

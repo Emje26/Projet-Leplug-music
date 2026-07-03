@@ -2,26 +2,8 @@
 
 <div class="booking-page">
 
-  <!-- CLOUDS TOP -->
-  <div class="booking-clouds-top">
-    <%= render "shared/clouds" %>
-  </div>
-
-  <!-- CONFETTI -->
-  <div class="booking-confetti" aria-hidden="true">
-    <div class="confetti confetti-1"></div>
-    <div class="confetti confetti-2"></div>
-    <div class="confetti confetti-1"></div>
-    <div class="confetti confetti-2"></div>
-    <div class="confetti confetti-1"></div>
-    <div class="confetti confetti-2"></div>
-  </div>
-
-  <!-- CHECK CIRCLE + STARBURST -->
+  <!-- CHECK -->
   <div class="booking-check-zone">
-    <div class="booking-starburst">
-      <%= render "shared/starburst", size: :medium %>
-    </div>
     <div class="booking-check-circle">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="32" height="32">
         <polyline points="20 6 9 17 4 12"/>
@@ -29,53 +11,50 @@
     </div>
   </div>
 
-  <!-- TITLE + DRIP -->
+  <!-- TITLE -->
   <div class="booking-title-zone">
-    <h1 class="booking-confirmed-title">RÉSERVÉ</h1>
-    <div class="booking-drip-wrap">
-      <%= render "shared/drip" %>
-    </div>
-    <span class="booking-kicker q">CONFIRMÉ — № <%= @booking.id.to_s.rjust(4, "0") %></span>
+    <h1 class="booking-confirmed-title">Réservé</h1>
+    <span class="booking-kicker">Confirmé — № <%= @booking.id.to_s.rjust(4, "0") %></span>
   </div>
 
   <!-- BOOKABLE SUMMARY -->
   <section class="booking-bookable">
     <div class="bb-cover"><span><%= @bookable.initials %></span></div>
     <div class="bb-body">
-      <span class="bb-type q"><%= @booking.bookable_label.upcase %></span>
+      <span class="bb-type"><%= @booking.bookable_label %></span>
       <h2 class="bb-name">
-        <%= link_to @bookable.name.upcase, bookable_path, style: "color:inherit;text-decoration:none;" %>
+        <%= link_to @bookable.name, bookable_path, style: "color:inherit;text-decoration:none;" %>
       </h2>
-      <span class="bb-price">€<%= @booking.hourly_price.to_i %>/H · <%= @booking.duration_hours %>H</span>
+      <span class="bb-price">€<%= @booking.hourly_price.to_i %>/h · <%= @booking.duration_hours %>h</span>
     </div>
   </section>
 
   <!-- DETAILS -->
   <section class="booking-section">
-    <span class="bsec-label q">DÉTAILS</span>
+    <span class="bsec-label">Détails</span>
     <div class="details-grid">
       <div>
-        <span class="dg-k">DATE</span>
+        <span class="dg-k">Date</span>
         <span class="dg-v"><%= I18n.l(@booking.date, format: "%d %b %Y") rescue @booking.date.to_s %></span>
       </div>
       <div>
-        <span class="dg-k">CRÉNEAU</span>
+        <span class="dg-k">Créneau</span>
         <span class="dg-v"><%= @booking.start_time&.strftime("%H:%M") || "—" %></span>
       </div>
       <div>
-        <span class="dg-k">DURÉE</span>
-        <span class="dg-v"><%= @booking.duration_hours %>H</span>
+        <span class="dg-k">Durée</span>
+        <span class="dg-v"><%= @booking.duration_hours %>h</span>
       </div>
       <div>
-        <span class="dg-k">STATUT</span>
-        <span class="dg-v" style="color: var(--accent);"><%= @booking.status.upcase %></span>
+        <span class="dg-k">Statut</span>
+        <span class="dg-v accent"><%= @booking.status %></span>
       </div>
     </div>
   </section>
 
   <!-- SUMMARY -->
   <section class="booking-section">
-    <span class="bsec-label q">RÉCAPITULATIF</span>
+    <span class="bsec-label">Récapitulatif</span>
     <div class="summary-card">
       <div class="sum-row">
         <span class="sum-k">Sous-total</span>
@@ -95,13 +74,10 @@
 
   <!-- CTAs -->
   <div class="booking-cta">
-    <%= link_to "VOIR MES RÉSERVATIONS", bookings_path, class: "btn-signal", style: "width: 100%;" %>
-    <%= link_to "RETOUR", search_path, class: "btn-ghost", style: "width: 100%; margin-top: 10px;" %>
-  </div>
-
-  <!-- CLOUDS BOTTOM -->
-  <div class="booking-clouds-bottom">
-    <%= render "shared/clouds" %>
+    <%= link_to "Voir mes réservations", bookings_path, class: "btn-primary", style: "width: 100%;" %>
+    <%= link_to "Retour à l'exploration", search_path, class: "btn-ghost", style: "width: 100%; margin-top: 10px;" %>
   </div>
 
 </div>
+
+<%= render "shared/bottom_nav", active: :search %>

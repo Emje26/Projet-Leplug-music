@@ -1,41 +1,196 @@
-<%# Logged-in users are redirected to search_path by HomeController#index.
-    This template is the landing page for anonymous visitors only. %>
+<%# Landing page — visiteurs anonymes uniquement.
+    Les utilisateurs connectés sont redirigés vers search_path. %>
 
 <div class="plug-landing">
-  <!-- Clouds behind everything -->
-  <%= render "shared/clouds" %>
 
-  <header class="landing-topbar">
-    <span class="lt-brand" style="animation: flicker 6s ease-in-out infinite;">LE PLUG</span>
-    <span class="lt-right"><%= Date.today.year %></span>
+  <!-- TOPBAR -->
+  <header class="landing-topbar" data-controller="landing-nav">
+    <div class="wrap lt-inner">
+      <%= link_to root_path, class: "logo", "aria-label": "Le Plug — accueil" do %>
+        <span class="logo-mark"><span></span><span></span><span></span><span></span></span>
+        LE PLUG
+      <% end %>
+      <div class="lt-actions">
+        <%= link_to "Se connecter", new_user_session_path, class: "btn-ghost" %>
+        <%= link_to "Créer un compte", new_user_registration_path, class: "btn-primary" %>
+      </div>
+    </div>
   </header>
 
-  <section class="landing-body">
-    <!-- Starburst behind the title -->
-    <div class="landing-starburst">
-      <%= render "shared/starburst", size: :large %>
-    </div>
+  <!-- HERO -->
+  <section class="landing-hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Marketplace studios &amp; talents</span>
+        <h1>Trouve ton studio.<br>Book ton créneau.<br><em>Enregistre ton son.</em></h1>
+        <p class="lede">
+          Le Plug connecte les artistes aux studios, beatmakers et ingés son.
+          Dispos en temps réel, réservation en deux clics, paiement sécurisé.
+        </p>
 
-    <h1 class="landing-title">LE PLUG</h1>
-    <%= render "shared/drip" %>
+        <div class="hero-actions">
+          <%= link_to "Créer mon compte →", new_user_registration_path, class: "btn-primary" %>
+          <%= link_to "Se connecter", new_user_session_path, class: "btn-ghost" %>
+        </div>
 
-    <p class="landing-sub">
-      La musique. Les studios. Les talents.<br>
-      <strong>Tout connecté.</strong>
-    </p>
+        <div class="hero-tags">
+          <span class="pill"><b><%= Studio.count %></b> studios</span>
+          <span class="pill"><b><%= Talent.count %></b> talents</span>
+          <span class="pill"><b>2.1K</b> artistes plugged</span>
+          <span class="pill">0 % commission artiste</span>
+        </div>
+      </div>
 
-    <div class="landing-actions">
-      <%= link_to new_user_registration_path, class: "btn-signal" do %>
-        "CRÉER UN COMPTE"
-      <% end %>
-      <%= link_to new_user_session_path, class: "btn-ghost" do %>
-        "SE CONNECTER"
-      <% end %>
+      <!-- Console visuelle -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="console-top">
+          <div class="rec"><span class="dot"></span> REC · Session live</div>
+          <div class="timecode mono">00:02:14:08</div>
+        </div>
+        <div class="eq">
+          <% 32.times do |i| %>
+            <span style="animation-delay: <%= (i * 0.06).round(2) %>s; animation-duration: <%= (1 + (i * 7 % 10) * 0.08).round(2) %>s;"></span>
+          <% end %>
+        </div>
+        <div class="track-strip">
+          <div class="strip-row"><span class="ch">VOX</span><div class="mini-wave"></div><span class="lvl">-6 dB</span></div>
+          <div class="strip-row"><span class="ch">GTR</span><div class="mini-wave"></div><span class="lvl">-9 dB</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- STATS -->
+  <div class="landing-stats">
+    <div class="wrap">
+      <div class="stat"><div class="num">320<em>+</em></div><div class="lab">studios &amp; talents référencés</div></div>
+      <div class="stat"><div class="num">4 200</div><div class="lab">sessions réservées / mois</div></div>
+      <div class="stat"><div class="num">18</div><div class="lab">villes couvertes</div></div>
+      <div class="stat"><div class="num">4,9<em>/5</em></div><div class="lab">note moyenne artistes</div></div>
+    </div>
+  </div>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <section class="landing-steps" id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Comment ça marche</span>
+        <h2>De l'idée au master, en trois temps</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="ic">🔍</div>
+          <div class="n">01</div>
+          <h3>Cherche</h3>
+          <p>Filtre par ville, métier et budget. Compare l'équipement, les avis et les créneaux libres.</p>
+        </div>
+        <div class="step">
+          <div class="ic">📅</div>
+          <div class="n">02</div>
+          <h3>Réserve</h3>
+          <p>Choisis ta date, ton créneau et ta durée, paie en sécurité. Confirmation immédiate.</p>
+        </div>
+        <div class="step">
+          <div class="ic">🎙️</div>
+          <div class="n">03</div>
+          <h3>Enregistre</h3>
+          <p>Tu poses ton son. Partage tes tracks à la communauté et fais grossir tes plugs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TÉMOIGNAGES + CTA -->
+  <section class="landing-community" id="cta">
+    <div class="wrap">
+      <div class="sec-head" style="text-align:center;margin-left:auto;margin-right:auto">
+        <span class="eyebrow" style="justify-content:center;display:flex">Ils enregistrent sur Le Plug</span>
+        <h2>La communauté en parle</h2>
+      </div>
+      <div class="quotes">
+        <div class="quote">
+          <p>« J'ai trouvé un studio dispo le soir même à Paris. Réservé, payé, enregistré. Zéro coup de fil. »</p>
+          <div class="who"><div class="avatar"></div><div><div class="nm">Naïma K.</div><div class="rl">Artiste · R&amp;B</div></div></div>
+        </div>
+        <div class="quote">
+          <p>« Côté studio, mes créneaux creux se remplissent tout seuls. +30 % de taux d'occupation. »</p>
+          <div class="who"><div class="avatar"></div><div><div class="nm">Studio Latérale</div><div class="rl">Studio · Lyon</div></div></div>
+        </div>
+        <div class="quote">
+          <p>« Pouvoir booker un ingé son en même temps que le studio, c'est le détail qui change tout. »</p>
+          <div class="who"><div class="avatar"></div><div><div class="nm">Théo M.</div><div class="rl">Beatmaker · Bordeaux</div></div></div>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h2>Ton prochain son commence ici</h2>
+        <p>Crée ton compte gratuitement et réserve ta première session aujourd'hui.</p>
+        <div class="actions">
+          <%= link_to "Créer mon compte artiste", new_user_registration_path, class: "btn-dark" %>
+          <%= link_to "Se connecter", new_user_session_path, class: "btn-line" %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="landing-faq" id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">FAQ</span>
+        <h2>Les questions fréquentes</h2>
+      </div>
+      <div class="faq-list">
+        <% [
+          ["Comment je réserve un studio ?",
+           "Tu explores par ville et métier, tu choisis une date, un créneau et une durée, tu confirmes. La confirmation arrive instantanément avec le récapitulatif complet."],
+          ["C'est quoi la commission ?",
+           "0 % pour les artistes : tu paies le prix affiché plus des frais de service transparents. Le Plug se rémunère côté prestataire."],
+          ["Je peux booker un beatmaker ou un ingé son ?",
+           "Oui. Les talents (beatmakers, mixage, mastering, clip…) se réservent exactement comme les studios, au même endroit."],
+          ["Je récupère mes pistes comment ?",
+           "Tes fichiers sont partagés directement avec le studio via la messagerie. Tu peux ensuite les publier sur ton profil."],
+          ["Je gère un studio, comment je m'inscris ?",
+           "Crée un compte, renseigne ton équipement et tes créneaux. Tu pilotes tes disponibilités en temps réel."]
+        ].each do |q, a| %>
+          <details class="faq">
+            <summary><%= q %><span class="pm">+</span></summary>
+            <p class="faq-a"><%= a %></p>
+          </details>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="landing-footer">
-    <span class="q">MADE IN LE WAGON</span>
-    <span style="color: var(--accent);">● 2.1K ARTISTS PLUGGED</span>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <span class="logo">
+            <span class="logo-mark"><span></span><span></span><span></span><span></span></span>
+            LE PLUG
+          </span>
+          <p>La marketplace qui connecte les artistes aux studios, beatmakers et ingés son. Réserve, enregistre, partage.</p>
+        </div>
+        <div>
+          <h4>Artistes</h4>
+          <%= link_to "Créer un compte", new_user_registration_path %>
+          <%= link_to "Se connecter", new_user_session_path %>
+          <a href="#how">Comment ça marche</a>
+        </div>
+        <div>
+          <h4>Le Plug</h4>
+          <a href="#cta">La communauté</a>
+          <a href="#faq">FAQ</a>
+          <a href="mailto:hello@leplug.music">Contact</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <%= Date.today.year %> LE PLUG — Paris</span>
+        <span class="mono">Réserve ton studio. Enregistre ton son.</span>
+      </div>
+    </div>
   </footer>
+
 </div>

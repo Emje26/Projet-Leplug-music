@@ -1,0 +1,148 @@
+// ===================================================================
+// ASSISTANT — PLUG/AI, chat créatif
+// ===================================================================
+
+.assistant-page {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 76px);
+}
+
+.assistant-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px 12px;
+
+  .hdr-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    color: var(--text);
+    flex-shrink: 0;
+
+    &:hover { border-color: var(--cyan); color: var(--cyan); }
+  }
+
+  .hdr-title {
+    flex: 1;
+
+    h1 { font-size: 22px; font-weight: 700; margin: 2px 0 0; }
+  }
+
+  .hdr-kicker {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  .hdr-spacer { width: 40px; flex-shrink: 0; }
+}
+
+.assistant-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px 10px;
+  flex-wrap: wrap;
+
+  .btn-ghost { height: 40px; padding: 0 18px; font-size: 13px; }
+}
+
+// ---- FENÊTRE DE CHAT -----------------------------------------------------
+
+.chat-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 20px 16px;
+}
+
+.chat-bubble {
+  max-width: 88%;
+  padding: 13px 16px;
+  border-radius: var(--radius);
+  font-size: 14.5px;
+
+  .bubble-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    opacity: 0.7;
+  }
+
+  p { margin: 0 0 8px; &:last-child { margin-bottom: 0; } }
+
+  &.assistant {
+    align-self: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-bottom-left-radius: 5px;
+
+    .bubble-label { color: var(--cyan); }
+  }
+
+  &.user {
+    align-self: flex-end;
+    background: var(--grad);
+    color: var(--on-accent);
+    border-bottom-right-radius: 5px;
+
+    .bubble-label { color: rgba(4, 18, 46, 0.7); }
+  }
+}
+
+// ---- INPUT --------------------------------------------------------------
+
+.assistant-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 10px 20px 16px;
+
+  .assistant-input {
+    flex: 1;
+    min-width: 0;
+    background: rgba(16, 32, 71, 0.6);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 12px 16px;
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+      color: var(--muted-2);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+    }
+
+    &:focus { border-color: var(--cyan); }
+  }
+
+  .btn-primary { flex-shrink: 0; }
+}
+
+.assistant-hint {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}

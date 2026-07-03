@@ -27,11 +27,10 @@ Rails.application.routes.draw do
   # new attend ?bookable_type=Studio&bookable_id=:id
   resources :bookings, only: [:new, :create, :show, :index]
 
-  # ---- ASSISTANT (inchangé) ----------------------------------------
+  # ---- ASSISTANT (PLUG/AI) ------------------------------------------
   get  "assistant",        to: "assistant#show",  as: :assistant
   post "assistant/talk",   to: "assistant#talk",  as: :assistant_talk
   post "assistant/reset",  to: "assistant#reset", as: :reset_chat
-  post "assistant/save",   to: "assistant#save",  as: :assistant_save
 
   # ---- PROFILE (inchangé) ------------------------------------------
   resource :profile, only: [:show, :edit, :update]
@@ -42,11 +41,6 @@ Rails.application.routes.draw do
   # ---- CHAT + CONVERSATIONS -----------------------------------------
   resources :chats, only: [:index]
   resources :conversations, only: [:show]
-
-  # ---- LEGACY (résidus KitchenGuru, inchangés) ---------------------
-  post 'meal_plans/generate', to: 'meal_plans#generate', as: :meal_plans_generate
-  resources :recipes, only: [:index, :show, :destroy, :new, :create]
-  get "planner", to: "pages#planner"
 
   # ---- SETTINGS (money dashboard) ------------------------------------
   get "settings/money", to: "settings#money", as: :settings_money

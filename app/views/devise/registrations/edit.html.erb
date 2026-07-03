@@ -1,30 +1,16 @@
-<div class="cyber-auth-page">
+<div class="auth-page">
 
-  <!-- Floating music notes background -->
-  <div class="cyber-notes-bg">
-    <span class="note">♪</span>
-    <span class="note">♫</span>
-    <span class="note">🎵</span>
-    <span class="note">♬</span>
-    <span class="note">🎶</span>
-    <span class="note">♩</span>
-    <span class="note">♪</span>
-    <span class="note">♫</span>
-    <span class="note">🎵</span>
-    <span class="note">♬</span>
-  </div>
+  <div class="auth-panel">
+    <span class="logo">
+      <span class="logo-mark"><span></span><span></span><span></span><span></span></span>
+      LE PLUG
+    </span>
 
-  <div class="cyber-card">
+    <span class="auth-kicker">Mon compte</span>
+    <h1 class="auth-title">Tes <em>informations</em>.</h1>
+    <p class="auth-sub">Mets à jour ton email ou ton mot de passe.</p>
 
-    <!-- Header -->
-    <div class="cyber-header-section">
-      <div class="cyber-icon">⚙️</div>
-      <h1 class="cyber-title">Mon Profil</h1>
-      <p class="cyber-subtitle">Modifie tes <span class="highlight">informations</span></p>
-    </div>
-
-    <!-- Form -->
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "cyber-form" }) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "auth-form" }) do |f| %>
       <%= f.error_notification %>
 
       <div class="form-inputs">
@@ -35,9 +21,9 @@
             placeholder: "ton@email.com" %>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <p style="color: #00f5ff; font-size: 0.85rem; margin-bottom: 1rem; padding: 0.75rem; background: rgba(0,245,255,0.1); border-radius: 8px;">
-            ⏳ En attente de confirmation : <%= resource.unconfirmed_email %>
-          </p>
+          <div class="alert" style="position: static; margin: 0 0 14px;">
+            En attente de confirmation : <%= resource.unconfirmed_email %>
+          </div>
         <% end %>
 
         <%= f.input :password,
@@ -51,9 +37,7 @@
             label: "Confirmer le nouveau mot de passe",
             placeholder: "••••••••" %>
 
-        <div class="cyber-divider">
-          <span>Confirmation requise</span>
-        </div>
+        <div class="auth-divider"><span>Confirmation requise</span></div>
 
         <%= f.input :current_password,
             required: true,
@@ -62,27 +46,21 @@
             hint: "Pour confirmer les modifications" %>
       </div>
 
-      <%= f.button :submit, "Mettre à jour", class: "cyber-btn" %>
+      <%= f.button :submit, "Mettre à jour →", class: "btn-primary auth-submit" %>
     <% end %>
 
-    <!-- Danger zone -->
-    <div class="cyber-divider">
-      <span>Zone dangereuse</span>
-    </div>
+    <div class="auth-divider"><span>Zone dangereuse</span></div>
 
-    <div style="text-align: center;">
+    <div class="auth-danger-zone">
       <%= button_to "Supprimer mon compte", registration_path(resource_name),
           method: :delete,
-          data: { confirm: "Es-tu sûr ? Cette action est irréversible.", turbo_confirm: "Es-tu sûr ? Cette action est irréversible." },
-          class: "cyber-btn cyber-btn-danger",
-          style: "display: inline-block; width: auto; padding: 0.75rem 2rem;" %>
+          data: { turbo_confirm: "Es-tu sûr ? Cette action est irréversible." },
+          class: "btn-danger" %>
     </div>
 
-    <!-- Links -->
-    <div class="cyber-links">
+    <div class="auth-links">
       <%= link_to "← Retour à l'accueil", root_path %>
     </div>
-
   </div>
 
 </div>

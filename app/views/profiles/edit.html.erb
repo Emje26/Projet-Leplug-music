@@ -1,25 +1,25 @@
 <div class="settings-page">
 
   <header class="settings-header">
-    <%= link_to profile_path, class: "back-btn" do %>
+    <%= link_to profile_path, class: "back-btn", "aria-label": "Retour au profil" do %>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
         <path d="M15 6l-6 6 6 6"/>
       </svg>
     <% end %>
-    <h1 class="settings-title">EDIT PROFILE</h1>
+    <div class="settings-title-wrap">
+      <h1 class="settings-title">Modifier le profil</h1>
+      <span class="settings-sub">Infos publiques</span>
+    </div>
     <span class="header-spacer"></span>
   </header>
 
-  <div class="auth-panel" style="max-width: 520px; padding: 32px 20px;">
-    <div class="auth-heading">
-      <span class="h-kicker">PROFILE / EDIT</span>
-      <h1 style="font-size: 36px;">YOUR<br>INFO.</h1>
-      <p>Met à jour ton profil. Les infos visibles publiquement sur ta page artiste.</p>
+  <div class="settings-section">
+    <div class="empty-state">
+      <span class="empty-ix">✎</span>
+      <h3 class="empty-title">Bientôt disponible</h3>
+      <p class="empty-text">L'édition du profil arrive dans une prochaine version</p>
+      <%= link_to "← Retour au profil", profile_path, class: "btn-ghost" %>
     </div>
-
-    <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--paper-mute); text-transform: uppercase;">
-      Ce formulaire est un placeholder — branche-le à l'action <code>profiles#update</code>.
-    </p>
   </div>
 
 </div>

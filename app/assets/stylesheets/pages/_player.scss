@@ -1,0 +1,260 @@
+// ===================================================================
+// PLAYER — écran "Now Playing" plein écran
+// ===================================================================
+
+.player-page {
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: calc(100vh - 76px);
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px 24px;
+  background:
+    radial-gradient(600px 420px at 50% 0%, rgba(47, 107, 255, 0.18), transparent 65%),
+    var(--navy);
+}
+
+.player-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0 8px;
+
+  .player-hdr-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+
+    &:hover { border-color: var(--cyan); color: var(--cyan); }
+  }
+
+  .player-hdr-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+}
+
+// ---- ARTWORK : vinyle + grande onde ---------------------------------
+
+.player-artwork {
+  position: relative;
+  margin: 18px 0 10px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(160deg, var(--surface) 0%, var(--ink) 100%);
+  box-shadow: var(--shadow);
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  .vinyl {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 50%, var(--surface-2) 0 18%, transparent 18.5%),
+      repeating-radial-gradient(circle at 50% 50%, #0B1834 0 3px, #0E1D40 3px 6px);
+    border: 1px solid var(--line-strong);
+    box-shadow: 0 18px 50px -14px rgba(0, 8, 30, 0.8);
+    animation: spin-slow 9s linear infinite;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--grad);
+    }
+  }
+
+  .artwork-eq {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    bottom: 18px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    height: 46px;
+
+    span {
+      width: 5px;
+      border-radius: 3px;
+      background: var(--grad);
+      opacity: 0.8;
+      animation: wave 1.3s ease-in-out infinite;
+    }
+  }
+}
+
+// ---- INFOS PISTE ------------------------------------------------------
+
+.player-track-info {
+  text-align: center;
+  padding: 14px 0 6px;
+
+  .player-track-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+
+  .player-track-artist {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+}
+
+// ---- PROGRESSION --------------------------------------------------------
+
+.player-progress {
+  padding: 16px 0 4px;
+
+  .player-progress-bar {
+    position: relative;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--line);
+
+    .player-progress-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      border-radius: 3px;
+      background: var(--grad);
+    }
+
+    .player-progress-dot {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 12px rgba(87, 225, 255, 0.7);
+    }
+  }
+
+  .player-progress-times {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted-2);
+  }
+}
+
+// ---- CONTRÔLES ----------------------------------------------------------
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 14px 0;
+
+  .player-ctrl {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+    &:hover { border-color: var(--cyan); color: var(--cyan); }
+  }
+
+  .player-ctrl-play {
+    width: 70px;
+    height: 70px;
+    background: var(--grad);
+    color: var(--on-accent);
+    border: none;
+    box-shadow: var(--glow);
+
+    &:hover {
+      color: var(--on-accent);
+      transform: scale(1.05);
+      box-shadow: 0 16px 38px -8px rgba(47, 107, 255, 0.8);
+    }
+  }
+}
+
+// ---- SUIVANT ---------------------------------------------------------------
+
+.player-next {
+  margin-top: auto;
+  padding-top: 18px;
+
+  .player-next-label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .player-next-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    padding: 12px 14px;
+    transition: border-color 0.2s ease;
+
+    &:hover { border-color: var(--line-strong); }
+
+    .pnc-thumb {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--grad);
+      opacity: 0.85;
+      flex-shrink: 0;
+    }
+
+    .pnc-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .pnc-title { font-weight: 600; font-size: 14px; }
+      .pnc-artist {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--muted-2);
+      }
+    }
+
+    .pnc-time {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+  }
+}

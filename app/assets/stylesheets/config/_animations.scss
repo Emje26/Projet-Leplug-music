@@ -1,54 +1,47 @@
 // ===================================================================
-// LE PLUG — All @keyframes
+// LE PLUG — Animations
+// Un vocabulaire court : ondes d'equalizer, pulsations, entrées douces.
 // ===================================================================
 
-// ---- STARBURST ----------------------------------------------------
-@keyframes spin-slow    { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
-@keyframes spin-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
-@keyframes pulse-scale  { 0%, 100% { transform: scale(1); }  50% { transform: scale(1.08); } }
-@keyframes breathe      { 0%, 100% { opacity: 0.7; }         50% { opacity: 1; } }
+// Barres d'equalizer (logo, player, cartes)
+@keyframes eq-wave {
+  0%, 100% { transform: scaleY(0.4); }
+  50%      { transform: scaleY(1); }
+}
 
-// ---- CLOUDS -------------------------------------------------------
-@keyframes cloud-drift-1 { 0% { transform: translateX(0); }            50% { transform: translateX(12px); }           100% { transform: translateX(0); } }
-@keyframes cloud-drift-2 { 0% { transform: translateX(0); }            50% { transform: translateX(-10px); }          100% { transform: translateX(0); } }
-@keyframes cloud-drift-3 { 0% { transform: translateX(0) scaleX(1); }  50% { transform: translateX(8px) scaleX(1.05); } 100% { transform: translateX(0) scaleX(1); } }
+// Grande onde (hauteur variable, hero / player)
+@keyframes wave {
+  0%, 100% { height: 14%; }
+  50%      { height: 90%; }
+}
 
-// ---- LASER BILLS --------------------------------------------------
-@keyframes float-up-1 { 0% { transform: translateY(40px) rotate(-8deg);  opacity: 0; } 15% { opacity: 0.6; } 85% { opacity: 0.6; } 100% { transform: translateY(-320px) rotate(5deg);  opacity: 0; } }
-@keyframes float-up-2 { 0% { transform: translateY(60px) rotate(6deg);   opacity: 0; } 10% { opacity: 0.5; } 80% { opacity: 0.5; } 100% { transform: translateY(-350px) rotate(-4deg); opacity: 0; } }
-@keyframes float-up-3 { 0% { transform: translateY(30px) rotate(-3deg);  opacity: 0; } 20% { opacity: 0.4; } 75% { opacity: 0.4; } 100% { transform: translateY(-300px) rotate(8deg);  opacity: 0; } }
-@keyframes float-up-4 { 0% { transform: translateY(50px) rotate(10deg);  opacity: 0; } 12% { opacity: 0.35;} 82% { opacity: 0.35;} 100% { transform: translateY(-340px) rotate(-6deg); opacity: 0; } }
-@keyframes float-up-5 { 0% { transform: translateY(45px) rotate(-12deg); opacity: 0; } 18% { opacity: 0.5; } 78% { opacity: 0.5; } 100% { transform: translateY(-310px) rotate(3deg);  opacity: 0; } }
-@keyframes sway        { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(3px); } 75% { transform: translateX(-3px); } }
-@keyframes glow-pulse  { 0%, 100% { filter: drop-shadow(0 0 2px rgba(var(--accent-rgb), 0.3)); } 50% { filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.6)); } }
+// Pulsation "live" / "rec"
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 84, 112, 0.6); }
+  70%  { box-shadow: 0 0 0 10px rgba(255, 84, 112, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 84, 112, 0); }
+}
 
-// ---- EQUALIZER ----------------------------------------------------
-@keyframes eq-1 { 0%, 100% { height: 4px; }  50% { height: 16px; } }
-@keyframes eq-2 { 0%, 100% { height: 8px; }  50% { height: 20px; } }
-@keyframes eq-3 { 0%, 100% { height: 12px; } 50% { height: 6px; } }
-@keyframes eq-4 { 0%, 100% { height: 6px; }  50% { height: 18px; } }
-@keyframes eq-5 { 0%, 100% { height: 10px; } 50% { height: 4px; } }
+@keyframes pulse-cyan {
+  0%   { box-shadow: 0 0 0 0 rgba(87, 225, 255, 0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(87, 225, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(87, 225, 255, 0); }
+}
 
-// ---- ECLIPSE ------------------------------------------------------
-@keyframes eclipse-glow { 0%, 100% { filter: drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.2)); } 50% { filter: drop-shadow(0 0 16px rgba(var(--accent-rgb), 0.4)); } }
+// Entrée douce des sections / cartes
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-// ---- CONFETTI -----------------------------------------------------
-@keyframes confetti-1 { 0% { transform: translateY(0) rotate(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(120px) rotate(360deg); opacity: 0; } }
-@keyframes confetti-2 { 0% { transform: translateY(0) rotate(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(100px) rotate(-270deg); opacity: 0; } }
+// Rotation lente (vinyle du player)
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
 
-// ---- CHECK DRAW ---------------------------------------------------
-@keyframes check-draw { 0% { stroke-dashoffset: 30; } 100% { stroke-dashoffset: 0; } }
-
-// ---- REVENUES LASER BILLS (6 variants, more organic than the generic float-up set) ----
-@keyframes float-1 { 0% { transform: translateY(50px) rotate(-8deg); opacity: 0; } 12% { opacity: 0.55; } 88% { opacity: 0.55; } 100% { transform: translateY(-380px) rotate(6deg); opacity: 0; } }
-@keyframes float-2 { 0% { transform: translateY(70px) rotate(5deg); opacity: 0; } 10% { opacity: 0.45; } 82% { opacity: 0.45; } 100% { transform: translateY(-400px) rotate(-5deg); opacity: 0; } }
-@keyframes float-3 { 0% { transform: translateY(35px) rotate(-4deg); opacity: 0; } 18% { opacity: 0.4; } 78% { opacity: 0.4; } 100% { transform: translateY(-360px) rotate(7deg); opacity: 0; } }
-@keyframes float-4 { 0% { transform: translateY(55px) rotate(9deg); opacity: 0; } 14% { opacity: 0.35; } 84% { opacity: 0.35; } 100% { transform: translateY(-390px) rotate(-3deg); opacity: 0; } }
-@keyframes float-5 { 0% { transform: translateY(42px) rotate(-11deg); opacity: 0; } 16% { opacity: 0.5; } 80% { opacity: 0.5; } 100% { transform: translateY(-370px) rotate(4deg); opacity: 0; } }
-@keyframes float-6 { 0% { transform: translateY(60px) rotate(3deg); opacity: 0; } 13% { opacity: 0.3; } 85% { opacity: 0.3; } 100% { transform: translateY(-350px) rotate(-8deg); opacity: 0; } }
-
-// ---- FLICKER (logo) -----------------------------------------------
-@keyframes flicker { 0%, 95%, 100% { opacity: 1; } 96% { opacity: 0.3; } 98% { opacity: 0.7; } }
-
-// ---- CHARGE BAR (revenue source bars) -----------------------------
-@keyframes charge-bar { from { width: 0; } to { width: var(--w); } }
+// Barres de progression qui se chargent (revenus, sources)
+@keyframes charge-bar {
+  from { width: 0; }
+  to   { width: var(--w); }
+}

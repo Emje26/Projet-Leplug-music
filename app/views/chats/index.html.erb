@@ -2,31 +2,31 @@
   username = current_user.email.split('@').first
 
   plugged = [
-    { name: "LUNA",    online: true  },
-    { name: "MARCUS",  online: false },
-    { name: "JADE",    online: true  },
-    { name: "ALEX",    online: false },
-    { name: "MAYA",    online: true  },
-    { name: "KAI",     online: false },
-    { name: "ZOE",     online: false }
+    { name: "LUNA",   online: true  },
+    { name: "MARCUS", online: false },
+    { name: "JADE",   online: true  },
+    { name: "ALEX",   online: false },
+    { name: "MAYA",   online: true  },
+    { name: "KAI",    online: false },
+    { name: "ZOE",    online: false }
   ]
 
   messages = [
-    { id: 1, name: "KØNG",        preview: "Tiens check mon pricing :",  time: "5H",  unread: false },
-    { id: 2, name: "STUDIO BARBÈS", preview: "Nickel ! À mardi 📍",     time: "8H",  unread: false },
-    { id: 3, name: "PIELO",       preview: "Voilà ce que je propose :", time: "3J",  unread: true  },
-    { id: nil, name: "ULYSSE N.",   preview: "A aimé un message",        time: "3J",  unread: false },
-    { id: nil, name: "DODO",        preview: "Regarde sur Shotgun",       time: "4J",  unread: false },
-    { id: nil, name: "J2",          preview: "Tu connais le morceau ?",   time: "5J",  unread: false },
-    { id: nil, name: "MAYA B.",     preview: "On fait la collab ?",       time: "1S",  unread: true  }
+    { id: 1,   name: "KØNG",          preview: "Tiens check mon pricing :",  time: "5h", unread: false },
+    { id: 2,   name: "STUDIO BARBÈS", preview: "Nickel ! À mardi 📍",        time: "8h", unread: false },
+    { id: 3,   name: "PIELO",         preview: "Voilà ce que je propose :",  time: "3j", unread: true  },
+    { id: nil, name: "ULYSSE N.",     preview: "A aimé un message",          time: "3j", unread: false },
+    { id: nil, name: "DODO",          preview: "Regarde sur Shotgun",        time: "4j", unread: false },
+    { id: nil, name: "J2",            preview: "Tu connais le morceau ?",    time: "5j", unread: false },
+    { id: nil, name: "MAYA B.",       preview: "On fait la collab ?",        time: "1s", unread: true  }
   ]
 %>
 
 <div class="chats-page">
 
   <header class="chat-header">
-    <h1 class="chat-title"><%= username.upcase %></h1>
-    <button class="new-chat-btn" aria-label="New message">
+    <h1 class="chat-title"><%= username.capitalize %></h1>
+    <button class="new-chat-btn" aria-label="Nouveau message">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
         <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
       </svg>
@@ -36,12 +36,12 @@
   <div class="chat-search">
     <div class="search-box">
       <span class="search-label">Q</span>
-      <input type="text" placeholder="RECHERCHER UN PLUG">
+      <input type="text" placeholder="Rechercher un plug" aria-label="Rechercher un plug">
     </div>
   </div>
 
   <div class="plugged-row">
-    <span class="plugged-label">PLUGGED</span>
+    <span class="plugged-label">Plugged</span>
     <div class="plugged-scroll">
       <% plugged.each do |p| %>
         <div class="plugged-item">
@@ -53,13 +53,13 @@
   </div>
 
   <div class="chat-section-head">
-    <span class="sh-label">"MESSAGES"</span>
-    <span class="sh-action">DEMANDES</span>
+    <span class="sh-label">Messages</span>
+    <span class="sh-action">Demandes</span>
   </div>
 
   <div class="chat-list">
     <% messages.each do |m| %>
-      <%= link_to (m[:id] ? conversation_path(m[:id]) : "#"), class: "chat-row #{'unread' if m[:unread]}", style: "text-decoration:none;color:inherit;" do %>
+      <%= link_to (m[:id] ? conversation_path(m[:id]) : "#"), class: "chat-row #{'unread' if m[:unread]}" do %>
         <div class="cr-av"></div>
         <div>
           <h3 class="cr-name"><%= m[:name] %></h3>

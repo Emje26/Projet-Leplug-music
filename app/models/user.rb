@@ -3,9 +3,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :profile, dependent: :destroy
-  has_one :user_preference, dependent: :destroy
-  has_many :recipes, dependent: :destroy
-  has_many :meal_plans, dependent: :destroy
 
   # Marketplace
   has_one  :studio,   dependent: :destroy

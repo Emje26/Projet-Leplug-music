@@ -1,16 +1,11 @@
 // ===================================================================
 // LE PLUG — Typography
-// Industrial / brutalist stack inspired by Virgil Abloh's approach:
-// condensed display sans (Bebas) for headlines as architecture,
-// a neutral grotesque (Inter) for body, mono (JetBrains) for data.
+// Space Grotesk pour les titres (architecture), Inter pour le corps,
+// IBM Plex Mono pour les labels / data / timecodes.
 // ===================================================================
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
-$display-font: "Bebas Neue", "Oswald", "Impact", sans-serif;
+$display-font: "Space Grotesk", "Inter", "Helvetica Neue", sans-serif;
 $body-font:    "Inter", "Helvetica Neue", "Arial", sans-serif;
-$mono-font:    "JetBrains Mono", "Menlo", "Courier New", monospace;
-$alt-font:     "Space Grotesk", "Inter", sans-serif;
-
-// legacy aliases (kept so old partials don't blow up)
-$headers-font: $display-font;
+$mono-font:    "IBM Plex Mono", "Menlo", "Courier New", monospace;
