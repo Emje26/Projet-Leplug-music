@@ -1,6 +1,6 @@
 // ===================================================================
 // LE PLUG — root stylesheet
-// "Whole Lotta Red" mode: void black, blood red, pure white.
+// Studio at night : deep navy, dégradé bleu → cyan, mono labels.
 // ===================================================================
 
 // Tokens
@@ -16,70 +16,44 @@
 @import "config/animations";
 
 // ===================================================================
-// DARK MODE (default) — CSS custom properties
+// DESIGN TOKENS — CSS custom properties
 // ===================================================================
 
 :root {
-  --blood:      #D12326;
-  --terracotta: #C45A3C;
-  --accent:     #D12326;
-  --accent-rgb: 209, 35, 38;
+  --ink:         #{$ink};
+  --navy:        #{$navy};
+  --surface:     #{$surface};
+  --surface-2:   #{$surface-2};
 
-  --void:       #2C2926;
-  --surface:    #39352F;
-  --card:       #443E3B;
-  --ink:        #FFFFFF;
-  --green:      #4ADE80;
+  --line:        #{$line};
+  --line-strong: #{$line-strong};
 
-  --text-sec:   rgba(255,255,255,0.25);
-  --text-ter:   rgba(255,255,255,0.15);
-  --border:     rgba(255,255,255,0.05);
-  --border-btn: rgba(255,255,255,0.14);
+  --blue:        #{$blue};
+  --blue-bright: #{$blue-bright};
+  --cyan:        #{$cyan};
 
-  // Legacy aliases (so existing pages still compile)
-  --ink-2:      #39352F;
-  --ink-3:      #443E3B;
-  --ink-line:   rgba(255,255,255,0.05);
-  --paper:      #FFFFFF;
-  --paper-dim:  rgba(255,255,255,0.25);
-  --paper-mute: rgba(255,255,255,0.15);
-  --signal:     #D12326;
-  --signal-dim: #A01E1E;
+  --text:        #{$text};
+  --muted:       #{$muted};
+  --muted-2:     #{$muted-2};
+
+  --on-accent:   #{$on-accent};
+  --danger:      #{$danger};
+  --success:     #{$success};
+  --gold:        #{$gold};
+
+  --grad:        linear-gradient(135deg, #{$blue} 0%, #{$cyan} 100%);
+  --shadow:      0 24px 60px -20px rgba(0, 8, 30, 0.7);
+  --glow:        0 10px 30px -8px rgba(47, 107, 255, 0.6);
 
   --font-display: #{$display-font};
   --font-body:    #{$body-font};
   --font-mono:    #{$mono-font};
 
+  --radius:    16px;
+  --radius-sm: 12px;
+  --radius-lg: 20px;
+
   --safe-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-// ===================================================================
-// LIGHT MODE — disabled by default. Activate only via body.light-mode.
-// The @media prefers-color-scheme was causing the app to render in
-// crème/terracotta when the user's OS was in light mode, which broke
-// the dark-first WLR design. Now dark is ALWAYS the default.
-// ===================================================================
-
-body.light-mode {
-  --accent:     #C45A3C;
-  --accent-rgb: 196, 90, 60;
-  --void:       #F2EDE4;
-  --surface:    #FFFFFF;
-  --card:       #E8DFD2;
-  --ink:        #1A1A1A;
-  --green:      #16A34A;
-  --text-sec:   rgba(0,0,0,0.3);
-  --text-ter:   rgba(0,0,0,0.15);
-  --border:     rgba(0,0,0,0.04);
-  --border-btn: rgba(0,0,0,0.12);
-  --ink-2:      #FFFFFF;
-  --ink-3:      #E8DFD2;
-  --ink-line:   rgba(0,0,0,0.04);
-  --paper:      #1A1A1A;
-  --paper-dim:  rgba(0,0,0,0.3);
-  --paper-mute: rgba(0,0,0,0.15);
-  --signal:     #C45A3C;
-  --signal-dim: #A0452E;
 }
 
 // ===================================================================
@@ -88,74 +62,93 @@ body.light-mode {
 
 * { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 html, body {
-  background: #2C2926 !important;
-  background: var(--void) !important;
-  color: #fff !important;
-  color: var(--ink) !important;
+  background: $navy !important;
+  background: var(--navy) !important;
+  color: $text !important;
+  color: var(--text) !important;
   font-family: var(--font-body);
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
-body.bg-dark { background: var(--void) !important; }
+body.bg-dark { background: var(--navy) !important; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
 
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; color: inherit; }
 
-::selection { background: var(--accent); color: #000; }
+::selection { background: var(--cyan); color: var(--on-accent); }
 
-// PWA: prevent bounce-scroll and disable text selection (feels native).
+// PWA: prevent bounce-scroll (feels native).
 html { overscroll-behavior: none; }
-body { -webkit-user-select: none; user-select: none; }
 .bottom-nav { padding-bottom: env(safe-area-inset-bottom); }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-btn); border-radius: 0; }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 3px; }
 
-%hairline-t { border-top: 1px solid var(--border); }
-%hairline-b { border-bottom: 1px solid var(--border); }
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
 
 // ===================================================================
 // TYPOGRAPHY PRIMITIVES
 // ===================================================================
 
-.display {
-  font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  line-height: 0.9;
-}
-
 .mono {
   font-family: var(--font-mono);
-  font-weight: 500;
+  font-size: 12px;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-size: 11px;
 }
 
 .label {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-sec);
+  color: var(--muted-2);
 }
 
-.q::before { content: "\201C"; }
-.q::after  { content: "\201D"; }
-.q {
+.eyebrow {
   font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  color: var(--cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  &::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--cyan);
+    display: inline-block;
+  }
+}
+
+.grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 // ===================================================================
@@ -166,43 +159,190 @@ body { -webkit-user-select: none; user-select: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
   height: 48px;
-  padding: 0 24px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  padding: 0 26px;
+  border-radius: 999px;
   border: 1px solid transparent;
   background: transparent;
-  color: var(--ink);
+  color: var(--text);
   cursor: pointer;
-  transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
-  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+              background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
   &:active { transform: translateY(1px); }
 }
 
-.btn-signal {
+.btn-primary {
   @extend %btn-base;
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-  &:hover { background: #fff; color: #000; border-color: #fff; }
+  background: var(--grad);
+  color: var(--on-accent);
+  box-shadow: var(--glow);
+
+  &:hover {
+    color: var(--on-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 38px -8px rgba(47, 107, 255, 0.75);
+  }
 }
 
 .btn-ghost {
   @extend %btn-base;
-  border-color: var(--border-btn);
-  color: var(--ink);
-  &:hover { border-color: var(--ink); }
+  border-color: var(--line-strong);
+
+  &:hover { border-color: var(--cyan); color: var(--cyan); }
 }
 
-.btn-outline-paper {
+.btn-dark {
   @extend %btn-base;
-  border-color: var(--ink);
-  &:hover { background: var(--ink); color: var(--void); }
+  background: var(--ink);
+  color: var(--text);
+
+  &:hover { background: #020A1C; transform: translateY(-2px); }
+}
+
+.btn-danger {
+  @extend %btn-base;
+  border-color: rgba(255, 84, 112, 0.4);
+  color: var(--danger);
+
+  &:hover { border-color: var(--danger); }
+}
+
+// ===================================================================
+// SHARED APP PATTERNS
+// ===================================================================
+
+// Section headings (feed, search, show pages)
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 26px 20px 14px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.section-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+
+  &:hover { color: var(--text); }
+}
+
+// Compact app header (back + title + action)
+.page-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px 12px;
+
+  .ph-title-wrap { flex: 1; min-width: 0; }
+
+  .ph-kicker {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  .ph-title {
+    font-size: 21px;
+    font-weight: 700;
+    margin: 2px 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.back-btn,
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s ease, color 0.2s ease;
+
+  svg { width: 18px; height: 18px; }
+
+  &:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .dot {
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--cyan);
+  }
+}
+
+.header-spacer { width: 40px; flex-shrink: 0; }
+
+// Empty state
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+
+  .empty-ix {
+    font-family: var(--font-mono);
+    font-size: 34px;
+    color: var(--muted-2);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .empty-title { font-size: 20px; font-weight: 700; margin: 0 0 6px; }
+
+  .empty-text {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 22px;
+  }
+}
+
+// Pills / chips
+.pill {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  b { color: var(--cyan); font-weight: 500; }
 }
 
 // ===================================================================
@@ -211,16 +351,21 @@ body { -webkit-user-select: none; user-select: none; }
 
 main#main-content {
   min-height: 100vh;
-  padding-bottom: calc(72px + var(--safe-bottom));
+  padding-bottom: calc(76px + var(--safe-bottom));
+
+  // Pages sans bottom-nav : pas de padding réservé
+  &:has(> .plug-landing),
+  &:has(> .auth-page),
+  &:has(> .convo-page) {
+    padding-bottom: 0;
+  }
 }
 
-.cyber-header { background: transparent; border: 0; }
-
 .alert {
-  border: 1px solid var(--border) !important;
-  border-radius: 12px !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: var(--radius-sm) !important;
   background: var(--surface) !important;
-  color: var(--ink) !important;
+  color: var(--text) !important;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -228,7 +373,11 @@ main#main-content {
   padding: 12px 16px;
   margin: 12px 16px;
 }
-.alert-danger { border-color: var(--accent) !important; color: var(--accent) !important; }
+
+.alert-danger {
+  border-color: rgba(255, 84, 112, 0.5) !important;
+  color: var(--danger) !important;
+}
 
 // ===================================================================
 // ACCESSIBILITY — Respect user motion preferences
@@ -240,6 +389,7 @@ main#main-content {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  html { scroll-behavior: auto; }
 }
 
 // Components

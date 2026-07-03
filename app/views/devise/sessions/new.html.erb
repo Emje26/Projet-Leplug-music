@@ -1,42 +1,38 @@
 <div class="auth-page">
 
   <div class="auth-panel">
-    <div class="auth-starburst">
-      <%= render "shared/starburst", size: :medium %>
-    </div>
+    <span class="logo">
+      <span class="logo-mark"><span></span><span></span><span></span><span></span></span>
+      LE PLUG
+    </span>
 
-    <h1 class="auth-title">LE PLUG</h1>
-    <%= render "shared/drip" %>
-
-    <p class="auth-sub">Entre tes identifiants pour accéder à ton feed.</p>
-
-    <% if flash[:alert] %>
-      <div class="alert alert-danger"><%= flash[:alert] %></div>
-    <% end %>
+    <span class="auth-kicker">Connexion</span>
+    <h1 class="auth-title">Content de te <em>revoir</em>.</h1>
+    <p class="auth-sub">Entre tes identifiants pour retrouver ton feed, tes messages et tes bookings.</p>
 
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f| %>
       <div class="form-inputs">
         <%= f.input :email,
             required: true,
             autofocus: true,
-            label: false,
-            placeholder: "Email",
+            label: "Email",
+            placeholder: "ton@email.com",
             input_html: { autocomplete: "email" } %>
 
         <%= f.input :password,
             required: true,
-            label: false,
-            placeholder: "Mot de passe",
+            label: "Mot de passe",
+            placeholder: "••••••••",
             input_html: { autocomplete: "current-password" } %>
 
         <% if devise_mapping.rememberable? %>
           <div class="boolean">
-            <%= f.input :remember_me, as: :boolean, label: "Se souvenir" %>
+            <%= f.input :remember_me, as: :boolean, label: "Se souvenir de moi" %>
           </div>
         <% end %>
       </div>
 
-      <%= f.button :submit, "\"SE CONNECTER\"", class: "btn-signal auth-submit" %>
+      <%= f.button :submit, "Se connecter →", class: "btn-primary auth-submit" %>
     <% end %>
 
     <div class="auth-links">

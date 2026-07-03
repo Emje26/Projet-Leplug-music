@@ -7,12 +7,12 @@
 <div class="booking-page">
 
   <header class="booking-header">
-    <%= link_to bookable_path, class: "back-btn" do %>
+    <%= link_to bookable_path, class: "back-btn", "aria-label": "Retour" do %>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M15 6l-6 6 6 6"/></svg>
     <% end %>
     <div class="booking-title-wrap">
-      <span class="booking-kicker">"RÉSERVATION"</span>
-      <h1 class="booking-title">NOUVEAU<br>BOOKING.</h1>
+      <span class="booking-kicker">Réservation</span>
+      <h1 class="booking-title">Nouveau booking</h1>
     </div>
     <span class="header-spacer"></span>
   </header>
@@ -21,19 +21,25 @@
   <section class="booking-bookable">
     <div class="bb-cover"><span><%= @bookable.initials %></span></div>
     <div class="bb-body">
-      <span class="bb-type"><%= @bookable.is_a?(Studio) ? "\"STUDIO\"" : "\"TALENT\"" %></span>
-      <h2 class="bb-name"><%= @bookable.name.upcase %></h2>
-      <span class="bb-price">€<%= hourly.to_i %>/H</span>
+      <span class="bb-type"><%= @bookable.is_a?(Studio) ? "Studio" : "Talent" %></span>
+      <h2 class="bb-name"><%= @bookable.name %></h2>
+      <span class="bb-price">€<%= hourly.to_i %>/h</span>
     </div>
   </section>
 
-  <%= form_with model: @booking, url: bookings_path, local: true, class: "booking-form" do |f| %>
+  <%= form_with model: @booking, url: bookings_path, local: true, class: "booking-form",
+                data: {
+                  controller: "booking",
+                  booking_hourly_value: hourly.to_f,
+                  booking_fee_rate_value: Booking::SERVICE_FEE_RATE,
+                  action: "change->booking#refresh"
+                } do |f| %>
     <%= f.hidden_field :bookable_type, value: @bookable.class.name %>
     <%= f.hidden_field :bookable_id,   value: @bookable.id %>
 
-    <!-- DATE STRIP -->
+    <!-- DATE -->
     <section class="booking-section">
-      <span class="bsec-label">"DATE"</span>
+      <span class="bsec-label">Date</span>
       <div class="date-strip">
         <% (0..6).each do |offset| %>
           <% d = Date.today + offset + 1 %>
@@ -49,9 +55,9 @@
       </div>
     </section>
 
-    <!-- TIMESLOT -->
+    <!-- CRÉNEAU -->
     <section class="booking-section">
-      <span class="bsec-label">"CRÉNEAU"</span>
+      <span class="bsec-label">Créneau</span>
       <div class="slot-grid">
         <% %w[09:00 11:00 13:00 15:00 17:00 19:00 21:00 23:00].each do |slot| %>
           <label class="slot-cell">
@@ -62,44 +68,44 @@
       </div>
     </section>
 
-    <!-- DURATION -->
+    <!-- DURÉE -->
     <section class="booking-section">
-      <span class="bsec-label">"DURÉE"</span>
+      <span class="bsec-label">Durée</span>
       <div class="duration-grid">
         <% [1, 2, 3, 4, 6, 8].each do |h| %>
           <label class="dur-cell">
             <%= f.radio_button :duration_hours, h, checked: @booking.duration_hours.to_i == h %>
-            <span><%= h %>H</span>
+            <span><%= h %>h</span>
           </label>
         <% end %>
       </div>
     </section>
 
-    <!-- PREVIEW / SUMMARY -->
+    <!-- RÉCAPITULATIF -->
     <section class="booking-section">
-      <span class="bsec-label">"RÉCAPITULATIF"</span>
+      <span class="bsec-label">Récapitulatif</span>
       <div class="summary-card">
         <div class="sum-row">
           <span class="sum-k">Sous-total</span>
-          <span class="sum-v mono">€<%= format("%.2f", preview_subtotal) %></span>
+          <span class="sum-v mono" data-booking-target="subtotal">€<%= format("%.2f", preview_subtotal) %></span>
         </div>
         <div class="sum-row">
           <span class="sum-k">Frais de service <span class="sum-hint">(15%)</span></span>
-          <span class="sum-v mono">€<%= format("%.2f", preview_service_fee) %></span>
+          <span class="sum-v mono" data-booking-target="fee">€<%= format("%.2f", preview_service_fee) %></span>
         </div>
         <div class="sum-divider"></div>
         <div class="sum-row total">
           <span class="sum-k">Total</span>
-          <span class="sum-v mono">€<%= format("%.2f", preview_total) %></span>
+          <span class="sum-v mono" data-booking-target="total">€<%= format("%.2f", preview_total) %></span>
         </div>
       </div>
       <p class="booking-note">
-        NB : ce récapitulatif est basé sur la durée sélectionnée. Il sera recalculé à la confirmation.
+        Le récapitulatif se met à jour avec la durée sélectionnée. Il sera vérifié à la confirmation.
       </p>
     </section>
 
     <div class="booking-cta">
-      <%= f.submit "CONFIRMER LE BOOKING →", class: "btn-signal", style: "width: 100%; height: 54px;" %>
+      <%= f.submit "Confirmer le booking →", class: "btn-primary", style: "width: 100%; height: 54px;" %>
     </div>
   <% end %>
 

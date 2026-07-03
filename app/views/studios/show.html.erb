@@ -2,13 +2,13 @@
 
   <!-- HEADER -->
   <header class="studio-header">
-    <%= link_to search_path, class: "back-btn" do %>
+    <%= link_to search_path, class: "back-btn", "aria-label": "Retour" do %>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
         <path d="M15 6l-6 6 6 6"/>
       </svg>
     <% end %>
-    <span class="studio-hdr-handle">"STUDIO" / <%= @studio.id.to_s.rjust(3, "0") %></span>
-    <button class="icon-btn" aria-label="Share">
+    <span class="studio-hdr-handle">Studio / <%= @studio.id.to_s.rjust(3, "0") %></span>
+    <button class="icon-btn" aria-label="Partager">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
         <path d="M4 12v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8"/>
         <path d="M16 6l-4-4-4 4"/>
@@ -17,11 +17,8 @@
     </button>
   </header>
 
-  <!-- GALLERY (carousel de placeholders) -->
-  <section class="studio-gallery">
-    <div class="studio-gallery-clouds">
-      <%= render "shared/clouds" %>
-    </div>
+  <!-- GALLERY -->
+  <section class="studio-gallery" aria-label="Galerie">
     <% 3.times do |i| %>
       <div class="gallery-slide">
         <span class="gs-num"><%= format("%02d", i + 1) %></span>
@@ -33,39 +30,32 @@
   <!-- IDENTITY -->
   <section class="studio-identity">
     <div class="si-top">
-      <span class="si-category q"><%= @studio.category&.upcase %></span>
-      <div class="si-rating"><span class="si-stars">★</span> <%= format("%.1f", @studio.rating) %> <span class="si-reviews-count"><%= @studio.reviews_count %> AVIS</span></div>
+      <span class="si-category"><%= @studio.category&.capitalize %></span>
+      <div class="si-rating"><span class="si-stars">★</span> <%= format("%.1f", @studio.rating) %> <span class="si-reviews-count"><%= @studio.reviews_count %> avis</span></div>
     </div>
-    <h1 class="si-name"><%= @studio.name.upcase %></h1>
+    <h1 class="si-name"><%= @studio.name %></h1>
     <div class="si-address"><%= @studio.address %> — <%= @studio.city %></div>
   </section>
 
   <!-- PRICE CARD + CTA -->
   <section class="studio-price-card">
     <div class="spc-left">
-      <span class="spc-label q">TARIF</span>
-      <div class="spc-amount">€<%= @studio.price_per_hour.to_i %><span class="spc-unit">/H</span></div>
+      <span class="spc-label label">Tarif</span>
+      <div class="spc-amount">€<%= @studio.price_per_hour.to_i %><span class="spc-unit">/h</span></div>
     </div>
-    <%= link_to new_booking_path(bookable_type: "Studio", bookable_id: @studio.id), class: "btn-signal" do %>
-      RÉSERVER
-    <% end %>
+    <%= link_to "Réserver →", new_booking_path(bookable_type: "Studio", bookable_id: @studio.id), class: "btn-primary" %>
   </section>
-
-  <!-- DRIP -->
-  <div class="studio-drip-wrap">
-    <%= render "shared/drip" %>
-  </div>
 
   <!-- DESCRIPTION -->
   <section class="studio-desc">
-    <span class="label q">DESCRIPTION</span>
+    <span class="label">Description</span>
     <p><%= @studio.description %></p>
   </section>
 
   <!-- EQUIPMENT -->
   <% if @studio.equipment.present? %>
     <section class="studio-equipment">
-      <span class="label q">ÉQUIPEMENT</span>
+      <span class="label">Équipement</span>
       <div class="equip-pills">
         <% @studio.equipment.each do |item| %>
           <span class="equip-pill"><%= item %></span>
@@ -77,7 +67,7 @@
   <!-- REVIEWS -->
   <section class="studio-reviews">
     <div class="section-head" style="padding: 0 0 14px;">
-      <h2 class="section-title q">AVIS</h2>
+      <h2 class="section-title">Avis</h2>
       <span class="section-link"><%= @reviews.size %></span>
     </div>
 
@@ -87,7 +77,7 @@
           <article class="review-card">
             <header>
               <span class="rc-stars"><%= "★" * r.rating %><span class="dim"><%= "★" * (5 - r.rating) %></span></span>
-              <span class="rc-user"><%= r.user.email.split('@').first.upcase %></span>
+              <span class="rc-user"><%= r.user.email.split('@').first %></span>
               <time class="rc-date"><%= r.created_at.strftime("%d.%m.%y") %></time>
             </header>
             <p><%= r.content %></p>
@@ -95,31 +85,30 @@
         <% end %>
       </div>
     <% else %>
-      <p class="empty-inline">AUCUN AVIS POUR L'INSTANT — SOIS LE PREMIER.</p>
+      <p class="empty-inline">Aucun avis pour l'instant — sois le premier.</p>
     <% end %>
 
     <!-- New review form -->
     <%= form_with model: @review, url: studio_reviews_path(@studio), class: "review-form", local: true do |f| %>
-      <span class="label q">LAISSER UN AVIS</span>
+      <span class="label">Laisser un avis</span>
       <div class="rf-row">
-        <%= f.select :rating, (1..5).to_a.map { |n| ["#{'★' * n} (#{n}/5)", n] }, { selected: 5 }, class: "rf-select" %>
+        <%= f.select :rating, (1..5).to_a.map { |n| ["#{'★' * n} (#{n}/5)", n] }, { selected: 5 }, class: "rf-select", "aria-label": "Note" %>
       </div>
       <%= f.text_area :content, rows: 3, placeholder: "Ton expérience en studio…", class: "rf-textarea" %>
-      <%= f.submit "PUBLIER L'AVIS", class: "btn-signal" %>
+      <%= f.submit "Publier l'avis", class: "btn-primary" %>
     <% end %>
   </section>
 
   <!-- LOCATION -->
   <section class="studio-location">
-    <span class="label q">LOCALISATION</span>
+    <span class="label">Localisation</span>
     <div class="loc-card">
       <div class="loc-map">
         <span class="loc-pin">◉</span>
-        <div class="loc-grid"></div>
       </div>
       <div class="loc-info">
         <div class="loc-address"><%= @studio.address %></div>
-        <div class="loc-city"><%= @studio.city.upcase %> · FR</div>
+        <div class="loc-city"><%= @studio.city %> · FR</div>
         <div class="loc-coords mono">
           <%= format("%.4f", @studio.latitude || 0) %>, <%= format("%.4f", @studio.longitude || 0) %>
         </div>

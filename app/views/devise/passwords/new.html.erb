@@ -1,18 +1,32 @@
-<h2>Forgot your password?</h2>
+<div class="auth-page">
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
+  <div class="auth-panel">
+    <span class="logo">
+      <span class="logo-mark"><span></span><span></span><span></span><span></span></span>
+      LE PLUG
+    </span>
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
+    <span class="auth-kicker">Mot de passe oublié</span>
+    <h1 class="auth-title">On te <em>replug</em>.</h1>
+    <p class="auth-sub">Entre ton email, on t'envoie les instructions de réinitialisation.</p>
+
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "auth-form" }) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    label: "Email",
+                    placeholder: "ton@email.com",
+                    input_html: { autocomplete: "email" } %>
+      </div>
+
+      <%= f.button :submit, "Envoyer les instructions →", class: "btn-primary auth-submit" %>
+    <% end %>
+
+    <div class="auth-links">
+      <span><%= link_to "← Retour à la connexion", new_session_path(resource_name) %></span>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

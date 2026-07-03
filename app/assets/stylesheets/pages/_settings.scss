@@ -1,539 +1,286 @@
 // ===================================================================
-// LE PLUG — SETTINGS
-// Card-based list, industrial. "Revenus" highlight in signal orange.
+// SETTINGS — paramètres et activité (+ argent)
 // ===================================================================
 
-.settings-page {
-  background: var(--void);
-  color: var(--paper);
-  min-height: 100vh;
-  padding: 0 0 140px;
-}
-
-// ---- Header --------------------------------------------------------
-.settings-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 18px 20px 16px;
-  border-bottom: 1px solid var(--ink-line);
-  position: sticky;
-  top: 0;
-  background: var(--void);
-  z-index: 10;
-
-  .back-btn {
-    width: 38px;
-    height: 38px;
-    border: 1px solid var(--ink-line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--paper);
-    text-decoration: none;
-    flex-shrink: 0;
-
-    &:hover { border-color: var(--paper); }
-  }
-
-  .settings-title-wrap {
-    flex: 1;
-    text-align: center;
-    line-height: 1;
-  }
-
-  .settings-title {
-    font-family: var(--font-display);
-    font-size: 22px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--paper);
-    margin: 0;
-
-    &::before { content: "\201C"; color: var(--paper-mute); }
-    &::after  { content: "\201D"; color: var(--paper-mute); }
-  }
-
-  .settings-sub {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.24em;
-    color: var(--paper-mute);
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
-
-  .header-spacer { width: 38px; flex-shrink: 0; }
-}
-
-// ---- Search --------------------------------------------------------
-.settings-search {
-  padding: 18px 20px 6px;
-
-  .search-box {
-    border: 1px solid var(--ink-line);
-    background: var(--ink-2);
-    height: 46px;
-    display: flex;
-    align-items: center;
-    padding: 0 14px;
-    transition: border-color .15s ease;
-
-    &:focus-within { border-color: var(--paper); }
-
-    .lbl {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      color: var(--paper-mute);
-      text-transform: uppercase;
-      padding-right: 12px;
-      border-right: 1px solid var(--ink-line);
-    }
-
-    input {
-      flex: 1;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      color: var(--paper);
-      font-family: var(--font-body);
-      font-size: 14px;
-      padding: 0 12px;
-      height: 100%;
-
-      &::placeholder {
-        font-family: var(--font-mono);
-        font-size: 10px;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--paper-mute);
-      }
-    }
-  }
-}
-
-// ---- Section ------------------------------------------------------
-.settings-section {
-  padding: 24px 20px 8px;
-
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--paper-mute);
-    margin: 0 0 14px;
-
-    &::before { content: "\201C"; color: var(--paper-mute); }
-    &::after  { content: "\201D"; color: var(--paper-mute); }
-  }
-}
-
-// ---- Card rows ----------------------------------------------------
-.settings-card {
-  display: grid;
-  grid-template-columns: 48px 1fr auto auto;
-  align-items: center;
-  gap: 14px;
-  padding: 18px 18px 18px 14px;
-  margin-bottom: 10px;
-  background: var(--ink-2);
-  border: 1px solid var(--ink-line);
-  color: inherit;
-  text-decoration: none;
-  transition: border-color .15s ease, transform .15s ease, background .15s ease;
-  position: relative;
-
-  &:hover {
-    border-color: var(--paper-dim);
-    background: var(--ink-3);
-
-    .card-arrow { color: var(--signal); transform: translateX(3px); }
-  }
-
-  // left accent strip on hover (Abloh-ish)
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: transparent;
-    transition: background .15s ease;
-  }
-
-  &:hover::before { background: var(--signal); }
-
-  .card-icon {
-    width: 48px;
-    height: 48px;
-    background: var(--void);
-    border: 1px solid var(--ink-line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--paper);
-    flex-shrink: 0;
-
-    svg { width: 20px; height: 20px; }
-
-    // Signal variant — reserved for attention-grabbing rows (Revenus).
-    // Per spec: rgba(255,77,0,0.1) fill + #FF4D00 stroke.
-    &.signal {
-      background: rgba(255, 77, 0, 0.1);
-      border-color: var(--signal);
-      color: var(--signal);
-    }
-  }
-
-  .card-body {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 0;
-  }
-
-  .card-title {
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--paper);
-    line-height: 1.2;
-    letter-spacing: 0.01em;
-  }
-
-  .card-sub {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--paper-mute);
-    line-height: 1.4;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  // Trailing amount (Revenus €247.80)
-  .card-amount {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--signal);
-    padding: 6px 10px;
-    border: 1px solid rgba(255,77,0,0.35);
-    background: rgba(255,77,0,0.06);
-  }
-
-  // Trailing badge (Mes collabs "3")
-  .card-badge {
-    min-width: 22px;
-    height: 22px;
-    padding: 0 7px;
-    background: var(--signal);
-    color: #000;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .card-arrow {
-    font-family: var(--font-mono);
-    font-size: 18px;
-    color: var(--paper-mute);
-    font-weight: 400;
-    line-height: 1;
-    transition: color .15s ease, transform .15s ease;
-    padding-left: 4px;
-  }
-
-  // Danger (logout) variant
-  &.danger {
-    .card-icon { color: var(--signal); border-color: rgba(255,77,0,0.4); }
-    .card-title { color: var(--signal); }
-    &:hover { border-color: var(--signal); }
-  }
-}
-
-// ===================================================================
-// MONEY PAGE (WLR design system)
-// ===================================================================
-
+.settings-page,
 .money-page {
-  background: var(--void);
-  color: var(--ink);
-  min-height: 100vh;
-  padding-bottom: 120px;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
-// ---- Header --------------------------------------------------------
+.settings-header,
 .money-header {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 18px 20px 16px;
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  background: var(--void);
-  z-index: 10;
+  padding: 18px 20px 12px;
 
-  .money-back {
-    width: 38px;
-    height: 38px;
-    border: 1px solid var(--border-btn);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ink);
-    text-decoration: none;
-    flex-shrink: 0;
+  .settings-title-wrap, .money-header-title { flex: 1; }
 
-    &:hover { border-color: var(--ink); }
+  .settings-title, h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
   }
 
-  .money-header-title {
-    flex: 1;
-    text-align: center;
-
-    h1 {
-      font-family: var(--font-display);
-      font-size: 22px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--ink);
-      margin: 0;
-    }
+  .settings-sub {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-2);
   }
-
-  .money-header-spacer { width: 38px; flex-shrink: 0; }
 }
 
-// ---- Balance card --------------------------------------------------
-.money-balance-card {
-  position: relative;
-  margin: 20px 20px 0;
-  padding: 28px 24px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
+.money-header-spacer { width: 40px; flex-shrink: 0; }
 
-  .mbc-starburst {
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    pointer-events: none;
-    opacity: 0.8;
-    z-index: 1;
+.settings-search { padding: 0 20px 8px; }
+
+// ---- SECTIONS + CARTES -------------------------------------------------
+
+.settings-section {
+  padding: 14px 20px 4px;
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin: 0 0 10px;
+  }
+}
+
+.settings-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-1px);
+
+    .card-arrow { color: var(--cyan); }
   }
 
-  .mbc-bills {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
+  .card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(47, 107, 255, 0.14);
+    color: var(--muted);
+    flex-shrink: 0;
 
-    .laser-bills {
-      width: 100%;
-      height: 100%;
+    svg { width: 19px; height: 19px; }
+
+    &.signal {
+      background: var(--grad);
+      color: var(--on-accent);
     }
   }
 
-  .mbc-content {
-    position: relative;
-    z-index: 1;
+  .card-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
   }
 
-  .mbc-label {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-sec);
-    display: block;
-    margin-bottom: 10px;
+  .card-title { font-size: 14.5px; font-weight: 600; }
+
+  .card-sub { font-size: 12px; color: var(--muted-2); }
+
+  .card-amount {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--cyan);
   }
+
+  .card-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: var(--grad);
+    color: var(--on-accent);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 0 7px;
+  }
+
+  .card-arrow {
+    color: var(--muted-2);
+    font-size: 18px;
+    transition: color 0.2s ease;
+  }
+
+  &.danger {
+    border-color: rgba(255, 84, 112, 0.25);
+
+    .card-icon { background: rgba(255, 84, 112, 0.12); color: var(--danger); }
+    .card-title { color: var(--danger); }
+
+    &:hover { border-color: var(--danger); }
+  }
+}
+
+// ===================================================================
+// MONEY — dashboard argent
+// ===================================================================
+
+.money-balance-card {
+  position: relative;
+  margin: 8px 20px 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line-strong);
+  background:
+    radial-gradient(420px 260px at 85% 0%, rgba(87, 225, 255, 0.16), transparent 60%),
+    linear-gradient(160deg, var(--surface) 0%, var(--ink) 100%);
+  box-shadow: var(--shadow);
+  padding: 26px 22px;
+  overflow: hidden;
+
+  .mbc-label { display: block; margin-bottom: 8px; }
 
   .mbc-amount {
-    display: flex;
-    align-items: baseline;
-    margin-bottom: 10px;
-  }
-
-  .mbc-main {
-    font-family: var(--font-mono);
-    font-size: 34px;
+    font-family: var(--font-display);
     font-weight: 700;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
+    letter-spacing: -0.03em;
 
-  .mbc-cents {
-    font-family: var(--font-mono);
-    font-size: 18px;
-    color: var(--ink);
-    opacity: 0.35;
-    letter-spacing: -0.02em;
+    .mbc-main { font-size: 52px; }
+    .mbc-cents { font-size: 24px; color: var(--muted); }
   }
 
   .mbc-badge {
-    display: inline-block;
+    display: inline-flex;
+    margin-top: 8px;
     font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--green);
-    background: rgba(0, 200, 83, 0.1);
-    border: 1px solid rgba(0, 200, 83, 0.3);
-    border-radius: 8px;
-    padding: 4px 10px;
+    font-size: 11.5px;
+    color: var(--success);
+    border: 1px solid rgba(61, 220, 151, 0.35);
+    background: rgba(61, 220, 151, 0.08);
+    padding: 5px 11px;
+    border-radius: 999px;
   }
 }
 
-// ---- Withdraw button -----------------------------------------------
-.money-withdraw {
-  padding: 16px 20px 4px;
-}
+.money-withdraw { padding: 0 20px 8px; }
 
-// ---- Section labels ------------------------------------------------
 .money-section-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-sec);
-  margin-bottom: 14px;
+  color: var(--muted-2);
+  margin-bottom: 10px;
 }
 
-// ---- Sources 2x2 grid ----------------------------------------------
 .money-sources {
-  padding: 24px 20px 8px;
+  padding: 14px 20px 4px;
 }
 
 .money-sources-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
 }
 
 .money-source-card {
-  padding: 16px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  padding: 14px;
 
   .msc-label {
+    display: block;
     font-family: var(--font-mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-sec);
+    color: var(--muted-2);
   }
 
   .msc-amount {
+    display: block;
     font-family: var(--font-display);
-    font-size: 26px;
-    color: var(--ink);
-    letter-spacing: 0.02em;
-    line-height: 1;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 4px 0 10px;
   }
 
   .msc-bar {
-    height: 4px;
-    background: var(--surface);
-    border-radius: 2px;
-    margin-top: 4px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--line);
     overflow: hidden;
 
     .msc-bar-fill {
       height: 100%;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: width 0.6s ease;
+      border-radius: 3px;
+      background: var(--grad);
     }
   }
 }
 
-// ---- Transaction list ----------------------------------------------
 .money-transactions {
-  padding: 24px 20px 8px;
+  padding: 16px 20px;
 }
 
 .money-tx-row {
-  display: grid;
-  grid-template-columns: 36px 1fr auto;
+  display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
+  gap: 13px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+
+  &:last-child { border-bottom: none; }
 
   .mtx-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-shrink: 0;
 
-    &.mtx-income {
-      background: rgba(0, 200, 83, 0.1);
-      color: var(--green);
-    }
-
-    &.mtx-expense {
-      background: var(--surface);
-      color: var(--text-sec);
-    }
+    &.mtx-income  { background: rgba(61, 220, 151, 0.12); color: var(--success); }
+    &.mtx-expense { background: rgba(255, 84, 112, 0.12); color: var(--danger); }
   }
 
   .mtx-info {
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    min-width: 0;
+  }
 
-    .mtx-label {
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+  .mtx-label { font-size: 14px; font-weight: 500; }
 
-    .mtx-date {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.1em;
-      color: var(--text-sec);
-      text-transform: uppercase;
-    }
+  .mtx-date {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted-2);
   }
 
   .mtx-amount {
     font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
+    font-size: 13.5px;
 
-    &.mtx-income { color: var(--green); }
-    &.mtx-expense { color: var(--text-sec); }
+    &.mtx-income  { color: var(--success); }
+    &.mtx-expense { color: var(--danger); }
   }
 }

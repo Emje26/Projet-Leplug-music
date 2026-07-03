@@ -1,315 +1,232 @@
 // ===================================================================
-// LE PLUG — PROFILE (WLR: Whole Lotta Red design system)
-// Artist profile — rounded cards, --void/--surface/--card/--accent tokens
+// PROFILE — page artiste (hero, stats, tracks)
 // ===================================================================
 
 .profile-page {
-  background: var(--void);
-  color: var(--ink);
-  min-height: 100vh;
-  padding-bottom: 120px;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
-// ---- Hero zone (clouds behind) -------------------------------------
+// ---- HERO ------------------------------------------------------------
+
 .profile-hero {
-  position: relative;
-  overflow: hidden;
-
-  .profile-clouds-wrap {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-
-    .plug-clouds { width: 100%; height: 100%; }
-  }
+  background:
+    radial-gradient(560px 360px at 80% 0%, rgba(47, 107, 255, 0.22), transparent 60%),
+    radial-gradient(420px 300px at 0% 100%, rgba(87, 225, 255, 0.10), transparent 60%),
+    var(--navy);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 22px;
 }
 
-// ---- Header --------------------------------------------------------
 .profile-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px 14px;
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  background: var(--void);
-  z-index: 10;
+  gap: 12px;
+  padding: 18px 20px 8px;
 
   .hdr-back, .hdr-action {
-    width: 38px;
-    height: 38px;
-    border: 1px solid var(--border-btn);
-    border-radius: 12px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
     background: transparent;
-    color: var(--ink);
+    color: var(--text);
     cursor: pointer;
-    text-decoration: none;
 
-    &:hover { border-color: var(--ink); }
+    svg { width: 18px; height: 18px; }
 
-    svg { width: 16px; height: 16px; }
+    &:hover { border-color: var(--cyan); color: var(--cyan); }
   }
 
   .hdr-handle {
-    flex: 1;
-    text-align: center;
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
   }
 
-  .hdr-actions {
-    display: flex;
-    gap: 8px;
-  }
+  .hdr-actions { display: flex; gap: 10px; }
 }
 
-// ---- Identity block ------------------------------------------------
 .profile-identity {
-  padding: 24px 20px 16px;
-  display: grid;
-  grid-template-columns: 96px 1fr;
-  gap: 20px;
-  align-items: flex-start;
-  position: relative;
-  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 20px 0;
 
   .pi-avatar {
-    width: 96px;
-    height: 96px;
-    background: var(--card);
-    border: 2px solid var(--accent);
-    border-radius: 14px;
     position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(45deg, transparent 48%, var(--border) 48% 52%, transparent 52%),
-        linear-gradient(-45deg, transparent 48%, var(--border) 48% 52%, transparent 52%);
-    }
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--grad);
+    box-shadow: var(--glow);
+    flex-shrink: 0;
 
     .av-badge {
       position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 18px;
-      height: 18px;
-      background: var(--accent);
-      border-radius: 0 6px 0 0;
+      right: 4px;
+      bottom: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--success);
+      border: 3px solid var(--navy);
     }
   }
 
   .pi-meta {
-    padding-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
 
-    .pi-name {
-      font-family: var(--font-display);
-      font-size: 44px;
-      line-height: 0.9;
-      letter-spacing: 0.02em;
-      margin: 0 0 6px;
-      text-transform: uppercase;
-      color: var(--ink);
-    }
+  .pi-name { font-size: 30px; font-weight: 700; margin: 0; }
 
-    .pi-specialty {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      color: var(--text-sec);
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 2px;
-    }
+  .pi-specialty {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
 
-    .pi-city {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      color: var(--text-sec);
-      text-transform: uppercase;
-      display: block;
-    }
+  .pi-city {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted-2);
   }
 }
 
-// ---- Stats spec sheet ----------------------------------------------
+// ---- STATS -----------------------------------------------------------
+
 .profile-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  margin: 8px 0 0;
+  gap: 12px;
+  padding: 18px 20px 6px;
 
   .stat-cell {
-    padding: 20px 16px;
-    text-align: left;
-    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    padding: 14px;
+    text-align: center;
 
-    & + .stat-cell { border-left: 1px solid var(--border); }
-
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-sec);
-      display: block;
-      margin-bottom: 6px;
-    }
+    .stat-label { display: block; margin-bottom: 4px; }
 
     .stat-number {
       font-family: var(--font-display);
-      font-size: 32px;
-      line-height: 1;
-      color: var(--ink);
-      letter-spacing: 0.02em;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
   }
 }
 
-// ---- Action row ----------------------------------------------------
 .profile-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  padding: 12px 20px;
 }
 
-// ---- Drip wrap -----------------------------------------------------
-.profile-drip-wrap {
-  padding: 0 20px;
-  display: flex;
-  justify-content: center;
+// ---- TABS ---------------------------------------------------------------
 
-  .plug-drip {
-    max-width: 300px;
-    width: 100%;
-    color: var(--text-sec);
-  }
-}
-
-// ---- Tab switch ----------------------------------------------------
 .profile-tabs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 4px;
+  padding: 10px 20px 0;
+  border-bottom: 1px solid var(--line);
 
   .tab {
-    padding: 14px 0;
-    text-align: center;
     font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--text-sec);
+    color: var(--muted-2);
     background: transparent;
-    border: 0;
+    border: none;
     border-bottom: 2px solid transparent;
+    padding: 12px 16px;
     cursor: pointer;
-    border-radius: 0;
+    transition: color 0.2s ease, border-color 0.2s ease;
 
-    & + .tab { border-left: 1px solid var(--border); }
-
-    &:hover { color: var(--ink); }
+    &:hover { color: var(--muted); }
 
     &.active {
-      color: var(--ink);
-      border-bottom-color: var(--accent);
+      color: var(--cyan);
+      border-bottom-color: var(--cyan);
     }
   }
 }
 
-// ---- Tracks list (Sons) --------------------------------------------
+// ---- TRACKS -----------------------------------------------------------------
+
 .profile-tracks {
-  padding: 8px 20px 20px;
-}
+  padding: 10px 20px 20px;
 
-.track-row {
-  display: grid;
-  grid-template-columns: 42px 1fr auto auto;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-
-  .tr-play {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--card);
-    border: 1px solid var(--border-btn);
-    color: var(--ink);
+  .track-row {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    transition: all 0.15s ease;
-  }
+    gap: 14px;
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--line);
 
-  &:hover .tr-play {
-    background: var(--accent);
-    color: var(--void);
-    border-color: var(--accent);
-  }
+    &:last-child { border-bottom: none; }
 
-  .tr-meta {
-    min-width: 0;
-  }
-
-  .tr-name {
-    font-family: var(--font-display);
-    font-size: 16px;
-    letter-spacing: 0.03em;
-    color: var(--ink);
-    line-height: 1;
-    text-transform: uppercase;
-    margin: 0 0 4px;
-  }
-
-  .tr-sub {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    color: var(--text-sec);
-  }
-
-  .tr-duration {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-sec);
-    letter-spacing: 0.06em;
-  }
-
-  .tr-eq-wrap {
-    display: flex;
-    align-items: center;
-    height: 24px;
-
-    .plug-equalizer {
-      height: 20px;
-    }
-  }
-
-  &.playing {
     .tr-play {
-      background: var(--accent);
-      color: var(--void);
-      border-color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line-strong);
+      background: transparent;
+      color: var(--text);
+      font-size: 12px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color 0.2s ease, color 0.2s ease;
+
+      &:hover { border-color: var(--cyan); color: var(--cyan); }
     }
-    .tr-name { color: var(--accent); }
+
+    &.playing .tr-play {
+      background: var(--grad);
+      color: var(--on-accent);
+      border-color: transparent;
+    }
+
+    .tr-meta { flex: 1; min-width: 0; }
+
+    .tr-name {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tr-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted-2);
+    }
+
+    .tr-duration {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+
+    .tr-eq-wrap { flex-shrink: 0; }
   }
 }

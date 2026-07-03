@@ -1,46 +1,32 @@
 <div class="assistant-page">
 
   <header class="assistant-header">
-    <%= link_to profile_path, class: "hdr-back" do %>
+    <%= link_to profile_path, class: "hdr-back", "aria-label": "Retour" do %>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
         <path d="M15 6l-6 6 6 6"/>
       </svg>
     <% end %>
     <div class="hdr-title">
-      <span class="hdr-kicker">"ASSISTANT"</span>
+      <span class="hdr-kicker">Assistant</span>
       <h1>PLUG/AI</h1>
     </div>
     <div class="hdr-spacer"></div>
   </header>
 
-  <!-- Action bar -->
+  <!-- Actions -->
   <div class="assistant-actions">
-    <% if @can_save_recipe %>
-      <%= button_to "SAVE DROP →",
-                    assistant_save_path,
-                    method: :post,
-                    class: "btn-signal",
-                    form: { style: "display:inline-block;margin:0;" } %>
-    <% else %>
-      <span class="assistant-hint">"ASK THE AI FOR A RECIPE TO ENABLE SAVING"</span>
-    <% end %>
-
-    <%= button_to "RESET CHAT",
+    <%= button_to "Réinitialiser le chat",
                   reset_chat_path,
                   method: :post,
                   class: "btn-ghost",
                   form: { style: "display:inline-block;margin:0;" } %>
   </div>
 
-  <!-- Flash -->
-  <% if notice %><div class="alert alert-primary"><%= notice %></div><% end %>
-  <% if alert  %><div class="alert alert-danger"><%=  alert  %></div><% end %>
-
   <!-- Chat window -->
   <div class="chat-window">
     <% if @messages.blank? %>
       <div class="chat-bubble assistant">
-        <span class="bubble-label">AI / C/O LE PLUG</span>
+        <span class="bubble-label">PLUG/AI</span>
         Salut. Décris-moi ce que tu veux créer — style, ambiance, référence, contraintes.
         Je te renvoie une suggestion de structure et d'ingrédients sonores.
       </div>
@@ -48,12 +34,12 @@
       <% @messages.each do |message| %>
         <% if message["role"] == "user" %>
           <div class="chat-bubble user">
-            <span class="bubble-label">YOU</span>
+            <span class="bubble-label">Toi</span>
             <%= simple_format(message["content"]) %>
           </div>
         <% else %>
           <div class="chat-bubble assistant">
-            <span class="bubble-label">AI / C/O LE PLUG</span>
+            <span class="bubble-label">PLUG/AI</span>
             <%= simple_format(message["content"]) %>
           </div>
         <% end %>
@@ -65,9 +51,10 @@
   <%= form_with url: assistant_talk_path, method: :post, data: { turbo: false }, class: "assistant-form" do %>
     <%= text_area_tag :message, nil,
           rows: 2,
-          placeholder: "EX: BEAT TRAP 90 BPM, PIANO MINEUR, INSPIRATION NINHO…",
-          class: "assistant-input" %>
-    <button type="submit" class="btn-signal">SEND →</button>
+          placeholder: "Ex : beat trap 90 BPM, piano mineur, inspiration Ninho…",
+          class: "assistant-input",
+          "aria-label": "Ton message" %>
+    <button type="submit" class="btn-primary">Envoyer →</button>
   <% end %>
 
 </div>

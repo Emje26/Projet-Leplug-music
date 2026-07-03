@@ -1,13 +1,12 @@
 <%
-  username  = current_user.email.split('@').first
-  name      = @profile&.name.presence || username
-  bio       = @profile&.bio.presence   || "Producteur / MC \u00b7 bas\u00e9 \u00e0 Paris 18e. En studio sur le prochain projet. \"Minuit \u00e0 Barb\u00e8s\" EP dispo."
-  handle    = "@#{username}"
+  username = current_user.email.split('@').first
+  name     = @profile&.name.presence || username
+  handle   = "@#{username}"
   tracks = [
-    { title: "MINUIT \u00c0 BARB\u00c8S",  time: "03:24", plays: "2.1K" },
-    { title: "B\u00c9TON FT. MARWA",  time: "02:58", plays: "1.8K" },
-    { title: "FANT\u00d4ME",          time: "04:12", plays: "956"  },
-    { title: "18E ARRONDISSEMENT", time: "03:47", plays: "742" }
+    { title: "Minuit à Barbès",    time: "03:24", plays: "2.1K" },
+    { title: "Béton ft. Marwa",    time: "02:58", plays: "1.8K" },
+    { title: "Fantôme",            time: "04:12", plays: "956"  },
+    { title: "18e arrondissement", time: "03:47", plays: "742"  }
   ]
 %>
 
@@ -15,24 +14,20 @@
 
   <!-- HERO -->
   <div class="profile-hero">
-    <div class="profile-clouds-wrap">
-      <%= render "shared/clouds" %>
-    </div>
-
     <header class="profile-header">
-      <%= link_to root_path, class: "hdr-back" do %>
+      <%= link_to root_path, class: "hdr-back", "aria-label": "Retour" do %>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg>
       <% end %>
       <div class="hdr-handle"><%= handle %></div>
       <div class="hdr-actions">
-        <button class="hdr-action" aria-label="Share">
+        <button class="hdr-action" aria-label="Partager">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
             <path d="M4 12v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8"/>
             <path d="M16 6l-4-4-4 4"/>
             <line x1="12" y1="2" x2="12" y2="15"/>
           </svg>
         </button>
-        <%= link_to profile_settings_path, class: "hdr-action", "aria-label": "Settings" do %>
+        <%= link_to profile_settings_path, class: "hdr-action", "aria-label": "Paramètres" do %>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
             <circle cx="12" cy="12" r="1.5"/>
             <circle cx="5"  cy="12" r="1.5"/>
@@ -45,12 +40,12 @@
     <!-- AVATAR + NAME -->
     <section class="profile-identity">
       <div class="pi-avatar">
-        <span class="av-badge"></span>
+        <span class="av-badge" title="En ligne"></span>
       </div>
       <div class="pi-meta">
-        <h1 class="pi-name"><%= name.upcase %></h1>
-        <span class="pi-specialty">PRODUCTEUR / MC</span>
-        <span class="pi-city">PARIS 18E</span>
+        <h1 class="pi-name"><%= name.capitalize %></h1>
+        <span class="pi-specialty">Producteur / MC</span>
+        <span class="pi-city">Paris 18e</span>
       </div>
     </section>
   </div>
@@ -58,48 +53,43 @@
   <!-- STATS -->
   <section class="profile-stats">
     <div class="stat-cell">
-      <span class="stat-label q">PLUGS</span>
+      <span class="stat-label label">Plugs</span>
       <div class="stat-number">847</div>
     </div>
     <div class="stat-cell">
-      <span class="stat-label q">\u00c9COUTES</span>
+      <span class="stat-label label">Écoutes</span>
       <div class="stat-number">12.4K</div>
     </div>
     <div class="stat-cell">
-      <span class="stat-label q">TRACKS</span>
+      <span class="stat-label label">Tracks</span>
       <div class="stat-number"><%= tracks.size %></div>
     </div>
   </section>
 
   <!-- ACTIONS -->
   <section class="profile-actions">
-    <%= link_to "PLUG", "#", class: "btn-signal" %>
-    <%= link_to "MESSAGE", chats_path, class: "btn-ghost" %>
+    <%= link_to "Plug", "#", class: "btn-primary" %>
+    <%= link_to "Message", chats_path, class: "btn-ghost" %>
   </section>
 
-  <!-- DRIP -->
-  <div class="profile-drip-wrap">
-    <%= render "shared/drip" %>
-  </div>
-
   <!-- TABS -->
-  <nav class="profile-tabs">
-    <button class="tab active">SONS</button>
-    <button class="tab">CLIPS</button>
-    <button class="tab">BIO</button>
+  <nav class="profile-tabs" aria-label="Sections du profil">
+    <button class="tab active">Sons</button>
+    <button class="tab">Clips</button>
+    <button class="tab">Bio</button>
   </nav>
 
   <!-- TRACKS -->
   <section class="profile-tracks">
     <% tracks.each_with_index do |t, i| %>
-      <div class="track-row <%= 'playing' if i == 0 %>">
-        <button class="tr-play"><%= i == 0 ? "\u275A\u275A" : "\u25B6" %></button>
+      <div class="track-row <%= 'playing' if i.zero? %>">
+        <button class="tr-play" aria-label="<%= i.zero? ? 'Pause' : 'Lecture' %>"><%= i.zero? ? "❚❚" : "▶" %></button>
         <div class="tr-meta">
           <h3 class="tr-name"><%= t[:title] %></h3>
-          <div class="tr-sub"><%= t[:plays] %> plays</div>
+          <div class="tr-sub"><%= t[:plays] %> écoutes</div>
         </div>
         <span class="tr-duration"><%= t[:time] %></span>
-        <% if i == 0 %>
+        <% if i.zero? %>
           <div class="tr-eq-wrap">
             <%= render "shared/equalizer" %>
           </div>

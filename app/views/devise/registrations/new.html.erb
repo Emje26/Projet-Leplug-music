@@ -1,18 +1,14 @@
 <div class="auth-page">
 
   <div class="auth-panel">
-    <div class="auth-starburst">
-      <%= render "shared/starburst", size: :medium %>
-    </div>
+    <span class="logo">
+      <span class="logo-mark"><span></span><span></span><span></span><span></span></span>
+      LE PLUG
+    </span>
 
-    <h1 class="auth-title">LE PLUG</h1>
-    <%= render "shared/drip" %>
-
+    <span class="auth-kicker">Inscription</span>
+    <h1 class="auth-title">Ton prochain son <em>commence ici</em>.</h1>
     <p class="auth-sub">Crée ton compte en 30 secondes. Gratuit, pour toujours.</p>
-
-    <% if flash[:alert] %>
-      <div class="alert alert-danger"><%= flash[:alert] %></div>
-    <% end %>
 
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f| %>
       <%= f.error_notification %>
@@ -22,24 +18,24 @@
             required: true,
             autofocus: true,
             autocomplete: "email",
-            label: false,
-            placeholder: "Email" %>
+            label: "Email",
+            placeholder: "ton@email.com" %>
 
         <%= f.input :password,
             required: true,
             autocomplete: "new-password",
-            label: false,
-            placeholder: "Mot de passe",
+            label: "Mot de passe",
+            placeholder: "••••••••",
             hint: "6 caractères minimum" %>
 
         <%= f.input :password_confirmation,
             required: true,
             autocomplete: "new-password",
-            label: false,
-            placeholder: "Confirmer le mot de passe" %>
+            label: "Confirmer le mot de passe",
+            placeholder: "••••••••" %>
       </div>
 
-      <%= f.button :submit, "\"CRÉER UN COMPTE\"", class: "btn-signal auth-submit" %>
+      <%= f.button :submit, "Créer mon compte →", class: "btn-primary auth-submit" %>
     <% end %>
 
     <div class="auth-links">

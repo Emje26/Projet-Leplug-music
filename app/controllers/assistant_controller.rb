@@ -1,24 +1,16 @@
-require "net/http"
-require "uri"
-require "json"
-
 class AssistantController < ApplicationController
   before_action :authenticate_user!
 
   def show
     session[:assistant_messages] ||= []
     @messages = session[:assistant_messages]
-
-    # We only show "Save recipe" if the last message comes from the assistant
-    last_msg = @messages.last
-    @can_save_recipe = last_msg.present? && last_msg["role"] == "assistant"
   end
 
   def talk
     user_message = params[:message].to_s.strip
 
     if user_message.blank?
-      redirect_to assistant_path, alert: "Please write a message first." and return
+      redirect_to assistant_path, alert: "Écris d'abord un message." and return
     end
 
     # 1. Get history from session (or init)
@@ -29,49 +21,34 @@ class AssistantController < ApplicationController
 
     # 3. System prompt
     system_prompt = <<~PROMPT
-      You are KitchenGuru, an AI Chef and Nutritionist specialized in gut-health
-      and anti-inflammatory cooking, inspired by ZOE Health principles.
+      Tu es PLUG/AI, l'assistant créatif de Le Plug, la marketplace qui connecte
+      les artistes aux studios, beatmakers et ingénieurs son.
 
-      CORE ZOE-STYLE GUIDELINES:
-      1. DIVERSITY:
-         Help the user reach at least ~30 different plants per week
-         (fruits, vegetables, whole grains, legumes, nuts, seeds, herbs, spices).
-         Favour variety in your suggestions instead of always repeating the same foods.
-      2. FAT QUALITY:
-         Prioritize extra-virgin olive oil, avocado, nuts and seeds as main fat sources.
-      3. AVOID:
-         Limit ultra-processed foods and added sugars. Do not recommend them
-         unless the user explicitly insists.
+      TON RÔLE :
+      - Aider les artistes à préparer leurs sessions : direction artistique,
+        structure de morceau, choix de BPM / tonalité / instrus, références,
+        checklist d'enregistrement, préparation du brief pour un ingé son.
+      - Conseiller sur le choix d'une prestation (enregistrement, mixage,
+        mastering, clip) et sur la façon d'en tirer le maximum en studio.
 
-      CONVERSATION BEHAVIOUR:
-      - Be efficient: do NOT ask too many clarification questions in a row.
-      - If the user already gave meal type + preferences + ingredients,
-        go directly to suggesting a recipe.
-      - If something is missing, ask at most 1–2 short follow-up questions,
-        then propose a recipe anyway.
+      COMPORTEMENT :
+      - Réponds en français, tutoie l'utilisateur, reste concret et actionnable.
+      - Sois efficace : ne pose pas trop de questions de clarification d'affilée.
+        Si le brief est suffisant, propose directement une suggestion complète.
+      - Si un élément clé manque, pose au maximum 1-2 questions courtes,
+        puis propose quand même une piste.
 
-      RECIPE FORMAT:
-      When you give a full recipe, ALWAYS use this plain-text structure:
+      FORMAT DES SUGGESTIONS :
+      Quand tu proposes une direction complète, structure ta réponse en texte
+      simple avec ces sections :
 
-      Title:
-      Meal type:
-      Prep time (minutes):
-      Cook time (minutes):
-      Ingredients:
-       item 1
-       item 2
-      Steps:
-
-
-
-      Macros (approx per serving):
-       Calories:
-       Protein (g):
-       Carbs (g):
-       Fats (g):
-       Fiber (g):
-
-      Macros must be simple but realistic estimates.
+      Titre de travail :
+      Style / ambiance :
+      BPM et tonalité :
+      Structure (intro / couplets / refrains / pont / outro) :
+      Ingrédients sonores :
+      Références :
+      Prochaine étape en studio :
     PROMPT
 
     # 4. Build a single conversation string from history
@@ -83,12 +60,12 @@ class AssistantController < ApplicationController
     full_prompt = <<~FULL
       #{system_prompt}
 
-      Here is the conversation so far between the user and KitchenGuru:
+      Voici la conversation entre l'utilisateur et PLUG/AI jusqu'ici :
 
       #{conversation_text}
 
-      Now answer as KitchenGuru to the LAST user message.
-      If appropriate, give a full recipe using the RECIPE FORMAT.
+      Réponds maintenant en tant que PLUG/AI au DERNIER message de l'utilisateur.
+      Si c'est pertinent, donne une suggestion complète au FORMAT DES SUGGESTIONS.
     FULL
 
     # 5. Call RubyLLM with a single string
@@ -109,140 +86,11 @@ class AssistantController < ApplicationController
     redirect_to assistant_path
   rescue StandardError => e
     Rails.logger.error("Assistant error: #{e.class} - #{e.message}")
-    redirect_to assistant_path, alert: "Something went wrong talking to KitchenGuru."
+    redirect_to assistant_path, alert: "Un problème est survenu avec PLUG/AI. Réessaie."
   end
 
   def reset
     session[:assistant_messages] = []
-    redirect_to assistant_path, notice: "Chat reset."
+    redirect_to assistant_path, notice: "Chat réinitialisé."
   end
-
-  # NEW ACTION: save last AI recipe as a Recipe record
-  def save
-    history = session[:assistant_messages] || []
-    last_assistant_msg = history.reverse.find { |m| m["role"] == "assistant" }
-
-    if last_assistant_msg.blank?
-      redirect_to assistant_path, alert: "There is no AI recipe to save yet." and return
-    end
-
-    recipe_attrs = build_recipe_from_ai(last_assistant_msg["content"])
-    @recipe = current_user.recipes.new(recipe_attrs)
-
-    @recipe.title
-
-
-    uri = URI("https://api.openai.com/v1/images/generations")
-
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE  # ⚠️ INSECURE – JUST FOR TESTING
-
-    req = Net::HTTP::Post.new(uri)
-    req["Content-Type"] = "application/json"
-    req["Authorization"] = "Bearer #{ENV['OPENAI_KEY']}"
-
-    req.body = {
-      model: "gpt-image-1",
-      n: 1,
-      quality: "low",
-      size: "1536x1024",
-      prompt: "High-quality food photography of: #{@recipe.title} #{@recipe.description} just show a picture of a the dish with no text "
-    }.to_json
-
-    res = http.request(req)
-
-
-    # Parse JSON
-    body = JSON.parse(res.body)
-
-    # Get the base64 string
-    b64_data = body.dig("data", 0, "b64_json")
-
-    @recipe.image_data = b64_data
-
-    if @recipe.save
-      redirect_to recipe_path(@recipe), notice: "Recipe saved to your cookbook."
-    else
-      Rails.logger.error("Recipe save failed: #{@recipe.errors.full_messages.join(', ')}")
-      redirect_to assistant_path, alert: "Could not save this recipe."
-    end
-  end
-
-  private
-
-  # Very simple parser based on the format we asked the AI to use
-  # def build_recipe_from_ai(text)
-  #   title      = text[/^Title:\s*(.+)$/i, 1] || "KitchenGuru recipe"
-  #   prep_min   = text[/^Prep time.*?:\s*(\d+)/i, 1]
-  #   cook_min   = text[/^Cook time.*?:\s*(\d+)/i, 1]
-
-  #   calories   = text[/Calories:\s*(\d+)/i, 1]
-  #   proteins   = text[/Protein.*?:\s*(\d+)/i, 1]
-  #   carbs      = text[/Carbs.*?:\s*(\d+)/i, 1]
-  #   fats       = text[/Fats?.*?:\s*(\d+)/i, 1]
-  #   fiber      = text[/Fiber.*?:\s*(\d+)/i, 1]
-
-  #   text = text.sub("Macros (approx per serving):", "")
-  #   text = text.sub("Calories: #{calories} kcal", "")
-  #   text = text.sub("Protein: #{proteins} g", "")
-  #   text = text.sub("Carbs: #{carbs} g", "")
-  #   text = text.sub("Fats: #{fats} g", "")
-  #   text = text.sub("Fiber: #{fiber} g", "")
-
-  #   {
-  #     title:       title,
-  #     description: text,                      # full text used by your show view
-  #     prep_time:   prep_min.to_i > 0 ? prep_min.to_i : nil,
-  #     cook_time:   cook_min.to_i > 0 ? cook_min.to_i : nil,
-  #     calories:    calories.present? ? calories.to_i : nil,
-  #     proteins:    proteins.present? ? proteins.to_i : nil,
-  #     carbs:       carbs.present? ? carbs.to_i : nil,
-  #     fats:        fats.present? ? fats.to_i : nil,
-  #     fiber:       fiber.present? ? fiber.to_i : nil,
-  #     servings:    2                           # simple default
-  #   }
-  # end
-    def build_recipe_from_ai(raw_text)
-      # 1. Normalise text: remove markdown and fix newlines
-      text = raw_text.to_s.gsub("\r\n", "\n")
-      # remove bold markers like **Title:** -> Title:
-      text = text.gsub("**", "")
-
-      # 2. Extract main fields from the AI answer
-      # We tolerate optional leading spaces and both "Carbs" and "Carbohydrates"
-      title    = text[/^\s*Title:\s*(.+)$/i, 1] || "KitchenGuru recipe"
-      prep_min = text[/^\s*Prep time.*?:\s*(\d+)/i, 1]
-      cook_min = text[/^\s*Cook time.*?:\s*(\d+)/i, 1]
-
-      calories = text[/^\s*Calories:\s*([\d\.]+)/i, 1]
-      proteins = text[/^\s*Protein.*?:\s*([\d\.]+)/i, 1]
-      # Handle both "Carbs" and "Carbohydrates"
-      carbs    = text[/^\s*(Carbs?|Carbohydrates).*?:\s*([\d\.]+)/i, 2]
-      fats     = text[/^\s*Fats?.*?:\s*([\d\.]+)/i, 1]
-      fiber    = text[/^\s*Fiber.*?:\s*([\d\.]+)/i, 1]
-
-      # 3. Clean description: remove the macros block from the bottom
-      description_text = text.dup
-      description_text.gsub!(/^\s*Macros.*$/i, "")
-      description_text.gsub!(/^\s*Calories:.*$/i, "")
-      description_text.gsub!(/^\s*Protein.*$/i, "")
-      description_text.gsub!(/^\s*(Carbs?|Carbohydrates).*$/i, "")
-      description_text.gsub!(/^\s*Fats?.*$/i, "")
-      description_text.gsub!(/^\s*Fiber.*$/i, "")
-
-      # 4. Build the attributes used by Recipe
-      {
-        title:       title,
-        description: description_text.strip,   # your show view uses this
-        prep_time:   prep_min&.to_i,
-        cook_time:   cook_min&.to_i,
-        calories:    calories&.to_i,
-        proteins:    proteins&.to_i,
-        carbs:       carbs&.to_i,
-        fats:        fats&.to_i,
-        fiber:       fiber&.to_i,
-        servings:    2                         # simple default
-      }
-    end
 end

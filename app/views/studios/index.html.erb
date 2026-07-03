@@ -1,11 +1,11 @@
 <div class="search-page results">
   <header class="results-header">
-    <%= link_to search_path, class: "back-btn" do %>
+    <%= link_to search_path, class: "back-btn", "aria-label": "Retour" do %>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M15 6l-6 6 6 6"/></svg>
     <% end %>
     <div class="results-title-wrap">
-      <span class="results-kicker">"DIRECTORY"</span>
-      <h1 class="results-title">TOUS LES STUDIOS</h1>
+      <span class="results-kicker">Annuaire</span>
+      <h1 class="results-title">Tous les studios</h1>
     </div>
     <span class="header-spacer"></span>
   </header>
@@ -15,8 +15,8 @@
       <%= link_to studio_path(s), class: "result-row" do %>
         <div class="rr-cover"><span><%= s.initials %></span></div>
         <div class="rr-body">
-          <h3 class="rr-name"><%= s.name.upcase %></h3>
-          <div class="rr-sub"><%= s.category&.upcase %> · <%= s.city %> · ★ <%= format("%.1f", s.rating) %></div>
+          <h3 class="rr-name"><%= s.name %></h3>
+          <div class="rr-sub"><%= s.category&.capitalize %> · <%= s.city %> · ★ <%= format("%.1f", s.rating) %></div>
         </div>
         <span class="rr-price"><%= s.display_price %></span>
         <span class="rr-arrow">›</span>

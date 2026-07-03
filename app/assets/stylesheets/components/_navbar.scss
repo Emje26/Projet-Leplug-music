@@ -1,12 +1,141 @@
-.navbar-lewagon {
+// ===================================================================
+// LE PLUG — Navigation
+// Top navbar (visiteurs anonymes) + bottom nav (app connectée).
+// ===================================================================
+
+// ---- TOP NAVBAR ---------------------------------------------------
+
+.plug-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  background: white;
+  gap: 16px;
+  height: 68px;
+  padding: 0 20px;
+  background: rgba(8, 18, 40, 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 8px 10px;
+
+    &:hover { color: var(--text); }
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13.5px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: var(--grad);
+    color: var(--on-accent);
+    box-shadow: var(--glow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      color: var(--on-accent);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px -8px rgba(47, 107, 255, 0.75);
+    }
+  }
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
+// ---- BOTTOM NAV (app) ---------------------------------------------
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  height: calc(64px + var(--safe-bottom));
+  background: rgba(6, 14, 34, 0.92);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--line);
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex: 1;
+    color: var(--muted-2);
+    transition: color 0.2s ease;
+
+    svg {
+      width: 21px;
+      height: 21px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    span {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    &:hover { color: var(--muted); }
+
+    &.active {
+      color: var(--cyan);
+
+      svg { filter: drop-shadow(0 0 6px rgba(87, 225, 255, 0.5)); }
+    }
+  }
+
+  .nav-drop {
+    flex: 0 0 72px;
+
+    .drop-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: none;
+      background: var(--grad);
+      color: var(--on-accent);
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1;
+      box-shadow: var(--glow);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 34px -8px rgba(47, 107, 255, 0.8);
+      }
+    }
+  }
 }

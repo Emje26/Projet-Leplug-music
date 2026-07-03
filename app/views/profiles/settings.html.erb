@@ -2,14 +2,14 @@
 
   <!-- HEADER -->
   <header class="settings-header">
-    <%= link_to profile_path, class: "back-btn" do %>
+    <%= link_to profile_path, class: "back-btn", "aria-label": "Retour au profil" do %>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
         <path d="M15 6l-6 6 6 6"/>
       </svg>
     <% end %>
     <div class="settings-title-wrap">
-      <h1 class="settings-title">PARAMÈTRES</h1>
-      <span class="settings-sub">ET ACTIVITÉ</span>
+      <h1 class="settings-title">Paramètres</h1>
+      <span class="settings-sub">Et activité</span>
     </div>
     <span class="header-spacer"></span>
   </header>
@@ -18,15 +18,15 @@
   <div class="settings-search">
     <div class="search-box">
       <span class="lbl">Q</span>
-      <input type="text" placeholder="RECHERCHER">
+      <input type="text" placeholder="Rechercher" aria-label="Rechercher un paramètre">
     </div>
   </div>
 
   <!-- VOTRE COMPTE -->
   <section class="settings-section">
-    <h2 class="section-label">VOTRE COMPTE</h2>
+    <h2 class="section-label">Votre compte</h2>
 
-    <a class="settings-card" href="#">
+    <%= link_to edit_user_registration_path, class: "settings-card" do %>
       <span class="card-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
           <circle cx="12" cy="8" r="4"/>
@@ -34,16 +34,16 @@
         </svg>
       </span>
       <div class="card-body">
-        <span class="card-title">Espace Comptes</span>
+        <span class="card-title">Espace comptes</span>
         <span class="card-sub">Mot de passe, sécurité, informations personnelles</span>
       </div>
       <span class="card-arrow">›</span>
-    </a>
+    <% end %>
   </section>
 
   <!-- ARGENT -->
   <section class="settings-section">
-    <h2 class="section-label">ARGENT</h2>
+    <h2 class="section-label">Argent</h2>
 
     <%= link_to profile_revenues_path, class: "settings-card" do %>
       <span class="card-icon signal">
@@ -53,14 +53,14 @@
         </svg>
       </span>
       <div class="card-body">
-        <span class="card-title">"Revenus"</span>
+        <span class="card-title">Revenus</span>
         <span class="card-sub">Gains, retraits, historique</span>
       </div>
       <span class="card-amount">€247.80</span>
       <span class="card-arrow">›</span>
     <% end %>
 
-    <a class="settings-card" href="#">
+    <%= link_to settings_money_path, class: "settings-card" do %>
       <span class="card-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
           <rect x="2" y="6" width="20" height="14" rx="1"/>
@@ -72,12 +72,12 @@
         <span class="card-sub">IBAN, carte, retrait</span>
       </div>
       <span class="card-arrow">›</span>
-    </a>
+    <% end %>
   </section>
 
   <!-- COLLABORATIONS -->
   <section class="settings-section">
-    <h2 class="section-label">COLLABORATIONS</h2>
+    <h2 class="section-label">Collaborations</h2>
 
     <a class="settings-card" href="#">
       <span class="card-icon">
@@ -115,7 +115,7 @@
 
   <!-- PRÉFÉRENCES -->
   <section class="settings-section">
-    <h2 class="section-label">PRÉFÉRENCES</h2>
+    <h2 class="section-label">Préférences</h2>
 
     <a class="settings-card" href="#">
       <span class="card-icon">
@@ -126,7 +126,7 @@
       </span>
       <div class="card-body">
         <span class="card-title">Notifications</span>
-        <span class="card-sub">Push, email, DMs, plugs</span>
+        <span class="card-sub">Push, email, messages, plugs</span>
       </div>
       <span class="card-arrow">›</span>
     </a>
@@ -155,7 +155,7 @@
       </span>
       <div class="card-body">
         <span class="card-title">Confidentialité</span>
-        <span class="card-sub">Qui peut te "plug", DMs, blocages</span>
+        <span class="card-sub">Qui peut te plug, messages, blocages</span>
       </div>
       <span class="card-arrow">›</span>
     </a>
@@ -163,7 +163,7 @@
 
   <!-- SESSION -->
   <section class="settings-section">
-    <h2 class="section-label">SESSION</h2>
+    <h2 class="section-label">Session</h2>
 
     <%= link_to destroy_user_session_path,
                 data: { turbo_method: :delete },
