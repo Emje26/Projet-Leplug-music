@@ -36,10 +36,20 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # Remonter les erreurs d'envoi d'email en développement pour faciliter le debug.
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
+
+  # Hôte utilisé par ActionMailer pour générer les URLs absolues dans les emails
+  # (ex: le lien de réinitialisation du mot de passe). Sans ça, Devise lève
+  # "Missing host to link to!".
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+
+  # En développement, on n'envoie pas de vrais emails : letter_opener ouvre
+  # automatiquement chaque email dans un nouvel onglet du navigateur.
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
