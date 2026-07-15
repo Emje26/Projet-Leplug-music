@@ -41,6 +41,14 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Host requis pour construire les liens complets dans les emails
+  # (reset de mot de passe Devise, etc.).
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+
+  # En dev, les emails sont ecrits dans tmp/mails/ au lieu d'etre envoyes :
+  # ouvre le fichier pour recuperer le lien de reinitialisation.
+  config.action_mailer.delivery_method = :file
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

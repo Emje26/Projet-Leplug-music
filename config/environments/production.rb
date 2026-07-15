@@ -73,6 +73,14 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Host public de l'app, requis pour les liens dans les emails.
+  # Sur Render, RENDER_EXTERNAL_HOSTNAME est fourni automatiquement ;
+  # sinon definis APP_HOST dans les variables d'environnement.
+  config.action_mailer.default_url_options = {
+    host: ENV["APP_HOST"] || ENV["RENDER_EXTERNAL_HOSTNAME"] || "localhost",
+    protocol: "https"
+  }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

@@ -1,7 +1,11 @@
-<p>Hello <%= @email %>!</p>
+<p>Salut <%= @email %>,</p>
 
 <% if @resource.try(:unconfirmed_email?) %>
-  <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
+  <p>On te prévient que ton adresse email Le Plug est en cours de changement vers <%= @resource.unconfirmed_email %>.</p>
 <% else %>
-  <p>We're contacting you to notify you that your email has been changed to <%= @resource.email %>.</p>
+  <p>On te prévient que ton adresse email Le Plug a été changée vers <%= @resource.email %>.</p>
 <% end %>
+
+<p>Si tu n'es pas à l'origine de ce changement, contacte-nous immédiatement.</p>
+
+<p>— L'équipe Le Plug</p>
